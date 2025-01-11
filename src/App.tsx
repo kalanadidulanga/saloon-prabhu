@@ -1,12 +1,14 @@
-import { Button } from "@/components/ui/button";
+import { Route, Routes } from "react-router";
+import HomePage from "@/pages/home/HomePage";
+import RootLayout from "./layouts/RootLayout";
 
 function App() {
   return (
-    <>
-      <div>
-        <Button>Click me</Button>
-      </div>
-    </>
+    <Routes>
+      <Route path="/" element={<RootLayout />}>
+        <Route index element={<HomePage />} />
+      </Route>
+    </Routes>
   );
 }
 
