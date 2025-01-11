@@ -33,7 +33,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-24">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <span className="text-4xl font-normal font-judson text-color-5">
+            <span className="text-2xl md:text-3xl lg:text-4xl font-normal font-judson text-color-5">
               Saloon Prabhu
             </span>
           </Link>
