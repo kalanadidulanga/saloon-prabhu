@@ -19,6 +19,8 @@ const HomePage = () => {
             Click Me
           </button>
         </div>
+
+        <div className=" bg-rose-500 min-h-screen"></div>
       </div>
     </>
   );
