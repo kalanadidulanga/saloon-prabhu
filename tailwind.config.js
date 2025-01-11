@@ -30,6 +30,15 @@ export default {
         beige: {
           500: "#BDB6A5", // Beige
         },
+        "nav-color": "#3DA1D240",
+        "color-1": "#EBEBEB",
+        "color-2": "#B74F6F",
+        "color-3": "#3DA1D2",
+        "color-4": "#FCA311",
+        "color-5": "#28262C",
+        "color-6": "#E9D415",
+        "color-7": "#F6ECD799",
+        "text-color": "#525252",
       },
       borderRadius: {
         lg: "var(--radius)",

@@ -1,6 +1,7 @@
 // src/components/Navbar.tsx
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router";
+import { Link, NavLink, useLocation } from "react-router";
+import { Button } from "./ui/button";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -25,16 +26,14 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed w-full transition-all duration-300 z-50 ${
-        isScrolled
-          ? "bg-blue-500/25 backdrop-blur-md shadow-md"
-          : "bg-blue-500/25"
+        isScrolled ? "bg-nav-color backdrop-blur-2xl shadow-md" : "bg-nav-color"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+      <div className="container">
+        <div className="flex justify-between items-center h-24">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <span className="text-xl font-semibold text-gray-800">
+            <span className="text-4xl font-normal font-judson text-color-5">
               Saloon Prabhu
             </span>
           </Link>
@@ -42,27 +41,24 @@ const Navbar = () => {
           {/* Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
-              <Link
+              <NavLink
                 key={link.path}
                 to={link.path}
-                className={`text-sm font-medium transition-colors duration-200 ${
-                  location.pathname === link.path
-                    ? "text-blue-500"
-                    : "text-gray-600 hover:text-blue-500"
-                }`}
+                className={({ isActive }) =>
+                  isActive
+                    ? "font-medium text-base transition-all duration-200 text-text-color"
+                    : "font-normal text-base transition-all duration-200 text-text-color"
+                }
               >
                 {link.title}
-              </Link>
+              </NavLink>
             ))}
           </div>
 
           {/* Appointment Button */}
-          <Link
-            to="/appointment"
-            className="bg-blue-500 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-600 transition-colors duration-200"
-          >
-            MAKE APPOINTMENT
-          </Link>
+          <Button variant={"blue"} size={"mySize"} asChild>
+            <Link to="#appointment">MAKE APPOINTMENT</Link>
+          </Button>
         </div>
       </div>
     </nav>

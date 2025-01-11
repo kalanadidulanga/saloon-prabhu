@@ -5,7 +5,9 @@ const HomePage = () => {
     <>
       <div className=" container">
         <div>
-          <Button>Click me</Button>
+          <Button variant={"blue"} size={"mySize"}>
+            Click me
+          </Button>
         </div>
 
         <div className=" my-4">
