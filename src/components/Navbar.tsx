@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router";
 import { Button } from "./ui/button";
 import { Menu, X } from "lucide-react";
+import { NAVIGATIONS } from "@/constants";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -28,12 +29,7 @@ const Navbar = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const navLinks = [
-    { title: "Home", path: "/" },
-    { title: "About us", path: "/about" },
-    { title: "Services", path: "/services" },
-    { title: "Contact us", path: "/contact" },
-  ];
+  const navLinks = NAVIGATIONS;
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);

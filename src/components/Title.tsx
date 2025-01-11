@@ -18,7 +18,7 @@ const Title = ({
       }`}
     >
       <p
-        className={` capitalize text-color-5 text-lg tracking-wider ${
+        className={` capitalize text-color-5 text-base tracking-wide ${
           align === "left"
             ? "pl-1 pr-5 text-left"
             : align === "right"
