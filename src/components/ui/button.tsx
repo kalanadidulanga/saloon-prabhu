@@ -5,13 +5,13 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 dark:focus-visible:ring-zinc-300",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 dark:focus-visible:ring-zinc-300",
   {
     variants: {
       variant: {
         blue: "bg-color-3 text-color-1 rounded-full font-medium hover:brightness-90 transition-all duration-200",
         black:
-          "bg-color-5 text-color-1 capitalize rounded-full font-medium hover:brightness-90 transition-all duration-200",
+          "bg-color-5 text-color-1 !capitalize text-base rounded-full hover:bg-color-5/80 transition-all duration-200",
         default:
           "bg-zinc-900 text-zinc-50 shadow hover:bg-zinc-900/90 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-50/90",
         destructive:
