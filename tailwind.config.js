@@ -40,11 +40,6 @@ export default {
         "color-7": "#F6ECD799",
         "text-color": "#525252",
       },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
-      },
     },
     container: {
       center: true,
