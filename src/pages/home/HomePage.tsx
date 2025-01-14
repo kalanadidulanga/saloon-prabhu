@@ -1,6 +1,7 @@
 import HeroSection from "./HeroSection";
 import AboutSection from "./AboutSection";
 import ServicesSection from "./ServicesSection";
+import PriceRangeSection from "./PriceRangeSection";
 
 const HomePage = () => {
   const SERVICES = [
@@ -30,6 +31,8 @@ const HomePage = () => {
       <AboutSection />
 
       <ServicesSection services={SERVICES} />
+
+      <PriceRangeSection />
 
       <div className=" bg-rose-500 min-h-screen"></div>
     </>

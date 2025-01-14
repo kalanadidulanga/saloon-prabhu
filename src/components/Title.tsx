@@ -20,15 +20,15 @@ const Title = ({
       <p
         className={` capitalize text-color-5 text-base tracking-wide ${
           align === "left"
-            ? "pl-1 pr-5 text-left"
+            ? " text-left"
             : align === "right"
-            ? "pl-5 pr-1 text-right"
-            : "px-1 text-center"
+            ? "text-right"
+            : "text-center"
         }`}
       >
         {title}
       </p>
-      <div className=" border-2 border-color-3" />
+      <div className={` border-2 border-color-3 w-20 rounded-full`} />
     </div>
   );
 };

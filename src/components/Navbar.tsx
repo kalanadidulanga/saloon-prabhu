@@ -45,9 +45,12 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16 md:h-20 lg:h-24">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <span className="text-xl md:text-2xl lg:text-4xl font-normal font-judson text-color-5">
+            {/* <span className="text-xl md:text-2xl lg:text-4xl font-normal font-judson text-color-5">
               Saloon Prabhu
-            </span>
+            </span> */}
+            <div>
+              <img src="/assets/logo.svg" className="w-12 md:w-16 lg:w-20" />
+            </div>
           </Link>
 
           {/* Desktop Navigation Links */}
