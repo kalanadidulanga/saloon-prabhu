@@ -16,3 +16,7 @@ body {
 .appoimentbgimg {
   background-image: url("/assets/appoimentbg.svg");
 }
+
+.headerbgimg {
+  background-image: url("/assets/headerbg.png");
+}

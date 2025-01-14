@@ -38,7 +38,7 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed w-full transition-all duration-300 z-50 backdrop-blur-md ${
-        isScrolled ? "bg-nav-color shadow-md" : "bg-nav-color"
+        isScrolled ? "bg-nav-color shadow-md" : "headerbgimg bg-cover bg-center"
       }`}
     >
       <div className="container">
@@ -49,7 +49,10 @@ const Navbar = () => {
               Saloon Prabhu
             </span> */}
             <div>
-              <img src="/assets/logo.svg" className="w-12 md:w-16 lg:w-20" />
+              <img
+                src={isScrolled ? `/assets/logo.svg` : `/assets/logowhite.svg`}
+                className="w-12 md:w-16 lg:w-20"
+              />
             </div>
           </Link>
 
@@ -60,9 +63,11 @@ const Navbar = () => {
                 key={link.path}
                 to={link.path}
                 className={({ isActive }) =>
-                  `text-sm lg:text-base transition-all duration-200 text-text-color hover:text-text-color/80 ${
-                    isActive ? "font-medium" : "font-normal"
-                  }`
+                  `text-sm lg:text-base transition-all duration-200 ${
+                    isScrolled
+                      ? "text-text-color hover:text-text-color/80"
+                      : "text-white hover:text-white/80"
+                  }  ${isActive ? "font-bold" : "font-normal"}`
                 }
               >
                 {link.title}
@@ -81,7 +86,11 @@ const Navbar = () => {
               variant="ghost"
               size="icon"
               onClick={toggleMobileMenu}
-              className="text-text-color"
+              className={`${
+                isScrolled
+                  ? "text-text-color "
+                  : "text-white hover:text-text-color"
+              }`}
             >
               {isMobileMenuOpen ? (
                 <X className="h-6 w-6" />
@@ -102,8 +111,14 @@ const Navbar = () => {
                   to={link.path}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={({ isActive }) =>
-                    `block px-3 py-2 rounded-md text-base transition-all duration-200 text-text-color hover:bg-gray-100 ${
-                      isActive ? "font-medium bg-gray-50" : "font-normal"
+                    `block px-3 py-2 rounded-md text-base transition-all duration-200 hover:bg-gray-100 ${
+                      isScrolled
+                        ? "text-text-color hover:text-text-color/80"
+                        : "text-white hover:text-white/80 hover:text-text-color"
+                    } ${
+                      isActive
+                        ? "font-medium bg-gray-50 !text-text-color"
+                        : "font-normal"
                     }`
                   }
                 >
