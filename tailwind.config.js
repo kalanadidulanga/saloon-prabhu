@@ -51,6 +51,9 @@ export default {
         '2xl': '6rem',
       },
     },
+    backgroundImage: {
+      'appoimentbg': "url('./public/assets/appoimentbg.svg')",
+    }
   },
   plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 };
