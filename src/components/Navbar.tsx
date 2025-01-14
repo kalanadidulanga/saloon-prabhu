@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router";
 import { Button } from "./ui/button";
 import { Menu, X } from "lucide-react";
 import { NAVIGATIONS } from "@/constants";
+import { Link as ScrollLink } from "react-scroll";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -129,12 +130,14 @@ const Navbar = () => {
               {/* Mobile Appointment Button */}
               <div className="px-3 pt-2">
                 <Button variant="blue" size="mySize" asChild className="w-full">
-                  <Link
-                    to="#appointment"
+                  <ScrollLink
+                    to="appointment"
+                    smooth={true}
+                    duration={500}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     MAKE APPOINTMENT
-                  </Link>
+                  </ScrollLink>
                 </Button>
               </div>
             </div>

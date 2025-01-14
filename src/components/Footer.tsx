@@ -5,7 +5,7 @@ import Title from "./Title";
 
 const Footer = () => {
   return (
-    <footer className="bg-[url('/assets/footer-bg.png')] bg-cover bg-center bg-no-repeat py-16 px-4 md:px-8">
+    <footer className="bg-[url('/assets/footer-bg.svg')] bg-cover bg-center bg-no-repeat py-16 px-4 md:px-8">
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand Section */}

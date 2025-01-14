@@ -3,6 +3,7 @@ import AboutSection from "./AboutSection";
 import ServicesSection from "./ServicesSection";
 import PriceRangeSection from "./PriceRangeSection";
 import AppoimentSection from "@/components/AppoimentSection";
+import HashtagGallery from "@/components/HashtagGallery";
 
 const HomePage = () => {
   const SERVICES = [
@@ -26,17 +27,25 @@ const HomePage = () => {
     },
   ];
   return (
-    <>
-      <HeroSection />
+    <div className="relative overflow-hidden">
+      {/* Blue glow effect */}
+      <div className="absolute top-[-200px] right-[-200px] w-[600px] h-[600px] bg-[#3DA1D21F] rounded-full blur-[100px] z-0" />
+      <div className="absolute bottom-[-50px] left-[-175px] w-[600px] h-[600px] bg-[#3DA1D21F] rounded-full blur-3xl z-0" />
 
-      <AboutSection />
+      <div className="relative z-10">
+        <HeroSection />
 
-      <ServicesSection services={SERVICES} />
+        <AboutSection />
 
-      <PriceRangeSection />
+        <ServicesSection services={SERVICES} />
 
-      <AppoimentSection />
-    </>
+        <PriceRangeSection />
+
+        <AppoimentSection />
+
+        <HashtagGallery />
+      </div>
+    </div>
   );
 };
 

@@ -42,10 +42,7 @@ const AppoimentSection = () => {
   }
 
   return (
-    <div
-      id="appointment"
-      className="appoimentbgimg bg-cover bg-no-repeat bg-center"
-    >
+    <div id="appointment" className="appoimentbgimg bg-cover bg-center">
       <div className="container py-24">
         <div className="flex flex-col items-center">
           <Title title={"APPOINTMENT"} align={"center"} />
