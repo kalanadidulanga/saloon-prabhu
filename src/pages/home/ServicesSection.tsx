@@ -19,6 +19,7 @@ const ServicesSection = ({ services }: { services: Service[] }) => {
           services.map((service: any) => {
             return (
               <ServiceCard
+                key={service.title}
                 imageUrl={service.imageUrl}
                 title={service.title}
                 description={service.description}

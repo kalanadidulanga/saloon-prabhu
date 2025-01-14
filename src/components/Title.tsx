@@ -28,7 +28,15 @@ const Title = ({
       >
         {title}
       </p>
-      <div className={` border-2 border-color-3 w-20 rounded-full`} />
+      <div
+        className={` border-2 border-color-3 w-20 rounded-full ${
+          align === "center"
+            ? "mx-auto"
+            : align === "left"
+            ? "mr-auto"
+            : "ml-auto"
+        }`}
+      />
     </div>
   );
 };

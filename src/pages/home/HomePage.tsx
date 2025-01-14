@@ -36,8 +36,6 @@ const HomePage = () => {
       <PriceRangeSection />
 
       <AppoimentSection />
-
-      <div className=" bg-rose-500 min-h-screen"></div>
     </>
   );
 };
