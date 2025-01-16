@@ -1,15 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router";
 import { Button } from "./ui/button";
-import {
-  LocateIcon,
-  Mail,
-  MapPin,
-  Menu,
-  Phone,
-  PinIcon,
-  X,
-} from "lucide-react";
+import { Mail, MapPin, Menu, Phone, X } from "lucide-react";
 import { NAVIGATIONS } from "@/constants";
 import { Link as ScrollLink } from "react-scroll";
 
