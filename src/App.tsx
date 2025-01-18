@@ -10,6 +10,7 @@ import ServicesManager from "./adminPages/services-manager/ServicesManager";
 import PackagesManager from "./adminPages/packages-manager/PackagesManager";
 import AppointmentsManager from "./adminPages/appointments-manager/AppointmentsManager";
 import Client from "./adminPages/client/Client";
+import Login from "./auth/Login";
 
 function App() {
   return (
@@ -28,6 +29,8 @@ function App() {
         <Route path="client" element={<Client />} />
         <Route path="appointments-manager" element={<AppointmentsManager />} />
       </Route>
+
+      <Route path="/login" element={<Login />} />
     </Routes>
   );
 }
