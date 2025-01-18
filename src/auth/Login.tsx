@@ -1,6 +1,7 @@
 import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router";
 import { AlertCircle } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface LoginResponse {
   success: boolean;
@@ -21,6 +22,7 @@ export default function Login() {
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -28,7 +30,7 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:3000/api/auth/login", {
+      const response = await fetch("http://localhost:8000/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -42,10 +44,8 @@ export default function Login() {
         throw new Error(data.message || "Login failed");
       }
 
-      // Store token in localStorage
-      localStorage.setItem("token", data.data.token);
-      // Store user data if needed
-      localStorage.setItem("user", JSON.stringify(data.data.user));
+      // Use the login function from context instead of manually setting items
+      login(data.data.token, data.data.user);
 
       // Navigate to dashboard
       navigate("/dashboard");

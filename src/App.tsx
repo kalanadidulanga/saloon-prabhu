@@ -11,27 +11,52 @@ import PackagesManager from "./adminPages/packages-manager/PackagesManager";
 import AppointmentsManager from "./adminPages/appointments-manager/AppointmentsManager";
 import Client from "./adminPages/client/Client";
 import Login from "./auth/Login";
+import { AuthProvider } from "./contexts/AuthContext";
+import { ProtectedRoute } from "./components/ProtectedRoute";
+import { PublicOnlyRoute } from "./components/PublicOnlyRoute";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<RootLayout />}>
-        <Route index element={<HomePage />} />
-        <Route path="about" element={<AboutPage />} />
-        <Route path="services" element={<ServicesPage />} />
-        <Route path="contact" element={<ContactPage />} />
-      </Route>
+    <AuthProvider>
+      <Routes>
+        {/* Public routes - RootLayout */}
+        <Route path="/" element={<RootLayout />}>
+          <Route index element={<HomePage />} />
+          <Route path="about" element={<AboutPage />} />
+          <Route path="services" element={<ServicesPage />} />
+          <Route path="contact" element={<ContactPage />} />
+        </Route>
 
-      <Route path="/dashboard" element={<DashboardLayout />}>
-        <Route index element={<Dashboard />} />
-        <Route path="services-manager" element={<ServicesManager />} />
-        <Route path="packages-manager" element={<PackagesManager />} />
-        <Route path="client" element={<Client />} />
-        <Route path="appointments-manager" element={<AppointmentsManager />} />
-      </Route>
+        {/* Protected dashboard routes */}
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <DashboardLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route index element={<Dashboard />} />
+          <Route path="services-manager" element={<ServicesManager />} />
+          <Route path="packages-manager" element={<PackagesManager />} />
+          <Route path="client" element={<Client />} />
+          <Route
+            path="appointments-manager"
+            element={<AppointmentsManager />}
+          />
+        </Route>
 
-      <Route path="/login" element={<Login />} />
-    </Routes>
+        {/* Public only route - redirects to dashboard if authenticated */}
+        <Route
+          path="/login"
+          element={
+            <PublicOnlyRoute>
+              <Login />
+            </PublicOnlyRoute>
+          }
+        />
+      </Routes>
+    </AuthProvider>
   );
 }
 

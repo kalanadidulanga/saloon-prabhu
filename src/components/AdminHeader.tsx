@@ -1,3 +1,4 @@
+import { useAuth } from "@/contexts/AuthContext";
 import { LogOutIcon, Menu, X } from "lucide-react";
 
 const AdminHeader = ({
@@ -7,18 +8,22 @@ const AdminHeader = ({
   sidebarOpen: boolean;
   setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+  const { user, logout } = useAuth();
   return (
     <div className=" flex items-center justify-between h-16 px-3 md:px-5 border-b shadow-md">
       <div className=" flex items-center gap-3">
         <img src="/assets/logo.png" alt="logo" className=" w-10 h-10" />
         <div className=" flex flex-col text-[#202224] font-medium">
-          <p className=" text-sm">Salloon Prabhu</p>
-          <p className=" text-xs">admin@gmail.com</p>
+          <p className=" text-sm">{user?.name}</p>
+          <p className=" text-xs">{user?.email}</p>
         </div>
       </div>
 
       <div className=" flex items-center gap-3">
-        <button className=" flex items-center gap-2 text-sm bg-black-900 text-white rounded-md px-2 py-2 font-medium hover:brightness-90">
+        <button
+          className=" flex items-center gap-2 text-sm bg-black-900 text-white rounded-md px-2 py-2 font-medium hover:brightness-90"
+          onClick={logout}
+        >
           <LogOutIcon size={18} />
           <span className=" hidden md:block">Logout</span>
         </button>
