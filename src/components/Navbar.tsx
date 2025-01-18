@@ -37,20 +37,20 @@ const Navbar = () => {
   };
 
   return (
-    <>
-      <header className=" bg-white py-2">
-        <div className=" container flex justify-between items-center">
+    <div className=" fixed w-full z-50 backdrop-blur-md">
+      <header className=" bg-white w-full transition-all duration-300 z-50 backdrop-blur-md">
+        <div className=" container flex justify-between items-center h-10">
           <div className="flex gap-4">
-            <div className="flex items-center text-sm">
-              <MapPin className="mr-2" size={20} />
+            <div className="flex items-center text-xs">
+              <MapPin className="mr-2" size={14} />
               Salon PRABHU, Kottawa, Sri Lanka
             </div>
-            <div className="flex items-center text-sm">
-              <Phone className="mr-2" size={20} />
+            <div className="flex items-center text-xs">
+              <Phone className="mr-2" size={14} />
               94 75 222 3322
             </div>
-            <div className="flex items-center text-sm">
-              <Mail className="mr-2" size={20} />
+            <div className="flex items-center text-xs">
+              <Mail className="mr-2" size={14} />
               salonprabhu2020@gmail.com
             </div>
           </div>
@@ -58,7 +58,7 @@ const Navbar = () => {
         </div>
       </header>
       <nav
-        className={`fixed w-full transition-all duration-300 z-50 backdrop-blur-md ${
+        className={` w-full transition-all duration-300  backdrop-blur-md ${
           isScrolled
             ? "bg-nav-color shadow-md"
             : "headerbgimg bg-cover bg-center"
@@ -174,7 +174,7 @@ const Navbar = () => {
           )}
         </div>
       </nav>
-    </>
+    </div>
   );
 };
 

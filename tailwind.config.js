@@ -39,6 +39,7 @@ export default {
         "color-6": "#E9D415",
         "color-7": "#F6ECD799",
         "text-color": "#525252",
+        "my-blue": "#4880FF",
       },
     },
     container: {
