@@ -40,6 +40,8 @@ export default {
         "color-7": "#F6ECD799",
         "text-color": "#525252",
         "my-blue": "#4880FF",
+        "bg-color": "#222227",
+        "Color": "#F6ECD7",
       },
     },
     container: {

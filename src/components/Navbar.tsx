@@ -1,7 +1,15 @@
 import { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router";
 import { Button } from "./ui/button";
-import { Mail, MapPin, Menu, Phone, X } from "lucide-react";
+import {
+  Facebook,
+  Instagram,
+  Mail,
+  MapPin,
+  Menu,
+  Phone,
+  X,
+} from "lucide-react";
 import { NAVIGATIONS } from "@/constants";
 import { Link as ScrollLink } from "react-scroll";
 
@@ -37,31 +45,41 @@ const Navbar = () => {
   };
 
   return (
-    <div className=" fixed w-full z-50 backdrop-blur-md">
-      <header className=" bg-white w-full transition-all duration-300 z-50 backdrop-blur-md">
-        <div className=" container flex justify-between items-center h-10">
-          <div className="flex gap-4">
-            <div className="flex items-center text-xs">
+    <div className={` fixed w-full z-50`}>
+      <header
+        className={` bg-white w-full transition-all duration-300 z-50 backdrop-blur-md ${
+          isScrolled ? " -translate-y-16 md:-translate-y-10" : " translate-y-0"
+        }`}
+      >
+        <div className=" container flex flex-col md:flex-row justify-center gap-2 md:gap-0 md:justify-between items-center h-16 md:h-10">
+          <div className="flex gap-4 text-bg-color font-medium">
+            <div className="items-center text-xs hidden lg:flex">
               <MapPin className="mr-2" size={14} />
               Salon PRABHU, Kottawa, Sri Lanka
             </div>
             <div className="flex items-center text-xs">
               <Phone className="mr-2" size={14} />
-              94 75 222 3322
+              +94752223322
             </div>
             <div className="flex items-center text-xs">
               <Mail className="mr-2" size={14} />
               salonprabhu2020@gmail.com
             </div>
           </div>
-          <div></div>
+          <div className="flex gap-4 text-xs items-center font-medium text-bg-color">
+            <span>Floow Us On:</span>
+            <div className="flex gap-2">
+              <Instagram size={16} />
+              <Facebook size={16} />
+            </div>
+          </div>
         </div>
       </header>
       <nav
         className={` w-full transition-all duration-300  backdrop-blur-md ${
           isScrolled
-            ? "bg-nav-color shadow-md"
-            : "headerbgimg bg-cover bg-center"
+            ? "bg-nav-color shadow-md -translate-y-16 md:-translate-y-10"
+            : "headerbgimg bg-cover bg-center translate-y-0"
         }`}
       >
         <div className="container">
