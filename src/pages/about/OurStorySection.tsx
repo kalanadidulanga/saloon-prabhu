@@ -1,10 +1,11 @@
+import { OrnateFrame } from "@/components/ornate-frame";
 import Title from "@/components/Title";
 
 const OurStorySection = () => {
   return (
-    <div className="container flex flex-col lg:flex-row py-24">
+    <div className="container flex flex-col lg:flex-row pb-24">
       <div className="w-full flex flex-col lg:flex-row gap-16">
-        <div className=" flex flex-col w-full">
+        <div className=" flex flex-col justify-center w-full">
           <Title title={"ABOUT"} align="left" />
           <h1 className="text-3xl md:text-4xl font-judson my-8">Our Story</h1>
           <p className=" text-text-color">
@@ -20,7 +21,14 @@ const OurStorySection = () => {
           </p>
         </div>
         <div className=" w-full relative flex justify-end mb-8 lg:mb-0">
-          <img src="/assets/prabhu.png" className=" w-full max-w-md" />
+          <OrnateFrame
+            image="/assets/salon.svg"
+            alt="Beautiful landscape"
+            aspectRatio="portrait"
+            // width={600}
+            // height={450}
+            className=" w-full max-w-md"
+          />
         </div>
       </div>
     </div>

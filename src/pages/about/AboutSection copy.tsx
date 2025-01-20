@@ -1,14 +1,22 @@
+import { OrnateFrame } from "@/components/ornate-frame";
 import Title from "@/components/Title";
 
 const AboutSection = () => {
   return (
     <div className="container flex flex-col lg:flex-row py-24">
-      <div className="w-full flex flex-col lg:flex-row gap-16">
-        <div className=" w-full relative flex justify-start mb-8 lg:mb-0">
-          <img src="/assets/home2.png" className=" w-full max-w-md" />
+      <div className="w-full flex flex-col lg:flex-row gap-16 ">
+        <div className=" w-full relative flex justify-start lg:mb-0">
+          <OrnateFrame
+            image="/assets/prabhu2.svg"
+            alt="Beautiful landscape"
+            aspectRatio="portrait"
+            // width={600}
+            // height={450}
+            className=" w-full max-w-md"
+          />
         </div>
-        <div className=" flex flex-col w-full">
-          <Title title={"ABOUT"} align="left" />
+        <div className=" flex flex-col w-full justify-center">
+          <Title title={"ABOUT"} align="left" className="" />
           <h1 className="text-3xl md:text-4xl font-judson my-8">
             Welcome to Prabhu Salon Where Beauty Meets Expertise
           </h1>
