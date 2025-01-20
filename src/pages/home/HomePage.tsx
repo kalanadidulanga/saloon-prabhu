@@ -1,6 +1,6 @@
-import AboutSection from "./AboutSection";
-import ServicesSection from "./ServicesSection";
-import PriceRangeSection from "./PriceRangeSection";
+// import AboutSection from "./AboutSection";
+// import ServicesSection from "./ServicesSection";
+// import PriceRangeSection from "./PriceRangeSection";
 import AppoimentSection from "@/components/AppoimentSection";
 import HashtagGallery from "@/components/HashtagGallery";
 import HeroSection2 from "./HeroSection2";
@@ -77,6 +77,7 @@ const HomePage = () => {
         {/* <ServicesSection services={SERVICES} /> */}
 
         {/* <PriceRangeSection /> */}
+        <div className=" bg-white min-h-dvh"></div>
 
         <AppoimentSection />
 

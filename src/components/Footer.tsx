@@ -5,11 +5,11 @@ import Title from "./Title";
 
 const Footer = () => {
   return (
-    <footer className="bg-bg-color bg-cover bg-center bg-no-repeat py-16 px-4 md:px-8">
+    <footer className="bg-bg-color bg-cover bg-center bg-no-repeat pt-16 pb-8 px-4 md:px-8">
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand Section */}
-          <div className="space-y-6">
+          <div className="space-y-6 md:col-span-2">
             <h2 className="text-2xl font-judson text-white">Saloon Prabhu</h2>
             <p className="text-primary-bg text-sm leading-relaxed">
               Style and confidence go hand in hand, creating beauty that
@@ -30,19 +30,19 @@ const Footer = () => {
             <div className="flex space-x-4">
               <Link
                 to="#"
-                className="w-8 h-8 flex items-center justify-center bg-[#2F201A] text-white rounded-sm hover:bg-gray-700 transition-colors"
+                className="w-8 h-8 flex items-center justify-center bg-[#2F201A] text-white rounded-sm border-2 border-primary hover:bg-gray-700 transition-colors"
               >
                 <Facebook className="w-4 h-4" />
               </Link>
               <Link
                 to="#"
-                className="w-8 h-8 flex items-center justify-center bg-[#2F201A] text-white rounded-sm hover:bg-gray-700 transition-colors"
+                className="w-8 h-8 flex items-center justify-center bg-[#2F201A] text-white rounded-sm border-2 border-primary hover:bg-gray-700 transition-colors"
               >
                 <Instagram className="w-4 h-4" />
               </Link>
               <Link
                 to="#"
-                className="w-8 h-8 flex items-center justify-center bg-[#2F201A] text-white rounded-sm hover:bg-gray-700 transition-colors"
+                className="w-8 h-8 flex items-center justify-center bg-[#2F201A] text-white rounded-sm border-2 border-primary hover:bg-gray-700 transition-colors"
               >
                 <Phone className="w-4 h-4" />
               </Link>
@@ -51,13 +51,18 @@ const Footer = () => {
 
           {/* Pages Links */}
           <div className="space-y-4">
-            <Title title={"PAGES"} align="left" className="" />
+            <Title
+              title={"PAGES"}
+              align="left"
+              className=""
+              textColor=" text-white"
+            />
             <ul className="space-y-3">
               {NAVIGATIONS.map((item) => (
                 <li key={item.path}>
                   <Link
                     to={item.path}
-                    className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
+                    className="text-sm text-primary-bg hover:text-primary-bg/90 transition-colors"
                   >
                     {item.title}
                   </Link>
@@ -67,8 +72,13 @@ const Footer = () => {
           </div>
 
           {/* Policies Links */}
-          <div className="space-y-4">
-            <Title title={"POLICIES"} align="left" className="" />
+          {/* <div className="space-y-4">
+            <Title
+              title={"POLICIES"}
+              align="left"
+              className=""
+              textColor=" text-white"
+            />
             <ul className="space-y-3">
               {[
                 "Privacy Policy",
@@ -78,34 +88,50 @@ const Footer = () => {
                 <li key={item}>
                   <Link
                     to={`/${item.toLowerCase().replace(/ & | /g, "-")}`}
-                    className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
+                    className="text-sm text-primary-bg hover:text-gray-900 transition-colors"
                   >
                     {item}
                   </Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
 
           {/* Get in Touch */}
           <div className="space-y-4">
-            <Title title={"GET IN TOUCH"} align="left" className="" />
+            <Title
+              title={"GET IN TOUCH"}
+              align="left"
+              className=""
+              textColor=" text-white"
+            />
             <ul className="space-y-3">
-              <li className="text-sm text-gray-600">
+              <li className="text-sm text-primary-bg">
                 Prabhu Salon,
                 <br />
                 Your Street Name, City,
                 <br />
                 State, ZIP Code
               </li>
-              <li className="text-sm text-gray-600">
+              <li className="text-sm text-primary-bg">
                 Phone: Your Phone Number
               </li>
-              <li className="text-sm text-gray-600">
+              <li className="text-sm text-primary-bg">
                 Email: Your Email Address
               </li>
             </ul>
           </div>
+        </div>
+
+        <div className=" w-full text-center text-Color text-xs mt-12">
+          © 2025 Prabhu Salon. All Rights Reserved. Develop by{" "}
+          <a
+            href="https://fuchsius.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <strong>Fuchsius</strong>
+          </a>
         </div>
       </div>
     </footer>

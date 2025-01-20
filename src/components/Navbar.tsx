@@ -76,10 +76,8 @@ const Navbar = () => {
         </div>
       </header>
       <nav
-        className={` w-full transition-all duration-100  backdrop-blur-md ${
-          isScrolled
-            ? "bg-nav-color shadow-md -translate-y-16 md:-translate-y-10"
-            : "headerbgimg bg-cover bg-center translate-y-0"
+        className={` w-full transition-all duration-100  backdrop-blur-md headerbgimg bg-cover bg-center ${
+          isScrolled ? " -translate-y-16 md:-translate-y-10" : " translate-y-0"
         }`}
       >
         <div className="container">
@@ -91,9 +89,7 @@ const Navbar = () => {
             </span> */}
               <div>
                 <img
-                  src={
-                    isScrolled ? `/assets/logo.svg` : `/assets/logowhite.svg`
-                  }
+                  src={`/assets/logo.svg`}
                   className="w-12 md:w-16 lg:w-20"
                 />
               </div>
@@ -106,10 +102,8 @@ const Navbar = () => {
                   key={link.path}
                   to={link.path}
                   className={({ isActive }) =>
-                    `text-sm lg:text-base transition-all duration-100 ${
-                      isScrolled
-                        ? "text-text-color hover:text-text-color/80"
-                        : "text-white hover:text-white/80"
+                    `text-sm lg:text-base transition-all duration-100 text-white hover:text-white/80 ${
+                      isScrolled ? "" : ""
                     }  ${isActive ? "font-bold" : "font-normal"}`
                   }
                 >
@@ -118,7 +112,7 @@ const Navbar = () => {
               ))}
 
               {/* Desktop Appointment Button */}
-              <Button variant="blue" size="mySize" asChild className="ml-4">
+              <Button variant={"blue2"} size="mySize" asChild className="ml-4">
                 <Link to="#appointment">MAKE APPOINTMENT</Link>
               </Button>
             </div>
@@ -172,7 +166,7 @@ const Navbar = () => {
                 {/* Mobile Appointment Button */}
                 <div className="px-3 pt-2">
                   <Button
-                    variant="blue"
+                    variant={"blue2"}
                     size="mySize"
                     asChild
                     className="w-full"

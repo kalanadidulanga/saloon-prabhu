@@ -38,11 +38,13 @@ export default {
         "color-5": "#28262C",
         "color-6": "#E9D415",
         "color-7": "#F6ECD799",
+        "color-8": "#F6ECD7",
         "text-color": "#525252",
         "my-blue": "#4880FF",
         "bg-color": "#222227",
         "Color": "#F6ECD7",
-        "primary-bg": "#EBEBEB"
+        "primary-bg": "#EBEBEB",
+        "primary": "#9E8A78"
       },
     },
     backgroundImage: {

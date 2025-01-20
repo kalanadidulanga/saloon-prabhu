@@ -33,7 +33,7 @@ const Title = ({
         {title}
       </p>
       <div
-        className={` border-2 border-color-3 w-20 rounded-full ${
+        className={` border-2 border-primary w-20 rounded-full ${
           align === "center"
             ? "mx-auto"
             : align === "left"

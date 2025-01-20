@@ -45,8 +45,12 @@ const AppoimentSection = () => {
     <div id="appointment" className="appoimentbgimg bg-cover bg-center">
       <div className="container py-24">
         <div className="flex flex-col items-center">
-          <Title title={"APPOINTMENT"} align={"center"} />
-          <h1 className="text-3xl md:text-4xl font-judson text-color-5 text-center mb-14 mt-5">
+          <Title
+            title={"APPOINTMENT"}
+            align={"center"}
+            textColor="text-[#F6ECD7]"
+          />
+          <h1 className="text-3xl md:text-4xl font-judson text-color-8 text-center mb-14 mt-5">
             Make an Appointment
           </h1>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 w-full">
@@ -62,7 +66,7 @@ const AppoimentSection = () => {
                     name="fullName"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-sm font-medium text-gray-700">
+                        <FormLabel className="text-sm font-medium text-primary-bg">
                           Your Full Name
                         </FormLabel>
                         <FormControl>
@@ -81,7 +85,7 @@ const AppoimentSection = () => {
                     name="phoneNumber"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-sm font-medium text-gray-700">
+                        <FormLabel className="text-sm font-medium text-primary-bg">
                           Phone Number
                         </FormLabel>
                         <FormControl>
@@ -100,7 +104,7 @@ const AppoimentSection = () => {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-sm font-medium text-gray-700">
+                        <FormLabel className="text-sm font-medium text-primary-bg">
                           Email Address
                         </FormLabel>
                         <FormControl>
@@ -120,7 +124,7 @@ const AppoimentSection = () => {
                       name="date"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-sm font-medium text-gray-700">
+                          <FormLabel className="text-sm font-medium text-primary-bg">
                             Date
                           </FormLabel>
                           <FormControl>
@@ -145,7 +149,7 @@ const AppoimentSection = () => {
                       name="category"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-sm font-medium text-gray-700">
+                          <FormLabel className="text-sm font-medium text-primary-bg">
                             Category
                           </FormLabel>
                           <Select
@@ -170,7 +174,7 @@ const AppoimentSection = () => {
                   </div>
                   <Button
                     type="submit"
-                    variant="black"
+                    variant={"blue2"}
                     size="mySize"
                     className="tracking-wider !mt-8"
                   >
@@ -183,20 +187,20 @@ const AppoimentSection = () => {
             {/* Info Section */}
             <div className="space-y-12">
               <div>
-                <h2 className="text-3xl font-judson md:text-4xl font-bold text-color-5">
+                <h2 className="text-3xl font-judson md:text-4xl font-bold text-color-8">
                   Appointment Booking Form
                 </h2>
-                <p className="mt-2 text-color-5 font-normal">
+                <p className="mt-2 text-color-8 font-normal">
                   Fill in your details and let us handle the rest!
                 </p>
               </div>
 
               <div className="space-y-4">
-                <p className="text-gray-600 text-sm">
+                <p className="text-color-8 text-sm">
                   Please provide the following information to schedule your
                   appointment:
                 </p>
-                <ul className="space-y-1 text-sm text-gray-600">
+                <ul className="space-y-1 text-sm text-color-8/90">
                   <li>Full Name – Let us know who's coming in!</li>
                   <li>
                     Phone Number – We'll send you a confirmation and reminders.
