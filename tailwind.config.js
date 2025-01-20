@@ -39,6 +39,8 @@ export default {
         "color-6": "#E9D415",
         "color-7": "#F6ECD799",
         "color-8": "#F6ECD7",
+        "color-9": "#2F201A",
+        "color-10": "#14248A",
         "text-color": "#525252",
         "my-blue": "#4880FF",
         "bg-color": "#222227",
