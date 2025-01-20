@@ -42,10 +42,12 @@ export default {
         "my-blue": "#4880FF",
         "bg-color": "#222227",
         "Color": "#F6ECD7",
+        "primary-bg": "#EBEBEB"
       },
     },
     backgroundImage: {
       btnbg: "url('/assets/btnbg.png')",
+      customerbg: "url('/assets/customerbg.png')",
     },
     container: {
       center: true,

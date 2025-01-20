@@ -5,23 +5,23 @@ import Title from "./Title";
 
 const Footer = () => {
   return (
-    <footer className="bg-[url('/assets/footer-bg.svg')] bg-cover bg-center bg-no-repeat py-16 px-4 md:px-8">
+    <footer className="bg-bg-color bg-cover bg-center bg-no-repeat py-16 px-4 md:px-8">
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand Section */}
           <div className="space-y-6">
-            <h2 className="text-2xl font-judson">Saloon Prabhu</h2>
-            <p className="text-gray-600 text-sm leading-relaxed">
+            <h2 className="text-2xl font-judson text-white">Saloon Prabhu</h2>
+            <p className="text-primary-bg text-sm leading-relaxed">
               Style and confidence go hand in hand, creating beauty that
               inspires and empowers everyone.
             </p>
 
             {/* Open Hours */}
             <div className="space-y-2">
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-900">
+              <h3 className="text-sm font-semibold uppercase tracking-wider text-primary-bg">
                 Open Hours
               </h3>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-white">
                 Monday - Saturday : 10 AM - 07 PM
               </p>
             </div>
@@ -30,19 +30,19 @@ const Footer = () => {
             <div className="flex space-x-4">
               <Link
                 to="#"
-                className="w-8 h-8 flex items-center justify-center bg-gray-900 text-white rounded-sm hover:bg-gray-700 transition-colors"
+                className="w-8 h-8 flex items-center justify-center bg-[#2F201A] text-white rounded-sm hover:bg-gray-700 transition-colors"
               >
                 <Facebook className="w-4 h-4" />
               </Link>
               <Link
                 to="#"
-                className="w-8 h-8 flex items-center justify-center bg-gray-900 text-white rounded-sm hover:bg-gray-700 transition-colors"
+                className="w-8 h-8 flex items-center justify-center bg-[#2F201A] text-white rounded-sm hover:bg-gray-700 transition-colors"
               >
                 <Instagram className="w-4 h-4" />
               </Link>
               <Link
                 to="#"
-                className="w-8 h-8 flex items-center justify-center bg-gray-900 text-white rounded-sm hover:bg-gray-700 transition-colors"
+                className="w-8 h-8 flex items-center justify-center bg-[#2F201A] text-white rounded-sm hover:bg-gray-700 transition-colors"
               >
                 <Phone className="w-4 h-4" />
               </Link>

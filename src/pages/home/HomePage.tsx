@@ -5,6 +5,8 @@ import AppoimentSection from "@/components/AppoimentSection";
 import HashtagGallery from "@/components/HashtagGallery";
 import HeroSection2 from "./HeroSection2";
 import AboutSection2 from "./AboutSection2";
+import AboutSection3 from "./AboutSection3";
+import CustomersSection from "./CustomersSection";
 
 const HomePage = () => {
   const SERVICES = [
@@ -27,6 +29,34 @@ const HomePage = () => {
         "Revitalize your hair with our luxurious hair spa treatments, designed to nourish and strengthen your locks. Our keratin treatments restore smoothness and shine, leaving your hair frizz-free and manageable. Explore our customized hair color services, from subtle highlights to bold transformations, all tailored to enhance your unique style and personality.",
     },
   ];
+
+  const CUSTOMERS = [
+    {
+      id: 1,
+      imageUrl: "/assets/person1.png",
+      name: "Mrs. Kasthuti",
+      description: "Lorem ipsum dolor sit ametLorem ipsum dolor sit amet",
+    },
+    {
+      id: 2,
+      imageUrl: "/assets/person2.png",
+      name: "Mrs. LOREM",
+      description: "Lorem ipsum dolor sit ametLorem ipsum dolor sit amet",
+    },
+    {
+      id: 3,
+      imageUrl: "/assets/person3.png",
+      name: "Mrs. LOREM",
+      description: "Lorem ipsum dolor sit ametLorem ipsum dolor sit amet",
+    },
+    {
+      id: 4,
+      imageUrl: "/assets/person4.png",
+      name: "Mrs. LOREM",
+      description: "Lorem ipsum dolor sit ametLorem ipsum dolor sit amet",
+    },
+  ];
+
   return (
     <div className="relative overflow-hidden">
       {/* Blue glow effect */}
@@ -40,9 +70,13 @@ const HomePage = () => {
         {/* <AboutSection /> */}
         <AboutSection2 />
 
-        <ServicesSection services={SERVICES} />
+        <AboutSection3 />
 
-        <PriceRangeSection />
+        <CustomersSection customers={CUSTOMERS} />
+
+        {/* <ServicesSection services={SERVICES} /> */}
+
+        {/* <PriceRangeSection /> */}
 
         <AppoimentSection />
 

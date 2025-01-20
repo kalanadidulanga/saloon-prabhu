@@ -2,10 +2,12 @@ const Title = ({
   title,
   className,
   align = "left",
+  textColor,
 }: {
   title: string;
   className?: string;
   align?: "left" | "right" | "center";
+  textColor?: string;
 }) => {
   return (
     <div
@@ -18,7 +20,9 @@ const Title = ({
       }`}
     >
       <p
-        className={` capitalize text-color-5 text-base tracking-wide ${
+        className={` capitalize ${
+          textColor ? textColor : "text-color-5"
+        }  text-base tracking-wide ${
           align === "left"
             ? " text-left"
             : align === "right"
