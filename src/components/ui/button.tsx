@@ -10,6 +10,8 @@ const buttonVariants = cva(
     variants: {
       variant: {
         blue: "bg-color-3 text-color-1 rounded-full font-medium hover:brightness-90 transition-all duration-200",
+        blue2:
+          " bg-btnbg rounded-none text-white font-medium hover:brightness-90 transition-all duration-200",
         black:
           "bg-color-5 text-color-1 !capitalize text-base rounded-full hover:bg-color-5/80 transition-all duration-200",
         default:

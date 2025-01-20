@@ -1,9 +1,9 @@
-import HeroSection from "./HeroSection";
 import AboutSection from "./AboutSection";
 import ServicesSection from "./ServicesSection";
 import PriceRangeSection from "./PriceRangeSection";
 import AppoimentSection from "@/components/AppoimentSection";
 import HashtagGallery from "@/components/HashtagGallery";
+import HeroSection2 from "./HeroSection2";
 
 const HomePage = () => {
   const SERVICES = [
@@ -33,7 +33,9 @@ const HomePage = () => {
       <div className="absolute bottom-[-50px] left-[-175px] w-[600px] h-[600px] bg-[#3DA1D21F] rounded-full blur-3xl z-0" />
 
       <div className="relative z-10">
-        <HeroSection />
+        {/* <HeroSection /> */}
+
+        <HeroSection2 />
 
         <AboutSection />
 

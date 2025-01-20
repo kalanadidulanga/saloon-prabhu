@@ -44,6 +44,9 @@ export default {
         "Color": "#F6ECD7",
       },
     },
+    backgroundImage: {
+      btnbg: "url('/assets/btnbg.png')",
+    },
     container: {
       center: true,
       padding: {

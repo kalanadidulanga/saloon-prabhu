@@ -47,7 +47,7 @@ const Navbar = () => {
   return (
     <div className={` fixed w-full z-50`}>
       <header
-        className={` bg-white w-full transition-all duration-300 z-50 backdrop-blur-md ${
+        className={` bg-white w-full transition-all duration-100 z-50 backdrop-blur-md ${
           isScrolled ? " -translate-y-16 md:-translate-y-10" : " translate-y-0"
         }`}
       >
@@ -76,7 +76,7 @@ const Navbar = () => {
         </div>
       </header>
       <nav
-        className={` w-full transition-all duration-300  backdrop-blur-md ${
+        className={` w-full transition-all duration-100  backdrop-blur-md ${
           isScrolled
             ? "bg-nav-color shadow-md -translate-y-16 md:-translate-y-10"
             : "headerbgimg bg-cover bg-center translate-y-0"
@@ -106,7 +106,7 @@ const Navbar = () => {
                   key={link.path}
                   to={link.path}
                   className={({ isActive }) =>
-                    `text-sm lg:text-base transition-all duration-200 ${
+                    `text-sm lg:text-base transition-all duration-100 ${
                       isScrolled
                         ? "text-text-color hover:text-text-color/80"
                         : "text-white hover:text-white/80"
@@ -154,7 +154,7 @@ const Navbar = () => {
                     to={link.path}
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={({ isActive }) =>
-                      `block px-3 py-2 rounded-md text-base transition-all duration-200 hover:bg-gray-100 ${
+                      `block px-3 py-2 rounded-md text-base transition-all duration-100 hover:bg-gray-100 ${
                         isScrolled
                           ? "text-text-color hover:text-text-color/80"
                           : "text-white hover:text-white/80 hover:text-text-color"
