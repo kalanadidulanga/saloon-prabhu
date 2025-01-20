@@ -3,7 +3,7 @@ import { Link } from "react-router";
 
 const HeroSection2 = () => {
   return (
-    <div className="bg-[url('/assets/herobg.svg')]">
+    <div className="bg-[url('/assets/herobg.svg')] bg-cover bg-center">
       <div className="container flex flex-col min-h-[calc(100vh-96px)] justify-center pt-32 pb-24">
         <div className="w-full flex flex-col lg:flex-row">
           <div className=" flex flex-col w-full ">
