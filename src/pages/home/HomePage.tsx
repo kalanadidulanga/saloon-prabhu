@@ -4,6 +4,7 @@ import PriceRangeSection from "./PriceRangeSection";
 import AppoimentSection from "@/components/AppoimentSection";
 import HashtagGallery from "@/components/HashtagGallery";
 import HeroSection2 from "./HeroSection2";
+import AboutSection2 from "./AboutSection2";
 
 const HomePage = () => {
   const SERVICES = [
@@ -34,10 +35,10 @@ const HomePage = () => {
 
       <div className="relative z-10">
         {/* <HeroSection /> */}
-
         <HeroSection2 />
 
-        <AboutSection />
+        {/* <AboutSection /> */}
+        <AboutSection2 />
 
         <ServicesSection services={SERVICES} />
 
