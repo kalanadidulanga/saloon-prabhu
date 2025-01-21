@@ -7,6 +7,7 @@ import HeroSection2 from "./HeroSection2";
 import AboutSection2 from "./AboutSection2";
 import AboutSection3 from "./AboutSection3";
 import CustomersSection from "./CustomersSection";
+import BookSection from "@/components/BookSection";
 
 const HomePage = () => {
   // const SERVICES = [
@@ -77,7 +78,7 @@ const HomePage = () => {
         {/* <ServicesSection services={SERVICES} /> */}
 
         {/* <PriceRangeSection /> */}
-        <div className=" bg-white min-h-dvh"></div>
+        <BookSection />
 
         <AppoimentSection />
 

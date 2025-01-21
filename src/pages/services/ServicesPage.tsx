@@ -1,6 +1,9 @@
 import { ChevronRight } from "lucide-react";
 import { Link } from "react-router";
 import ServicesSection from "./ServicesSection";
+import BookSection from "@/components/BookSection";
+import AppoimentSection from "@/components/AppoimentSection";
+import Section4 from "./Section4";
 
 const ServicesPage = () => {
   return (
@@ -23,6 +26,12 @@ const ServicesPage = () => {
       </div>
 
       <ServicesSection />
+
+      <BookSection />
+
+      <AppoimentSection />
+
+      <Section4 />
     </>
   );
 };

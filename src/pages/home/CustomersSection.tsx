@@ -3,7 +3,7 @@ import Title from "@/components/Title";
 
 const CustomersSection = ({ customers }: { customers: any[] }) => {
   return (
-    <div className="bg-customerbg">
+    <div className="bg-customerbg bg-cover bg-center">
       <div className="container py-24 flex flex-col items-center">
         <Title title={"CUSTOMERS"} align={"center"} textColor="text-white" />
         <div className="text-3xl md:text-4xl font-judson mt-8 mb-12 text-center max-w-lg text-white">
