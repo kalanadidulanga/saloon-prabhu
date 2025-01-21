@@ -19,7 +19,7 @@ const AboutSection2 = () => {
               className=" w-full max-w-md"
             />
           </div>
-          <div className=" flex flex-col w-full justify-center">
+          <div className=" flex flex-col w-full justify-center motion-preset-slide-left ">
             <h1 className="text-3xl md:text-4xl font-judson">
               Get the Hair You’ve Been Dreaming About, With Care
             </h1>

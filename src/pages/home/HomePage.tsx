@@ -8,6 +8,7 @@ import AboutSection2 from "./AboutSection2";
 import AboutSection3 from "./AboutSection3";
 import CustomersSection from "./CustomersSection";
 import BookSection from "@/components/BookSection";
+// import Navbar from "@/components/Navbar";
 
 const HomePage = () => {
   // const SERVICES = [
@@ -59,32 +60,26 @@ const HomePage = () => {
   ];
 
   return (
-    <div className="relative overflow-hidden">
-      {/* Blue glow effect */}
-      <div className="absolute top-[-200px] right-[-200px] w-[600px] h-[600px] bg-[#3DA1D21F] rounded-full blur-[100px] z-0" />
-      <div className="absolute bottom-[-50px] left-[-175px] w-[600px] h-[600px] bg-[#3DA1D21F] rounded-full blur-3xl z-0" />
+    <>
+      {/* <HeroSection /> */}
+      <HeroSection2 />
 
-      <div className="relative z-10">
-        {/* <HeroSection /> */}
-        <HeroSection2 />
+      {/* <AboutSection /> */}
+      <AboutSection2 />
 
-        {/* <AboutSection /> */}
-        <AboutSection2 />
+      <AboutSection3 />
 
-        <AboutSection3 />
+      <CustomersSection customers={CUSTOMERS} />
 
-        <CustomersSection customers={CUSTOMERS} />
+      {/* <ServicesSection services={SERVICES} /> */}
 
-        {/* <ServicesSection services={SERVICES} /> */}
+      {/* <PriceRangeSection /> */}
+      <BookSection />
 
-        {/* <PriceRangeSection /> */}
-        <BookSection />
+      <AppoimentSection />
 
-        <AppoimentSection />
-
-        <HashtagGallery />
-      </div>
-    </div>
+      <HashtagGallery />
+    </>
   );
 };
 
