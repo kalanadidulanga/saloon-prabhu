@@ -10,7 +10,7 @@ const AdminHeader = ({
 }) => {
   const { user, logout } = useAuth();
   return (
-    <div className=" flex items-center justify-between h-16 px-3 md:px-5 border-b shadow-md">
+    <div className=" flex items-center justify-between h-16 min-h-16 px-3 md:px-5 border-b shadow-md">
       <div className=" flex items-center gap-3">
         <img src="/assets/logo.png" alt="logo" className=" w-10 h-10" />
         <div className=" flex flex-col text-[#202224] font-medium">

@@ -7,7 +7,7 @@ const DashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   return (
-    <div className="min-h-screen flex flex-col flex-1 w-full h-dvh max-h-dvh overflow-clip">
+    <div className=" flex flex-col flex-1 w-full h-dvh min-h-dvh max-h-dvh overflow-clip">
       <AdminHeader
         sidebarOpen={isSidebarOpen}
         setIsSidebarOpen={setIsSidebarOpen}
@@ -33,7 +33,7 @@ const DashboardLayout = () => {
           />
         )}
 
-        <div className="flex-1 overflow-y-auto p-3 bg-[#F5F6FA] relative">
+        <div className="flex-1 overflow-y-auto p-5 bg-[#F5F6FA] relative max-h-[calc(100vh-64px)]">
           <Outlet />
         </div>
       </main>
