@@ -9,22 +9,19 @@ const HashtagGallery = () => {
 
   const fetchInstagramData = async () => {
     try {
-      setLoading(true);
+      const accessToken = "YOUR_LONG_LIVED_ACCESS_TOKEN";
+      const hashtagName = "salonprabhu";
 
-      const accessToken = "YOUR_ACCESS_TOKEN"; // Replace with your access token
-      const hashtagId = "YOUR_HASHTAG_ID"; // Replace with your hashtag ID
-
-      // Fetch hashtag media
+      // Note: This is a simplified example
       const response = await axios.get(
-        `https://graph.facebook.com/v17.0/${hashtagId}/recent_media?user_id=YOUR_USER_ID&access_token=${accessToken}`
+        `https://graph.facebook.com/v17.0/ig_hashtag_search?user_id=YOUR_USER_ID&q=${hashtagName}&access_token=${accessToken}`
       );
 
-      const mediaData = response.data.data;
-      setImages(mediaData);
-    } catch (err) {
-      setError("Failed to fetch Instagram data.");
-    } finally {
-      setLoading(false);
+      console.log(response.data);
+
+      // Additional API calls needed to get actual media
+    } catch (error) {
+      console.error("Failed to fetch hashtag data");
     }
   };
 
