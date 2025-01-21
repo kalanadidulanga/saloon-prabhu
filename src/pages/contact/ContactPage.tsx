@@ -1,6 +1,8 @@
 import { ChevronRight } from "lucide-react";
 import { Link } from "react-router";
 import ContactFormSection from "./ContactFormSection";
+import AppoimentSection from "@/components/AppoimentSection";
+import LocationSection from "./LocationSection";
 
 const ContactPage = () => {
   return (
@@ -23,6 +25,8 @@ const ContactPage = () => {
       </div>
 
       <ContactFormSection />
+      <AppoimentSection />
+      <LocationSection />
     </div>
   );
 };
