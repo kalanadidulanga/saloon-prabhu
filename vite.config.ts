@@ -4,6 +4,10 @@ import path from "path";
 
 export default defineConfig({
   plugins: [react()],
+  esbuild: {
+    // Suppress certain TypeScript warnings during build
+    logOverride: { "ts-unused-variable": "silent" },
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
