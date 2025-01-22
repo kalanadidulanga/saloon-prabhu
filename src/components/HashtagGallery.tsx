@@ -17,6 +17,10 @@ const HashtagGallery = () => {
         `https://graph.facebook.com/v17.0/ig_hashtag_search?user_id=YOUR_USER_ID&q=${hashtagName}&access_token=${accessToken}`
       );
 
+      setLoading(false);
+      setImages([]);
+      setError("");
+
       console.log(response.data);
 
       // Additional API calls needed to get actual media
