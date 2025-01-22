@@ -2,12 +2,13 @@ import ClientCard from "@/components/ClientCard";
 import { ClientModal } from "@/components/ClientModal";
 import { Button } from "@/components/ui/button";
 import useAxios from "@/hooks/useAxios";
+import { Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 const Client = () => {
   const [clients, setClients] = useState([]);
-  const { fetch } = useAxios();
+  const { fetch, loading } = useAxios();
 
   const getClients = async () => {
     try {
@@ -45,6 +46,11 @@ const Client = () => {
       </div>
 
       <div className=" flex-1 mt-8">
+        {loading && (
+          <div className=" flex items-center justify-center w-full mb-8">
+            <Loader2 className=" mr-2 animate-spin" /> <span>Loading...</span>
+          </div>
+        )}
         <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
           {clients.length > 0 &&
             clients.map((client: any, index: number) => {
