@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import {
   ResponsiveModal,
   ResponsiveModalContent,
+  ResponsiveModalDescription,
   ResponsiveModalHeader,
   ResponsiveModalTitle,
   ResponsiveModalTrigger,
@@ -11,6 +12,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Cloud } from "lucide-react";
 import { useState, ReactNode } from "react";
+import toast from "react-hot-toast";
+import { uploadImage } from "@/utils/imageUpload";
+import useAxios from "@/hooks/useAxios";
 
 type Side = "top" | "bottom" | "left" | "right";
 
@@ -18,14 +22,30 @@ interface ClientModalProps {
   side: Side;
   children: ReactNode;
   type?: string;
+  clientData?: {
+    id: number;
+    imageUrl: string;
+    name: string;
+    description: string;
+  };
+  onRefresh?: () => void;
 }
 
-export const ClientModal = ({ children, side, type }: ClientModalProps) => {
-  const [imagePreview, setImagePreview] = useState("");
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+export const ClientModal = ({
+  children,
+  side,
+  type,
+  clientData,
+  onRefresh,
+}: ClientModalProps) => {
+  const [imgUrl, setImageUrl] = useState(clientData?.imageUrl || "");
+  const [name, setName] = useState(clientData?.name || "");
+  const [description, setDescription] = useState(clientData?.description || "");
   const [isDragging, setIsDragging] = useState(false);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const { fetch } = useAxios();
 
   const validateFile = (file: File) => {
     const validTypes = ["image/jpeg", "image/png", "image/gif", "image/webp"];
@@ -33,21 +53,28 @@ export const ClientModal = ({ children, side, type }: ClientModalProps) => {
       setError("Please upload an image file (JPEG, PNG, GIF, WEBP)");
       return false;
     }
-    if (file.size > 1 * 1024 * 1024) {
-      // 1MB
-      setError("File size should be less than 1MB");
+    if (file.size > 50 * 1024 * 1024) {
+      // 50MB
+      setError("File size should be less than 50MB");
       return false;
     }
     setError("");
     return true;
   };
 
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file && validateFile(file)) {
-      const reader = new FileReader();
-      reader.onload = (e) => setImagePreview(e.target?.result as string);
-      reader.readAsDataURL(file);
+      setLoading(true);
+      try {
+        const url = await uploadImage(file);
+        setImageUrl(url);
+        setError("");
+      } catch {
+        setError("Failed to upload the image. Please try again.");
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -60,32 +87,109 @@ export const ClientModal = ({ children, side, type }: ClientModalProps) => {
     setIsDragging(false);
   };
 
-  const handleDrop = (e: React.DragEvent) => {
+  const handleDrop = async (e: React.DragEvent) => {
     e.preventDefault();
     setIsDragging(false);
     const file = e.dataTransfer.files[0];
     if (file && validateFile(file)) {
-      const reader = new FileReader();
-      reader.onload = (e) => setImagePreview(e.target?.result as string);
-      reader.readAsDataURL(file);
+      setLoading(true);
+      try {
+        const url = await uploadImage(file);
+        setImageUrl(url);
+        setError("");
+      } catch {
+        setError("Failed to upload the image. Please try again.");
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
-  const handleSave = () => {
-    if (!imagePreview) {
+  const handleRemoveImage = () => {
+    setImageUrl("");
+  };
+
+  const handleSave = async () => {
+    if (!imgUrl) {
       setError("Please upload an image");
       return;
     }
-    if (!title.trim()) {
-      setError("Please enter a title");
+
+    if (!name.trim()) {
+      setError("Please enter a name");
       return;
     }
+
     if (!description.trim()) {
       setError("Please enter a description");
       return;
     }
-    // Handle save logic here
-    console.log({ imagePreview, title, description });
+
+    if (type === "new") {
+      // Add new service
+      try {
+        setIsLoading(true);
+        const { data } = await fetch({
+          url: "/api/clients",
+          method: "POST",
+          data: {
+            imgUrl,
+            name,
+            description,
+          },
+        });
+        if (data.success) {
+          //   console.log(data.data);
+          setImageUrl("");
+          setName("");
+          setDescription("");
+          toast.success(data.message || "Client added successfully");
+          if (onRefresh) {
+            onRefresh();
+          }
+        } else {
+          throw new Error(data.message || "Failed to fetch clients");
+        }
+      } catch (error) {
+        console.error("Error fetching clients:", error);
+        toast.error("Failed to fetch clients. Please try again.");
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    if (type === "edit") {
+      // Edit service
+      try {
+        setIsLoading(true);
+        const { data } = await fetch({
+          url: `/api/clients/${clientData?.id}`,
+          method: "PUT",
+          data: {
+            imgUrl,
+            name,
+            description,
+          },
+        });
+        if (data.success) {
+          //   console.log(data.data);
+          setImageUrl(data.data.imgUrl);
+          setName(data.data.name);
+          setDescription(data.data.description);
+          toast.success(data.message || "Client added successfully");
+          if (onRefresh) {
+            onRefresh();
+          }
+        } else {
+          throw new Error(data.message || "Failed to fetch clients");
+        }
+      } catch (error) {
+        console.error("Error fetching clients:", error);
+        toast.error("Failed to fetch clients. Please try again.");
+      } finally {
+        setIsLoading(false);
+      }
+    }
   };
 
   return (
@@ -93,22 +197,34 @@ export const ClientModal = ({ children, side, type }: ClientModalProps) => {
       <ResponsiveModalTrigger asChild>{children}</ResponsiveModalTrigger>
       <ResponsiveModalContent side={side}>
         <ResponsiveModalHeader>
-          <ResponsiveModalTitle>Add new Client</ResponsiveModalTitle>
+          <ResponsiveModalTitle>
+            {type === "new" ? "Add new " : "Edit "}Client
+          </ResponsiveModalTitle>
+          <ResponsiveModalDescription></ResponsiveModalDescription>
           <div className="grid gap-4 py-4">
             <div
               className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-colors
               ${isDragging ? "border-blue-500 bg-blue-50" : "border-gray-300"}
-              ${imagePreview ? "bg-gray-50" : "hover:bg-gray-50"}`}
+              ${imgUrl ? "bg-gray-50" : "hover:bg-gray-50"}`}
               onDragOver={handleDragOver}
               onDragLeave={handleDragLeave}
               onDrop={handleDrop}
             >
-              {imagePreview ? (
-                <img
-                  src={imagePreview}
-                  alt="Preview"
-                  className="max-h-40 mx-auto rounded-lg"
-                />
+              {imgUrl ? (
+                <div className="relative">
+                  <img
+                    src={imgUrl}
+                    alt="Uploaded Preview"
+                    className="max-h-40 mx-auto rounded-lg"
+                  />
+                  <Button
+                    variant="outline"
+                    className="absolute top-2 right-2"
+                    onClick={handleRemoveImage}
+                  >
+                    Remove
+                  </Button>
+                </div>
               ) : (
                 <div className="space-y-2">
                   <Cloud className="w-12 h-12 mx-auto text-gray-400" />
@@ -116,7 +232,7 @@ export const ClientModal = ({ children, side, type }: ClientModalProps) => {
                     Choose an image or drag & drop it here
                   </div>
                   <div className="text-xs text-gray-500">
-                    JPEG, PNG, GIF, WEBP formats up to 1MB
+                    JPEG, PNG, GIF, WEBP formats up to 50MB
                   </div>
                 </div>
               )}
@@ -127,24 +243,32 @@ export const ClientModal = ({ children, side, type }: ClientModalProps) => {
                 accept="image/*"
                 id="file-upload"
               />
-              <Button
-                variant="outline"
-                className="mt-4"
-                onClick={() => document.getElementById("file-upload")?.click()}
-              >
-                Browse File
-              </Button>
+              {!imgUrl && (
+                <Button
+                  variant="outline"
+                  className="mt-4"
+                  onClick={() =>
+                    document.getElementById("file-upload")?.click()
+                  }
+                >
+                  Browse File
+                </Button>
+              )}
             </div>
 
             {error && <div className="text-red-500 text-sm">{error}</div>}
 
+            {loading && (
+              <div className="text-blue-500 text-sm">Uploading...</div>
+            )}
+
             <div className="grid gap-2">
-              <Label htmlFor="title">Title</Label>
+              <Label htmlFor="name">Name</Label>
               <Input
-                id="title"
+                id="name"
                 required
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
             </div>
 
@@ -154,13 +278,17 @@ export const ClientModal = ({ children, side, type }: ClientModalProps) => {
                 id="description"
                 required
                 value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                onChange={(e: any) => setDescription(e.target.value)}
                 rows={4}
               />
             </div>
 
-            <Button onClick={handleSave} className="w-full">
-              Save changes
+            <Button
+              onClick={handleSave}
+              className="w-full"
+              disabled={isLoading}
+            >
+              {isLoading ? "Saving..." : "Save"}
             </Button>
           </div>
         </ResponsiveModalHeader>

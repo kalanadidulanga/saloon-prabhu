@@ -41,11 +41,11 @@ const ServicesManager = () => {
 
         setServices(data.data);
       } else {
-        throw new Error(data.message || "Failed to fetch school info");
+        throw new Error(data.message || "Failed to fetch services");
       }
     } catch (error) {
-      console.error("Error fetching school info:", error);
-      toast.error("Failed to fetch school info. Please try again.");
+      console.error("Error fetching services:", error);
+      toast.error("Failed to fetch services. Please try again.");
     }
   };
 
