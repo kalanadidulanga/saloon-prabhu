@@ -6,7 +6,7 @@ const Client = () => {
     <div className=" flex flex-col flex-1">
       <div className=" flex items-center justify-between">
         <h1 className=" text-xl font-semibold font-judson">Clients Manager</h1>
-        <ClientModal side="bottom">
+        <ClientModal side="bottom" type="new">
           <Button>Add New</Button>
         </ClientModal>
       </div>

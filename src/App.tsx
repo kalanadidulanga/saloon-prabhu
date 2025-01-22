@@ -15,6 +15,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { PublicOnlyRoute } from "./components/PublicOnlyRoute";
 import ScrollToTop from "./components/ScrollToTop";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
@@ -58,6 +59,8 @@ function App() {
           }
         />
       </Routes>
+
+      <Toaster />
     </AuthProvider>
   );
 }
