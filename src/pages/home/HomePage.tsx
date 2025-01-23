@@ -8,6 +8,7 @@ import AboutSection2 from "./AboutSection2";
 import AboutSection3 from "./AboutSection3";
 import CustomersSection from "./CustomersSection";
 import BookSection from "@/components/BookSection";
+import ReviewSection from "./ReviewSection";
 // import Navbar from "@/components/Navbar";
 
 const HomePage = () => {
@@ -77,6 +78,8 @@ const HomePage = () => {
       <BookSection />
 
       <AppoimentSection />
+
+      <ReviewSection />
 
       <HashtagGallery />
     </>

@@ -20,3 +20,8 @@ body {
 .headerbgimg {
   background-image: url("/assets/headerbg.png");
 }
+
+.scroll-bar-hidden {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
