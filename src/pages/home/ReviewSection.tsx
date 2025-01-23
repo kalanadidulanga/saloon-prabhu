@@ -7,8 +7,10 @@ import {
   ResponsiveModalDescription,
 } from "@/components/ui/responsive-modal";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Star } from "lucide-react";
+import useAxios from "@/hooks/useAxios";
+import toast from "react-hot-toast";
 
 interface ReviewCardProps {
   name: string;
@@ -20,9 +22,10 @@ const ReviewCard: React.FC<ReviewCardProps> = ({ name, rating, review }) => {
   const stars = Array.from({ length: 5 }, (_, i) => i + 1);
 
   return (
-    <div className="bg-transparent border border-black-900 p-4 lg:p-5 mb-6 max-w-2xl mx-auto">
+    <div className="bg-transparent border-2 border-black-900 p-4 lg:p-5 mb-6 max-w-2xl mx-auto">
       <h3 className="text-lg font-semibold">{name}</h3>
-      <div className="flex items-center my-3">
+      <p className="text-gray-700 leading-relaxed mt-3 mb-2">{review}</p>
+      <div className="flex items-center">
         {stars.map((star) => (
           <Star
             key={star}
@@ -32,7 +35,6 @@ const ReviewCard: React.FC<ReviewCardProps> = ({ name, rating, review }) => {
           />
         ))}
       </div>
-      <p className="text-gray-700 leading-relaxed">{review}</p>
     </div>
   );
 };
@@ -43,38 +45,76 @@ const ReviewSection = () => {
   const [review, setReview] = useState("");
   const [fullName, setFullName] = useState("");
 
-  const reviews: ReviewCardProps[] = [
-    {
-      name: "Didul Adeesha",
-      rating: 3,
-      review:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua quis nostrud exercitation ullamco.",
-    },
-    {
-      name: "Didul Adeesha",
-      rating: 2,
-      review:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua quis nostrud exercitation ullamco.",
-    },
-    {
-      name: "Didul Adeesha",
-      rating: 2,
-      review:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua quis nostrud exercitation ullamco.",
-    },
-    {
-      name: "Didul Adeesha",
-      rating: 2,
-      review:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua quis nostrud exercitation ullamco.",
-    },
-  ];
+  const { fetch, loading } = useAxios();
+  const [reviews, setReviews] = useState([]);
 
-  const handleSubmit = () => {
-    console.log("Full Name:", fullName);
-    console.log("Rating:", rating);
-    console.log("Review:", review);
-    setIsOpen(false);
+  const loadReviews = async () => {
+    try {
+      const { data } = await fetch({
+        url: "/api/reviews",
+        method: "GET",
+      });
+      if (data.success) {
+        setReviews(data.data);
+      } else {
+        throw new Error(data.message || "Failed to fetch Reviews");
+      }
+    } catch (error) {
+      console.error("Error fetching Reviews:", error);
+      toast.error("Failed to fetch Reviews. Please try again.");
+    }
+  };
+
+  useEffect(() => {
+    loadReviews();
+  }, []);
+
+  //   const reviews: ReviewCardProps[] = [
+  //     {
+  //       name: "Didul Adeesha",
+  //       rating: 3,
+  //       review:
+  //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua quis nostrud exercitation ullamco.",
+  //     },
+  //     {
+  //       name: "Didul Adeesha",
+  //       rating: 2,
+  //       review:
+  //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua quis nostrud exercitation ullamco.",
+  //     },
+  //     {
+  //       name: "Didul Adeesha",
+  //       rating: 2,
+  //       review:
+  //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua quis nostrud exercitation ullamco.",
+  //     },
+  //     {
+  //       name: "Didul Adeesha",
+  //       rating: 2,
+  //       review:
+  //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua quis nostrud exercitation ullamco.",
+  //     },
+  //   ];
+
+  const handleSubmit = async () => {
+    // Your logic to submit the review goes here
+    try {
+      await fetch({
+        url: "/api/reviews",
+        method: "POST",
+        data: { clientName: fullName, rating, comment: review },
+      });
+      loadReviews();
+      toast.success("Review submitted successfully.");
+      console.log("Full Name:", fullName);
+      console.log("Rating:", rating);
+      console.log("Review:", review);
+      setIsOpen(false);
+    } catch (error) {
+      console.error("Error submitting review:", error);
+      toast.error("Failed to submit review. Please try again.");
+    } finally {
+    }
   };
 
   return (
@@ -87,12 +127,12 @@ const ReviewSection = () => {
 
           <div className="bg-reviewbg bg-contain bg-center w-full aspect-video ps-16 pe-14 py-12 md:px-20 lg:ps-28 lg:pe-24 lg:py-20 overflow-hidden">
             <div className="w-full h-full aspect-video scroll-bar-hidden overflow-y-auto">
-              {reviews.map((review, index) => (
+              {reviews.map((review: any, index) => (
                 <ReviewCard
                   key={index}
-                  name={review.name}
+                  name={review.clientName}
                   rating={review.rating}
-                  review={review.review}
+                  review={review.comment}
                 />
               ))}
             </div>
@@ -149,7 +189,9 @@ const ReviewSection = () => {
                 <Button variant="secondary" onClick={() => setIsOpen(false)}>
                   Cancel
                 </Button>
-                <Button onClick={handleSubmit}>Submit</Button>
+                <Button onClick={handleSubmit} disabled={loading}>
+                  Submit
+                </Button>
               </ResponsiveModalFooter>
             </ResponsiveModalContent>
           </ResponsiveModal>
