@@ -34,8 +34,11 @@ const AppoimentSection = () => {
       email: "",
       date: "",
       category: "",
+      location: "",
     },
   });
+
+  const selectedCategory = form.watch("category");
 
   function onSubmit(values: z.infer<typeof appointmentFormSchema>) {
     console.log(values);
@@ -105,7 +108,7 @@ const AppoimentSection = () => {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-sm font-medium text-primary-bg">
-                          Email Address
+                          Email Address (Optional)
                         </FormLabel>
                         <FormControl>
                           <Input
@@ -162,9 +165,11 @@ const AppoimentSection = () => {
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <SelectItem value="haircut">Haircut</SelectItem>
-                              <SelectItem value="coloring">Coloring</SelectItem>
-                              <SelectItem value="facial">Facial</SelectItem>
+                              <SelectItem value="hair">Hair</SelectItem>
+                              <SelectItem value="skin">Skin</SelectItem>
+                              <SelectItem value="nail">Nail</SelectItem>
+                              <SelectItem value="kids">Kids</SelectItem>
+                              <SelectItem value="body">Bridal</SelectItem>
                             </SelectContent>
                           </Select>
                           <FormMessage />
@@ -172,6 +177,28 @@ const AppoimentSection = () => {
                       )}
                     />
                   </div>
+                  {/* Conditionally Render Location Input */}
+                  {selectedCategory === "body" && (
+                    <FormField
+                      control={form.control}
+                      name="location"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-sm font-medium text-primary-bg">
+                            Location
+                          </FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="Enter the location link"
+                              className="mt-1 h-12 bg-white border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-100 focus:border-blue-200"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  )}
                   <Button
                     type="submit"
                     variant={"blue2"}

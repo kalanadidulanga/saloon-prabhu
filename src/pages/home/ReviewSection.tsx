@@ -127,6 +127,7 @@ const ReviewSection = () => {
 
           <div className="bg-reviewbg bg-contain bg-center w-full aspect-video ps-16 pe-14 py-12 md:px-20 lg:ps-28 lg:pe-24 lg:py-20 overflow-hidden">
             <div className="w-full h-full aspect-video scroll-bar-hidden overflow-y-auto">
+              {loading && <p className=" text-center mb-2">Loading...</p>}
               {reviews.map((review: any, index) => (
                 <ReviewCard
                   key={index}
