@@ -16,6 +16,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import { PublicOnlyRoute } from "./components/PublicOnlyRoute";
 import ScrollToTop from "./components/ScrollToTop";
 import { Toaster } from "react-hot-toast";
+import ReviewsManager from "./adminPages/reviews-manager/ReviewsManager";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
           <Route path="services-manager" element={<ServicesManager />} />
           <Route path="packages-manager" element={<PackagesManager />} />
           <Route path="client" element={<Client />} />
+          <Route path="reviews-manager" element={<ReviewsManager />} />
           <Route
             path="appointments-manager"
             element={<AppointmentsManager />}

@@ -1,6 +1,14 @@
 import React from "react";
 import { Link, useLocation } from "react-router";
-import { Clock, Grid, Heart, MessageSquare, List } from "lucide-react";
+import {
+  Clock,
+  Grid,
+  Heart,
+  MessageSquare,
+  List,
+  RectangleVerticalIcon,
+  StampIcon,
+} from "lucide-react";
 
 interface NavItemProps {
   to: string;
@@ -63,6 +71,11 @@ const Sidebar = () => {
       to: "/dashboard/client",
       icon: <MessageSquare className="w-5 h-5" />,
       label: "Client",
+    },
+    {
+      to: "/dashboard/reviews-manager",
+      icon: <StampIcon className="w-5 h-5" />,
+      label: "Reviews",
     },
     {
       to: "/dashboard/appointments-manager",
