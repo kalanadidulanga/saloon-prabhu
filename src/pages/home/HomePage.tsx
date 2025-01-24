@@ -61,32 +61,32 @@ const HomePage = () => {
   //   },
   // ];
 
-  const CUSTOMERS = [
-    {
-      id: 1,
-      imageUrl: "/assets/person1.png",
-      name: "Mrs. Kasthuti",
-      description: "Lorem ipsum dolor sit ametLorem ipsum dolor sit amet",
-    },
-    {
-      id: 2,
-      imageUrl: "/assets/person2.png",
-      name: "Mrs. LOREM",
-      description: "Lorem ipsum dolor sit ametLorem ipsum dolor sit amet",
-    },
-    {
-      id: 3,
-      imageUrl: "/assets/person3.png",
-      name: "Mrs. LOREM",
-      description: "Lorem ipsum dolor sit ametLorem ipsum dolor sit amet",
-    },
-    {
-      id: 4,
-      imageUrl: "/assets/person4.png",
-      name: "Mrs. LOREM",
-      description: "Lorem ipsum dolor sit ametLorem ipsum dolor sit amet",
-    },
-  ];
+  // const CUSTOMERS = [
+  //   {
+  //     id: 1,
+  //     imageUrl: "/assets/person1.png",
+  //     name: "Mrs. Kasthuti",
+  //     description: "Lorem ipsum dolor sit ametLorem ipsum dolor sit amet",
+  //   },
+  //   {
+  //     id: 2,
+  //     imageUrl: "/assets/person2.png",
+  //     name: "Mrs. LOREM",
+  //     description: "Lorem ipsum dolor sit ametLorem ipsum dolor sit amet",
+  //   },
+  //   {
+  //     id: 3,
+  //     imageUrl: "/assets/person3.png",
+  //     name: "Mrs. LOREM",
+  //     description: "Lorem ipsum dolor sit ametLorem ipsum dolor sit amet",
+  //   },
+  //   {
+  //     id: 4,
+  //     imageUrl: "/assets/person4.png",
+  //     name: "Mrs. LOREM",
+  //     description: "Lorem ipsum dolor sit ametLorem ipsum dolor sit amet",
+  //   },
+  // ];
 
   return (
     <>
