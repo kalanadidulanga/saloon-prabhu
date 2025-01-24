@@ -51,7 +51,7 @@ const ReviewSection = () => {
   const loadReviews = async () => {
     try {
       const { data } = await fetch({
-        url: "/api/reviews",
+        url: "/api/reviews?status=accepted",
         method: "GET",
       });
       if (data.success) {
