@@ -4,7 +4,8 @@ import toast from "react-hot-toast";
 
 const ContactFormSection = () => {
   const { fetch, loading } = useAxios();
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
@@ -43,7 +44,25 @@ const ContactFormSection = () => {
       return;
     }
 
-    console.log(data);
+    // console.log(data);
+
+    try {
+      await fetch({
+        url: "/api/contact",
+        method: "POST",
+        data: {
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          message: data.message,
+        },
+      });
+
+      toast.success("Contact form submitted successfully!");
+    } catch (error) {
+      console.error("Error submitting contact form:", error);
+      toast.error("Failed to submit contact form. Please try again.");
+    }
   };
 
   return (
