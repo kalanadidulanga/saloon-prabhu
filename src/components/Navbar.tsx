@@ -12,10 +12,14 @@ import {
 } from "lucide-react";
 import { NAVIGATIONS } from "@/constants";
 import { Link as ScrollLink } from "react-scroll";
+import useContactDetailsStore from "@/stores/contactdetailsStore";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const { address, phone, email, instagram, facebook, whatsapp } =
+    useContactDetailsStore();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -55,22 +59,26 @@ const Navbar = () => {
           <div className="flex gap-4 text-bg-color font-medium">
             <div className="items-center text-xs hidden lg:flex">
               <MapPin className="mr-2" size={14} />
-              Salon PRABHU, Kottawa, Sri Lanka
+              {address}
             </div>
             <div className="flex items-center text-xs">
               <Phone className="mr-2" size={14} />
-              +94752223322
+              {phone}
             </div>
             <div className="flex items-center text-xs">
               <Mail className="mr-2" size={14} />
-              salonprabhu2020@gmail.com
+              {email}
             </div>
           </div>
           <div className="flex gap-4 text-xs items-center font-medium text-bg-color">
             <span>Floow Us On:</span>
             <div className="flex gap-2">
-              <Instagram size={16} />
-              <Facebook size={16} />
+              <Link to={instagram} target="_blank">
+                <Instagram size={16} />
+              </Link>
+              <Link to={whatsapp} target="_blank">
+                <Facebook size={16} />
+              </Link>
             </div>
           </div>
         </div>
