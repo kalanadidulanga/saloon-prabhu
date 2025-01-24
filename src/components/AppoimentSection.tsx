@@ -1,6 +1,6 @@
 "use client";
 
-import { Calendar } from "lucide-react";
+import { Calendar, Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -24,8 +24,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { appointmentFormSchema } from "@/lib/schema";
+import useAxios from "@/hooks/useAxios";
+import toast from "react-hot-toast";
 
 const AppoimentSection = () => {
+  const { fetch, loading } = useAxios();
   const form = useForm<z.infer<typeof appointmentFormSchema>>({
     resolver: zodResolver(appointmentFormSchema),
     defaultValues: {
@@ -40,8 +43,31 @@ const AppoimentSection = () => {
 
   const selectedCategory = form.watch("category");
 
-  function onSubmit(values: z.infer<typeof appointmentFormSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof appointmentFormSchema>) {
+    // console.log(values);
+    try {
+      await fetch({
+        url: "/api/appointments",
+        method: "POST",
+        data: {
+          fullName: values.fullName,
+          phoneNumber: values.phoneNumber,
+          email: values.email || "N/A",
+          date: values.date,
+          category: values.category,
+          location: values.location || "N/A",
+        },
+      });
+
+      toast.success("Appointment made successfully");
+      //clear the form
+      form.reset();
+      form.clearErrors();
+      form.setValue("category", "");
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to make an appointment");
+    }
   }
 
   return (
@@ -185,7 +211,7 @@ const AppoimentSection = () => {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="text-sm font-medium text-primary-bg">
-                            Location
+                            Location Link
                           </FormLabel>
                           <FormControl>
                             <Input
@@ -204,7 +230,9 @@ const AppoimentSection = () => {
                     variant={"blue2"}
                     size="mySize"
                     className="tracking-wider !mt-8"
+                    disabled={loading}
                   >
+                    {loading && <Loader2 className="mr-2 animate-spin" />}
                     MAKE APPOINTMENT
                   </Button>
                 </form>
