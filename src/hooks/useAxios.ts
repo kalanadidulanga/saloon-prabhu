@@ -15,7 +15,7 @@ function useAxios<T = any>(): UseAxiosReturn<T> {
 
   // Set up an axios instance with the base URL
   const axiosInstance = axios.create({
-    baseURL: import.meta.env.REACT_APP_BASE_URL || "http://localhost:8000",
+    baseURL: import.meta.env.VITE_BASE_URL || "http://localhost:8000",
   });
 
   const fetch = async (
