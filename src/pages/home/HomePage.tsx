@@ -9,9 +9,37 @@ import AboutSection3 from "./AboutSection3";
 import CustomersSection from "./CustomersSection";
 import BookSection from "@/components/BookSection";
 import ReviewSection from "./ReviewSection";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import useAxios from "@/hooks/useAxios";
 // import Navbar from "@/components/Navbar";
 
 const HomePage = () => {
+  const [clients, setClients] = useState([]);
+  const { fetch, loading } = useAxios();
+
+  const getClients = async () => {
+    try {
+      const { data } = await fetch({
+        url: "/api/clients",
+        method: "GET",
+      });
+      if (data.success) {
+        console.log(data.data);
+        setClients(data.data);
+      } else {
+        throw new Error(data.message || "Failed to fetch Clients");
+      }
+    } catch (error) {
+      console.error("Error fetching Clients:", error);
+      toast.error("Failed to fetch Clients. Please try again.");
+    }
+  };
+
+  useEffect(() => {
+    getClients();
+  }, []);
+
   // const SERVICES = [
   //   {
   //     imageUrl: "/assets/service1.png",
@@ -70,7 +98,7 @@ const HomePage = () => {
 
       <AboutSection3 />
 
-      <CustomersSection customers={CUSTOMERS} />
+      <CustomersSection customers={clients} isLoading={loading} />
 
       {/* <ServicesSection services={SERVICES} /> */}
 
