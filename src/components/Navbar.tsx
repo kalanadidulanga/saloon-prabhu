@@ -89,7 +89,7 @@ const Navbar = () => {
             </span> */}
               <div>
                 <img
-                  src={`/assets/logo.svg`}
+                  src={`/assets/logowhite.svg`}
                   className="w-12 md:w-16 lg:w-20"
                 />
               </div>
@@ -148,11 +148,7 @@ const Navbar = () => {
                     to={link.path}
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={({ isActive }) =>
-                      `block px-3 py-2 rounded-md text-base transition-all duration-100 hover:bg-gray-100 ${
-                        isScrolled
-                          ? "text-text-color hover:text-text-color/80"
-                          : "text-white hover:text-white/80 hover:text-text-color"
-                      } ${
+                      `block px-3 py-2 rounded-md text-base transition-all duration-100 text-white ${
                         isActive
                           ? "font-medium bg-gray-50 !text-text-color"
                           : "font-normal"

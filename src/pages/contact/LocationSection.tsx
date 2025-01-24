@@ -27,7 +27,7 @@ const LocationSection = () => {
         </div>
         <div className=" w-full">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2023616.6683735466!2d79.38685699961503!3d7.855627729237328!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8bc570145eafbc15%3A0x15f655659825b160!2sFuchsius%20(PVT)%20Ltd!5e0!3m2!1sen!2slk!4v1737436010124!5m2!1sen!2slk"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.4154415245225!2d79.96362287499576!3d6.840694993157447!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae251ec25ea4bef%3A0x99140c324806d9b9!2sSalon%20PRABHU!5e0!3m2!1sen!2slk!4v1737716806577!5m2!1sen!2slk"
             // width="600"
             // height="450"
             loading="lazy"

@@ -7,7 +7,8 @@ const ContactFormSection = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget; // Reference to the form element
+    const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
     const errors: string[] = [];
@@ -44,8 +45,6 @@ const ContactFormSection = () => {
       return;
     }
 
-    // console.log(data);
-
     try {
       await fetch({
         url: "/api/contact",
@@ -59,6 +58,7 @@ const ContactFormSection = () => {
       });
 
       toast.success("Contact form submitted successfully!");
+      form.reset(); // Clear the form after successful submission
     } catch (error) {
       console.error("Error submitting contact form:", error);
       toast.error("Failed to submit contact form. Please try again.");
@@ -127,7 +127,7 @@ const ContactFormSection = () => {
 
             <div className=" flex flex-col gap-2 text-[#28262C]">
               <label htmlFor="message">Your Message or Question</label>
-              <div className=" w-full border border-[#28262C]">
+              <div className=" w-full border border-[#28262C] focus:outline-none focus:ring-0 h-32">
                 <textarea
                   name="message"
                   id="message"
