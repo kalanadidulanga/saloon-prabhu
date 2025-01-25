@@ -1,9 +1,24 @@
 import { Link } from "react-router";
-import { Facebook, Instagram, Phone } from "lucide-react";
+import { Facebook, Instagram } from "lucide-react";
 import { NAVIGATIONS } from "@/constants";
 import Title from "./Title";
+import useContactDetailsStore from "@/stores/contactdetailsStore";
+import { FaWhatsapp } from "react-icons/fa";
+
+import { AiFillTikTok } from "react-icons/ai";
 
 const Footer = () => {
+  const {
+    address,
+    phone,
+    phone2,
+    email,
+    instagram,
+    facebook,
+    whatsapp,
+    tiktok,
+  } = useContactDetailsStore();
+
   return (
     <footer className="bg-bg-color bg-cover bg-center bg-no-repeat pt-16 pb-8 px-4 md:px-8">
       <div className="container">
@@ -29,22 +44,34 @@ const Footer = () => {
             {/* Social Media Icons */}
             <div className="flex space-x-4">
               <Link
-                to="#"
+                to={facebook}
+                target="_blank"
                 className="w-8 h-8 flex items-center justify-center bg-[#2F201A] text-white rounded-sm border-2 border-primary hover:bg-gray-700 transition-colors"
               >
                 <Facebook className="w-4 h-4" />
               </Link>
               <Link
-                to="#"
+                to={instagram}
+                target="_blank"
                 className="w-8 h-8 flex items-center justify-center bg-[#2F201A] text-white rounded-sm border-2 border-primary hover:bg-gray-700 transition-colors"
               >
                 <Instagram className="w-4 h-4" />
               </Link>
               <Link
-                to="#"
+                to={whatsapp}
+                target="_blank"
                 className="w-8 h-8 flex items-center justify-center bg-[#2F201A] text-white rounded-sm border-2 border-primary hover:bg-gray-700 transition-colors"
               >
-                <Phone className="w-4 h-4" />
+                {/* <Phone className="w-4 h-4" /> */}
+                <FaWhatsapp className="w-4 h-4" />
+              </Link>
+              <Link
+                to={tiktok}
+                target="_blank"
+                className="w-8 h-8 flex items-center justify-center bg-[#2F201A] text-white rounded-sm border-2 border-primary hover:bg-gray-700 transition-colors"
+              >
+                {/* <Ticktok className="w-4 h-4" /> */}
+                <AiFillTikTok className="w-4 h-4" />
               </Link>
             </div>
           </div>
@@ -106,19 +133,11 @@ const Footer = () => {
               textColor=" text-white"
             />
             <ul className="space-y-3">
+              <li className="text-sm text-primary-bg">{address}</li>
               <li className="text-sm text-primary-bg">
-                Prabhu Salon,
-                <br />
-                Your Street Name, City,
-                <br />
-                State, ZIP Code
+                Phone: {phone} | {phone2}
               </li>
-              <li className="text-sm text-primary-bg">
-                Phone: Your Phone Number
-              </li>
-              <li className="text-sm text-primary-bg">
-                Email: Your Email Address
-              </li>
+              <li className="text-sm text-primary-bg">Email: {email}</li>
             </ul>
           </div>
         </div>

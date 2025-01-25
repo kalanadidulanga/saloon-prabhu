@@ -18,7 +18,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const { address, phone, email, instagram, facebook, whatsapp } =
+  const { address, phone, phone2, email, instagram, facebook, whatsapp } =
     useContactDetailsStore();
 
   useEffect(() => {
