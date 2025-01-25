@@ -14,11 +14,11 @@ type ContactDetailsStore = ContactDetails & {
 };
 
 const useContactDetailsStore = create<ContactDetailsStore>((set) => ({
-  address: "123 Fake St",
-  phone: "555-555-5555",
-  email: "a@b.com",
-  instagram: "https://www.instagram.com/",
-  facebook: "https://www.facebook.com/",
+  address: "No. 114, Highlevel Road, Kottawa, Sri Lanka 10230",
+  phone: "0117433533",
+  email: "salonprabhu2020@gmail.com",
+  instagram: "https://www.instagram.com/salon_prabhu",
+  facebook: "https://web.facebook.com/salon.prabhu",
   whatsapp: "https://www.whatsapp.com/",
 
   updateContactDetails: (newDetails) =>
