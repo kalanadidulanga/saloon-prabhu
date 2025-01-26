@@ -1,6 +1,8 @@
-import { ServiceModal } from "@/components/ServiceModal";
+import PackageCard from "@/components/PackageCard";
+import { PackageModal } from "@/components/PackageModal";
 import { Button } from "@/components/ui/button";
 import useAxios from "@/hooks/useAxios";
+import { Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -11,11 +13,11 @@ const PackagesManager = () => {
   const getPackages = async () => {
     try {
       const { data } = await fetch({
-        url: "/api/services",
+        url: "/api/packages",
         method: "GET",
       });
       if (data.success) {
-        // console.log(data.data);
+        console.log(data.data);
 
         setPackages(data.data);
       } else {
@@ -42,12 +44,35 @@ const PackagesManager = () => {
           <h1 className=" text-xl font-semibold font-judson">
             Packages Manager
           </h1>
-          <ServiceModal side="bottom" type="new" onRefresh={refreshServices}>
+          <PackageModal side="bottom" type="new" onRefresh={refreshServices}>
             <Button>Add New</Button>
-          </ServiceModal>
+          </PackageModal>
         </div>
 
-        <div className=" flex-1 mt-8"></div>
+        <div className=" flex-1 mt-8">
+          {loading && (
+            <div className=" flex items-center justify-center w-full mb-8">
+              <Loader2 className=" mr-2 animate-spin" /> <span>Loading...</span>
+            </div>
+          )}
+          <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+            {packages.length > 0 &&
+              packages.map((service: any, index: number) => {
+                return (
+                  <PackageCard
+                    key={index}
+                    imageUrl={service.imageUrl}
+                    price={service.price}
+                    id={service.id}
+                    title={service.title}
+                    description={service.description}
+                    imageAlt={service.title}
+                    onRefresh={refreshServices}
+                  />
+                );
+              })}
+          </div>
+        </div>
       </div>
     </>
   );
