@@ -6,7 +6,7 @@ const HeroSection2 = () => {
   // Array of background images for the slider
   const backgroundImages = [
     "/assets/herobg.svg",
-    "/assets/herobg.svg",
+    "/assets/btnbg.png",
     "/assets/herobg.svg", // Add more background images here
   ];
 
