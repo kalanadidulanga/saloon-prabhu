@@ -25,7 +25,7 @@ const HomePage = () => {
         method: "GET",
       });
       if (data.success) {
-        console.log(data.data);
+        // console.log(data.data);
         setClients(data.data);
       } else {
         throw new Error(data.message || "Failed to fetch Clients");

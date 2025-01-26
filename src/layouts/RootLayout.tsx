@@ -1,5 +1,6 @@
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import { Outlet } from "react-router";
 
 const RootLayout = () => {
@@ -12,6 +13,7 @@ const RootLayout = () => {
         {/* </div> */}
       </main>
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 };
