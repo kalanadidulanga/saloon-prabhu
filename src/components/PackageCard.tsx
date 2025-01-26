@@ -48,7 +48,7 @@ const PackageCard = ({
           },
         });
 
-        const { data } = await fetch({
+        await fetch({
           url: `/api/packages/${id}`,
           method: "DELETE",
         });
@@ -74,55 +74,67 @@ const PackageCard = ({
   };
 
   return (
-    <div className={`max-w-md w-full mx-auto relative ${className}`}>
-      {/* Image Container */}
-      <div className="absolute inset-x-0 w-32 h-32 mx-auto">
-        <div className="absolute inset-0 rounded-full overflow-hidden">
+    <div
+      className={`w-full max-w-3xl mx-auto bg-white rounded-lg shadow-md ${className}`}
+    >
+      <div className="grid md:grid-cols-2 gap-6 p-6">
+        {/* Image Section */}
+        <div className="relative aspect-square rounded-md overflow-hidden bg-gray-100">
           <img
-            src={imageUrl}
+            src={imageUrl || "/placeholder.svg"}
             alt={imageAlt}
             className="w-full h-full object-cover"
           />
         </div>
-      </div>
 
-      <PackageModal
-        side="bottom"
-        type="edit"
-        packageData={{ imageUrl, title, price, description, id }}
-        onRefresh={() => onRefresh && onRefresh()}
-      >
-        <Button
-          className="absolute right-4 top-24"
-          size={"icon"}
-          variant={"ghost"}
-        >
-          <Edit />
-        </Button>
-      </PackageModal>
+        {/* Content Section */}
+        <div className="flex flex-col space-y-4">
+          <div className="space-y-4">
+            <div>
+              <label className="text-sm font-medium text-gray-500">Title</label>
+              <div className="text-lg font-medium text-gray-900">{title}</div>
+            </div>
 
-      <Button
-        className="absolute left-4 top-24"
-        size={"icon"}
-        variant={"destructive"}
-        onClick={() => deletePackage(id)}
-      >
-        <Trash2 />
-      </Button>
+            <div>
+              <label className="text-sm font-medium text-gray-500">Price</label>
+              <div className="text-lg font-medium text-gray-900">
+                {new Intl.NumberFormat("sri-LK", {
+                  style: "currency",
+                  currency: "LKR",
+                }).format(price)}
+              </div>
+            </div>
 
-      {/* Content with light blue background */}
-      <div className="bg-white rounded-md mt-20 pt-20 px-10 pb-8 text-center shadow-md">
-        <h3 className="text-md font-medium text-gray-900 mb-4 uppercase tracking-wide">
-          {title}
-        </h3>
-        <p className="text-gray-600 text-xs leading-relaxed max-w-sm mx-auto">
-          {description}
-        </p>
-        <div className="mt-4 font-medium text-gray-800">
-          {new Intl.NumberFormat("sri-LK", {
-            style: "currency",
-            currency: "LKR",
-          }).format(price)}
+            <div>
+              <label className="text-sm font-medium text-gray-500">
+                Description
+              </label>
+              <div className="text-gray-700">{description}</div>
+            </div>
+          </div>
+
+          <div className="flex justify-end space-x-2 pt-4">
+            <Button
+              variant="destructive"
+              size="sm"
+              onClick={() => deletePackage(id)}
+            >
+              <Trash2 className="w-4 h-4 mr-2" />
+              Delete
+            </Button>
+
+            <PackageModal
+              side="right"
+              type="edit"
+              packageData={{ imageUrl, title, price, description, id }}
+              onRefresh={() => onRefresh && onRefresh()}
+            >
+              <Button size="sm">
+                <Edit className="w-4 h-4 mr-2" />
+                Edit
+              </Button>
+            </PackageModal>
+          </div>
         </div>
       </div>
     </div>

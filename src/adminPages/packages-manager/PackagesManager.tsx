@@ -55,7 +55,7 @@ const PackagesManager = () => {
               <Loader2 className=" mr-2 animate-spin" /> <span>Loading...</span>
             </div>
           )}
-          <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+          <div className=" grid grid-cols-1 lg:grid-cols-2 gap-5">
             {packages.length > 0 &&
               packages.map((service: any, index: number) => {
                 return (
