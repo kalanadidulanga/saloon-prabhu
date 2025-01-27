@@ -12,7 +12,7 @@ import ReviewSection from "./ReviewSection";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import useAxios from "@/hooks/useAxios";
-import AntiqueBook from "@/components/AntiqueBook";
+// import AntiqueBook from "@/components/AntiqueBook";
 // import Navbar from "@/components/Navbar";
 
 const HomePage = () => {

@@ -15,7 +15,6 @@ import {
   SRGBColorSpace,
   Uint16BufferAttribute,
   Vector3,
-  Group,
 } from "three";
 import { degToRad } from "three/src/math/MathUtils.js";
 import { pageAtom, pages } from "./UI";

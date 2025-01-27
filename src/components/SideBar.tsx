@@ -6,7 +6,6 @@ import {
   Heart,
   MessageSquare,
   List,
-  RectangleVerticalIcon,
   StampIcon,
 } from "lucide-react";
 
