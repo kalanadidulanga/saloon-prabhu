@@ -7,7 +7,7 @@ import { Experience } from "./Experience";
 
 const BookSection = () => {
   return (
-    <section className="py-24 bg-Color">
+    <section className="py-24 bg-white">
       <div className="container mx-auto flex flex-col items-center px-4">
         {/* Title Component */}
         <Title title="PRICE RANGE" align="center" />
@@ -18,7 +18,7 @@ const BookSection = () => {
         </h2>
 
         {/* Content Wrapper */}
-        <div className="w-full flex flex-col items-center justify-center gap-8 relative">
+        <div className="w-full flex flex-col items-center justify-center gap-8 relative border-2 borderred-500">
           {/* UI Controls */}
           {/* <div className="w-full"> */}
           <UI />
