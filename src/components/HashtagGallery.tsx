@@ -1,61 +1,71 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Title from "./Title";
+
+interface InstagramPost {
+  id: string;
+  media_type: string;
+  media_url: string;
+  caption?: string;
+  permalink: string;
+}
 
 const HashtagGallery = () => {
-  const [images, setImages] = useState<any[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<any>(null);
+  const [posts, setPosts] = useState<InstagramPost[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const fetchInstagramData = async () => {
+  const FACEBOOK_ACCESS_TOKEN = "YOUR_LONG_LIVED_ACCESS_TOKEN";
+  const INSTAGRAM_ACCOUNT_ID = "YOUR_INSTAGRAM_ACCOUNT_ID";
+
+  const fetchInstagramHashtagMedia = async () => {
     try {
-      const accessToken = "YOUR_LONG_LIVED_ACCESS_TOKEN";
-      const hashtagName = "salonprabhu";
-
-      // Note: This is a simplified example
-      const response = await axios.get(
-        `https://graph.facebook.com/v17.0/ig_hashtag_search?user_id=YOUR_USER_ID&q=${hashtagName}&access_token=${accessToken}`
+      // Step 1: Search Hashtag
+      const hashtagSearchResponse = await axios.get(
+        `https://graph.facebook.com/v19.0/ig_hashtag_search?user_id=${INSTAGRAM_ACCOUNT_ID}&q=salonprabhu&access_token=${FACEBOOK_ACCESS_TOKEN}`
       );
 
+      const hashtagId = hashtagSearchResponse.data.data[0]?.id;
+
+      if (!hashtagId) {
+        throw new Error("Hashtag not found");
+      }
+
+      // Step 2: Fetch Recent Media for Hashtag
+      const recentMediaResponse = await axios.get(
+        `https://graph.facebook.com/v19.0/${hashtagId}/recent_media?user_id=${INSTAGRAM_ACCOUNT_ID}&fields=id,media_type,media_url,caption,permalink&access_token=${FACEBOOK_ACCESS_TOKEN}`
+      );
+
+      setPosts(recentMediaResponse.data.data);
       setLoading(false);
-      setImages([]);
-      setError("");
-
-      console.log(response.data);
-
-      // Additional API calls needed to get actual media
     } catch (error) {
-      console.error("Failed to fetch hashtag data");
+      console.error("Hashtag Fetch Error:", error);
+      setError("Failed to fetch Instagram posts");
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchInstagramData();
+    fetchInstagramHashtagMedia();
   }, []);
 
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
+
   return (
-    <div className="container py-24">
-      <div className=" flex flex-col items-center gap-5">
-        <Title title={"PROJECTS"} align={"center"} textColor="text-primary" />
-        <h2 className="text-4xl text-[#28262C] font-judson font-bold text-center mb-4">
-          #salonprabhu
-        </h2>
-        {loading && <p className=" text-center">Loading...</p>}
-        {error && <p className="text-red-500 text-center">{error}</p>}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-          {images.map((image) => (
-            <div key={image.id} className="relative group">
+    <div className="container">
+      <h2 className="text-3xl">#salonprabhu Posts</h2>
+      <div className="grid grid-cols-3 gap-4">
+        {posts.map((post) => (
+          <div key={post.id}>
+            {post.media_type === "IMAGE" && (
               <img
-                src={image.media_url}
-                alt={image.caption}
-                className="rounded-lg w-full h-48 object-cover"
+                src={post.media_url}
+                alt={post.caption || "Instagram Post"}
+                className="w-full h-64 object-cover"
               />
-              <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white font-bold">
-                {image.caption || "Instagram Post"}
-              </div>
-            </div>
-          ))}
-        </div>
+            )}
+          </div>
+        ))}
       </div>
     </div>
   );
