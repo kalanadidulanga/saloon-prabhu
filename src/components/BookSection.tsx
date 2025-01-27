@@ -1,19 +1,52 @@
 import Title from "./Title";
+// import { Loader } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+import { Suspense } from "react";
+import { UI } from "./UI";
+import { Experience } from "./Experience";
 
 const BookSection = () => {
   return (
-    <div>
-      <div className=" container flex flex-col py-24 items-center">
+    <section className="py-24 bg-Color">
+      <div className="container mx-auto flex flex-col items-center px-4">
+        {/* Title Component */}
         <Title title="PRICE RANGE" align="center" />
-        <h2 className="text-3xl md:text-4xl font-judson my-8 text-center">
+
+        {/* Subheading */}
+        <h2 className="text-3xl md:text-4xl font-judson my-8 text-center text-gray-800">
           Service fees for your beauty and body care
         </h2>
-        <div
-          id="book"
-          className="book min-h-96 border-2 border-Color w-full"
-        ></div>
+
+        {/* Content Wrapper */}
+        <div className="w-full flex flex-col items-center justify-center gap-8 relative">
+          {/* UI Controls */}
+          {/* <div className="w-full"> */}
+          <UI />
+          {/* </div> */}
+
+          {/* Canvas with 3D Experience */}
+          <div
+            className="relative w-full lg:w-3/4 h-[600px] lg:h-[700px]"
+            aria-label="3D Book Section"
+          >
+            <Canvas
+              shadows
+              camera={{
+                position: [-0.5, 1, window.innerWidth > 800 ? 4 : 9],
+                fov: 45,
+              }}
+            >
+              <Suspense fallback={null}>
+                <Experience />
+              </Suspense>
+            </Canvas>
+
+            {/* Loader */}
+            {/* <Loader /> */}
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
