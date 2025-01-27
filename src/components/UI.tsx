@@ -58,10 +58,10 @@ export const UI = () => {
             {[...pages].map((_, index) => (
               <button
                 key={index}
-                className={`border-transparent hover:border-white transition-all duration-300  px-4 py-3 rounded-full  text-lg uppercase shrink-0 border text-sm ${
+                className={`border-transparent bg-Color hover:border-white transition-all duration-300  px-4 py-3 rounded-full  text-lg uppercase shrink-0 border text-sm ${
                   index === page
-                    ? "bg-white/90 text-black"
-                    : "bg-black/30 text-white"
+                    ? "bg-Color/90 text-black"
+                    : "bg-Color/30 text-black"
                 }`}
                 onClick={() => setPage(index)}
               >
@@ -69,10 +69,10 @@ export const UI = () => {
               </button>
             ))}
             <button
-              className={`border-transparent hover:border-white transition-all duration-300  px-4 py-3 rounded-full  text-lg uppercase shrink-0 border text-sm ${
+              className={`border-transparent bg-Color hover:border-white transition-all duration-300  px-4 py-3 rounded-full  text-lg uppercase shrink-0 border text-sm ${
                 page === pages.length
-                  ? "bg-white/90 text-black"
-                  : "bg-black/30 text-white"
+                  ? "bg-Color/90 text-black"
+                  : "bg-Color/30 text-black"
               }`}
               onClick={() => setPage(pages.length)}
             >
