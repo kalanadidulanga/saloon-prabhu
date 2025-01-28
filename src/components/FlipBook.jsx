@@ -1,8 +1,32 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Title from "./Title";
+import useAxios from "../hooks/useAxios";
 
 const Flipbook = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [services, setServices] = useState([]);
+  const { fetch } = useAxios();
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch({
+        url: "/api/packages",
+        method: "GET",
+      });
+
+      // Validate and transform image URLs if needed
+      console.log(response.data.data);
+      const processedData = response.data.data;
+
+      setServices(processedData);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   useEffect(() => {
     // Initialize turn.js after component mount
@@ -73,7 +97,7 @@ const Flipbook = () => {
 
   return (
     <div className=" bg-Color/60 py-24">
-      <div className=" container">
+      <div className=" container overflow-hidden">
         {isLoading && (
           <div className="text-center text-lg text-gray-700 my-4">
             Loading Flipbook...
@@ -103,7 +127,7 @@ const Flipbook = () => {
             {/* <div className=" hard bg-[url('/textures/book-back.jpg')] bg-center bg-cover" /> */}
 
             {/* Pokemon Pages */}
-            {[
+            {/* {[
               { img: "img-1.png", name: "Charmander" },
               { img: "img-2.png", name: "Arbok" },
               { img: "img-3.png", name: "Pikachu" },
@@ -112,7 +136,7 @@ const Flipbook = () => {
             ].map((pokemon, index) => (
               <>
                 <div
-                  key={index}
+                  key={index + 1}
                   className=" bg-white border border-gray-200 p-5 flex justify-center items-center"
                 >
                   <img
@@ -126,13 +150,47 @@ const Flipbook = () => {
                     }}
                   />
                 </div>
-                <div key={index} className=" bg-white border border-gray-200">
+                <div
+                  key={index + 2}
+                  className=" bg-white border border-gray-200"
+                >
                   <small className="text-gray-600 text-sm mt-4">
                     {pokemon.name}
                   </small>
                 </div>
               </>
-            ))}
+            ))} */}
+
+            {services.length > 0 &&
+              services.map((service, index) => (
+                <>
+                  <div
+                    key={index}
+                    className=" bg-white border border-gray-200 p-5 flex justify-center items-center"
+                  >
+                    <img
+                      src={service.imageUrl}
+                      alt={service.title}
+                      className="w-full h-auto object-contain"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src =
+                          "https://via.placeholder.com/300x300?text=Pokemon";
+                      }}
+                    />
+                  </div>
+                  <div
+                    key={service.id}
+                    className=" bg-white border border-gray-200"
+                  >
+                    <h4>{service.title}</h4>
+                    <p>{service.price}</p>
+                    <small className="text-gray-600 text-sm mt-4">
+                      {service.description}
+                    </small>
+                  </div>
+                </>
+              ))}
 
             {/* Back Cover */}
             {/* <div className="  hard bg-[url('/textures/book-back.jpg')] bg-center bg-cover" /> */}
