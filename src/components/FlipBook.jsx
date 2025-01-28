@@ -13,6 +13,7 @@ const Flipbook = () => {
         url: "/api/packages",
         method: "GET",
       });
+      console.log(response.data.data);
       setServices(response.data.data || []);
     } catch (error) {
       console.error("Error fetching data:", error);
