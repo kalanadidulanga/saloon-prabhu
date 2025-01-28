@@ -100,7 +100,7 @@ const Flipbook = () => {
               {/* <p className="italic opacity-80">~ HankTheTank</p> */}
             </div>
 
-            <div className=" hard bg-[url('/textures/book-back.jpg')] bg-center bg-cover" />
+            {/* <div className=" hard bg-[url('/textures/book-back.jpg')] bg-center bg-cover" /> */}
 
             {/* Pokemon Pages */}
             {[
@@ -109,27 +109,33 @@ const Flipbook = () => {
               { img: "img-3.png", name: "Pikachu" },
               { img: "img-4.png", name: "Mew" },
               { img: "img-5.png", name: "Darkrai" },
-              { img: "img-5.png", name: "Darkrai" },
             ].map((pokemon, index) => (
-              <div key={index} className=" bg-white border border-gray-200">
-                <img
-                  src={`/images/${pokemon.img}`}
-                  alt={pokemon.name}
-                  className="w-full h-auto rounded-lg object-cover"
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src =
-                      "https://via.placeholder.com/300x300?text=Pokemon";
-                  }}
-                />
-                <small className="text-gray-600 text-sm mt-4">
-                  {pokemon.name}
-                </small>
-              </div>
+              <>
+                <div
+                  key={index}
+                  className=" bg-white border border-gray-200 p-5 flex justify-center items-center"
+                >
+                  <img
+                    src={`/images/${pokemon.img}`}
+                    alt={pokemon.name}
+                    className="w-full h-auto object-contain"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src =
+                        "https://via.placeholder.com/300x300?text=Pokemon";
+                    }}
+                  />
+                </div>
+                <div key={index} className=" bg-white border border-gray-200">
+                  <small className="text-gray-600 text-sm mt-4">
+                    {pokemon.name}
+                  </small>
+                </div>
+              </>
             ))}
 
             {/* Back Cover */}
-            <div className="  hard bg-[url('/textures/book-back.jpg')] bg-center bg-cover" />
+            {/* <div className="  hard bg-[url('/textures/book-back.jpg')] bg-center bg-cover" /> */}
             <div className="  hard bg-[url('/textures/book-back.jpg')] bg-center bg-cover flex flex-col justify-center items-center">
               <h2 className="text-3xl font-bold mb-4">Thank You</h2>
               <small className="italic opacity-80">Salon Prabhu</small>
