@@ -112,17 +112,20 @@ const Flipbook = () => {
       pages.push(
         <div
           key={`image-${service.id}-${index}`}
-          className="bg-white border border-gray-200 p-5 flex justify-center items-center"
+          className="bg-white border border-gray-200 "
         >
-          <img
-            src={service.imageUrl}
-            alt={service.title}
-            className="w-full h-auto object-contain"
-            onError={(e) => {
-              e.target.onerror = null;
-              e.target.src = "https://via.placeholder.com/300x300?text=Service";
-            }}
-          />
+          <div className="p-5 flex justify-center items-center">
+            <img
+              src={service.imageUrl}
+              alt={service.title}
+              className="w-full h-auto object-contain"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src =
+                  "https://via.placeholder.com/300x300?text=Service";
+              }}
+            />
+          </div>
         </div>
       );
 
