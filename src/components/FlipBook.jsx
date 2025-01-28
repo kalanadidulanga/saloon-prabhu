@@ -13,14 +13,10 @@ const Flipbook = () => {
         url: "/api/packages",
         method: "GET",
       });
-
-      // Validate and transform image URLs if needed
-      console.log(response.data.data);
-      const processedData = response.data.data;
-
-      setServices(processedData);
+      setServices(response.data.data || []);
     } catch (error) {
       console.error("Error fetching data:", error);
+      setServices([]);
     }
   };
 
@@ -29,17 +25,16 @@ const Flipbook = () => {
   }, []);
 
   useEffect(() => {
-    // Initialize turn.js after component mount
+    let checkDependenciesInterval;
+
     const initializeFlipbook = () => {
       if (window.$ && window.$(".flipbook").turn) {
         const flipbook = window.$(".flipbook");
 
-        // Destroy existing instance if any
         if (flipbook.data()?.turn) {
           flipbook.turn("destroy");
         }
 
-        // Initialize with new settings
         flipbook.turn({
           width: 800,
           height: 500,
@@ -60,25 +55,27 @@ const Flipbook = () => {
       }
     };
 
-    // Wait for both jQuery and turn.js to be fully loaded
-    const checkDependencies = setInterval(() => {
-      if (window.$ && window.$(".flipbook").turn) {
-        clearInterval(checkDependencies);
-        initializeFlipbook();
-      }
-    }, 100);
+    // Only start checking dependencies if services are loaded
+    if (services.length > 0) {
+      checkDependenciesInterval = setInterval(() => {
+        if (window.$ && window.$(".flipbook").turn) {
+          clearInterval(checkDependenciesInterval);
+          initializeFlipbook();
+        }
+      }, 100);
+    }
 
-    // Cleanup function
     return () => {
-      clearInterval(checkDependencies);
+      if (checkDependenciesInterval) {
+        clearInterval(checkDependenciesInterval);
+      }
       const flipbook = window.$?.(".flipbook");
       if (flipbook?.data()?.turn) {
         flipbook.turn("destroy");
       }
     };
-  }, []);
+  }, [services]); // Depend on services to reinitialize when data is loaded
 
-  // Handle window resize
   useEffect(() => {
     const handleResize = () => {
       const flipbook = window.$?.(".flipbook");
@@ -95,112 +92,95 @@ const Flipbook = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const renderPages = () => {
+    const pages = [];
+
+    // Front Cover
+    pages.push(
+      <div
+        key="front-cover"
+        className="hard bg-[url('/textures/book-cover.jpg')] bg-white bg-center bg-cover flex flex-col justify-center items-center"
+      >
+        {/* <h1 className="text-4xl font-bold text-gray-800 mb-4">Our Services</h1> */}
+        {/* <p className="text-xl text-gray-600">Salon Prabhu</p> */}
+      </div>
+    );
+
+    // Service Pages
+    services.forEach((service, index) => {
+      pages.push(
+        <div
+          key={`image-${service.id}-${index}`}
+          className="bg-white border border-gray-200 p-5 flex justify-center items-center"
+        >
+          <img
+            src={service.imageUrl}
+            alt={service.title}
+            className="w-full h-auto object-contain"
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = "https://via.placeholder.com/300x300?text=Service";
+            }}
+          />
+        </div>
+      );
+
+      pages.push(
+        <div
+          key={`details-${service.id}-${index}`}
+          className="bg-white border border-gray-200"
+        >
+          <div className="h-full flex flex-col justify-between p-5">
+            <div>
+              <h4 className="text-2xl font-bold mb-4">{service.title}</h4>
+              <p className="text-gray-600 text-base mb-4">
+                {service.description}
+              </p>
+            </div>
+            <p className="text-xl font-semibold text-gray-800 mt-4">
+              <span className="mr-2">LKR</span>
+              {service.price}
+            </p>
+          </div>
+        </div>
+      );
+    });
+
+    // Back Cover
+    pages.push(
+      <div
+        key="back-cover"
+        className="hard bg-[url('/textures/book-back.jpg')] bg-center bg-cover flex flex-col justify-center items-center"
+      >
+        <h2 className="text-3xl font-bold mb-4">Thank You</h2>
+        <small className="italic opacity-80">Salon Prabhu</small>
+      </div>
+    );
+
+    return pages;
+  };
+
   return (
-    <div className=" bg-Color/60 py-24">
-      <div className=" container overflow-hidden">
+    <div className="bg-gray-50/60 py-24">
+      <div className="container mx-auto px-4 overflow-hidden">
         {isLoading && (
           <div className="text-center text-lg text-gray-700 my-4">
             Loading Flipbook...
           </div>
         )}
 
-        {/* Title Component */}
         <Title title="PRICE RANGE" align="center" />
 
-        {/* Subheading */}
         <h2 className="text-3xl md:text-4xl font-judson mt-5 mb-16 text-center text-gray-800">
           Service fees for your beauty and body care
         </h2>
 
-        {/* <div className="flex justify-center items-center overflow-hidden"> */}
         <div
-          className="flipbook-container w-full h-full  grid place-content-center"
+          className="flipbook-container w-full h-full grid place-content-center"
           style={{ visibility: isLoading ? "hidden" : "visible" }}
         >
-          <div className="flipbook mx-auto">
-            {/* Cover */}
-            <div className=" hard bg-[url('/textures/book-cover.jpg')] bg-white bg-center bg-cover">
-              {/* <small className="text-4xl font-bold mb-4">Salon Prabhu</small> */}
-              {/* <p className="italic opacity-80">~ HankTheTank</p> */}
-            </div>
-
-            {/* <div className=" hard bg-[url('/textures/book-back.jpg')] bg-center bg-cover" /> */}
-
-            {/* Pokemon Pages */}
-            {/* {[
-              { img: "img-1.png", name: "Charmander" },
-              { img: "img-2.png", name: "Arbok" },
-              { img: "img-3.png", name: "Pikachu" },
-              { img: "img-4.png", name: "Mew" },
-              { img: "img-5.png", name: "Darkrai" },
-            ].map((pokemon, index) => (
-              <>
-                <div
-                  key={index + 1}
-                  className=" bg-white border border-gray-200 p-5 flex justify-center items-center"
-                >
-                  <img
-                    src={`/images/${pokemon.img}`}
-                    alt={pokemon.name}
-                    className="w-full h-auto object-contain"
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src =
-                        "https://via.placeholder.com/300x300?text=Pokemon";
-                    }}
-                  />
-                </div>
-                <div
-                  key={index + 2}
-                  className=" bg-white border border-gray-200"
-                >
-                  <small className="text-gray-600 text-sm mt-4">
-                    {pokemon.name}
-                  </small>
-                </div>
-              </>
-            ))} */}
-
-            {services.length > 0 &&
-              services.map((service, index) => (
-                <>
-                  <div
-                    key={index}
-                    className=" bg-white border border-gray-200 p-5 flex justify-center items-center"
-                  >
-                    <img
-                      src={service.imageUrl}
-                      alt={service.title}
-                      className="w-full h-auto object-contain"
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src =
-                          "https://via.placeholder.com/300x300?text=Pokemon";
-                      }}
-                    />
-                  </div>
-                  <div
-                    key={service.id}
-                    className=" bg-white border border-gray-200"
-                  >
-                    <h4>{service.title}</h4>
-                    <p>{service.price}</p>
-                    <small className="text-gray-600 text-sm mt-4">
-                      {service.description}
-                    </small>
-                  </div>
-                </>
-              ))}
-
-            {/* Back Cover */}
-            {/* <div className="  hard bg-[url('/textures/book-back.jpg')] bg-center bg-cover" /> */}
-            <div className="  hard bg-[url('/textures/book-back.jpg')] bg-center bg-cover flex flex-col justify-center items-center">
-              <h2 className="text-3xl font-bold mb-4">Thank You</h2>
-              <small className="italic opacity-80">Salon Prabhu</small>
-            </div>
-          </div>
+          <div className="flipbook mx-auto">{renderPages()}</div>
         </div>
-        {/* </div> */}
       </div>
     </div>
   );
