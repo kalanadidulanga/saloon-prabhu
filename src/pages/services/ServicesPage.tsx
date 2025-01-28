@@ -1,9 +1,10 @@
 import { ChevronRight } from "lucide-react";
 import { Link } from "react-router";
 import ServicesSection from "./ServicesSection";
-import BookSection from "@/components/BookSection";
+// import BookSection from "@/components/BookSection";
 import AppoimentSection from "@/components/AppoimentSection";
 import Section4 from "./Section4";
+import FlipBook from "@/components/FlipBook.jsx";
 
 const ServicesPage = () => {
   return (
@@ -27,7 +28,8 @@ const ServicesPage = () => {
 
       <ServicesSection />
 
-      <BookSection />
+      {/* <BookSection /> */}
+      <FlipBook />
 
       <AppoimentSection />
 
