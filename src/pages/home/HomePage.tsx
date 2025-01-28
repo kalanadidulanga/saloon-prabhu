@@ -2,7 +2,7 @@
 // import ServicesSection from "./ServicesSection";
 // import PriceRangeSection from "./PriceRangeSection";
 import AppoimentSection from "@/components/AppoimentSection";
-import HashtagGallery from "@/components/HashtagGallery";
+// import HashtagGallery from "@/components/HashtagGallery";
 import HeroSection2 from "./HeroSection2";
 import AboutSection2 from "./AboutSection2";
 import AboutSection3 from "./AboutSection3";
@@ -114,7 +114,7 @@ const HomePage = () => {
 
       <ReviewSection />
 
-      <HashtagGallery />
+      {/* <HashtagGallery /> */}
     </>
   );
 };

@@ -119,7 +119,7 @@ const ReviewSection = () => {
 
   return (
     <div>
-      <div className=" container pt-24">
+      <div className=" container pt-24 pb-24">
         <div className=" flex flex-col items-center justify-center flex-1 gap-8">
           <h2 className="text-4xl font-bold font-judson text-center text-[#6C381B]">
             What Our Clients Say

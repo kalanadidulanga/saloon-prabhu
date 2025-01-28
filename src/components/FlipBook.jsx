@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Title from "./Title";
 
 const Flipbook = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -71,73 +72,71 @@ const Flipbook = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-yellow-300 to-yellow-500 py-12 px-4">
-      <div className="max-w-6xl mx-auto">
+    <div className=" bg-Color/60 py-24">
+      <div className=" container">
         {isLoading && (
-          <div className="text-center text-lg text-gray-700 mb-4">
+          <div className="text-center text-lg text-gray-700 my-4">
             Loading Flipbook...
           </div>
         )}
 
-        <div className="flex justify-center items-center overflow-hidden">
-          <div
-            className="flipbook-container"
-            style={{ visibility: isLoading ? "hidden" : "visible" }}
-          >
-            <div className="flipbook">
-              {/* Cover */}
-              <div className="bg-red-700 text-white p-8 flex flex-col justify-center items-center text-center shadow-lg border-2 border-black">
-                <h1 className="text-4xl font-bold mb-4">My Pokemon Gallery</h1>
-                <p className="italic opacity-80">~ HankTheTank</p>
+        {/* Title Component */}
+        <Title title="PRICE RANGE" align="center" />
+
+        {/* Subheading */}
+        <h2 className="text-3xl md:text-4xl font-judson mt-5 mb-16 text-center text-gray-800">
+          Service fees for your beauty and body care
+        </h2>
+
+        {/* <div className="flex justify-center items-center overflow-hidden"> */}
+        <div
+          className="flipbook-container w-full h-full  grid place-content-center"
+          style={{ visibility: isLoading ? "hidden" : "visible" }}
+        >
+          <div className="flipbook mx-auto">
+            {/* Cover */}
+            <div className=" hard bg-[url('/textures/book-cover.jpg')] bg-white bg-center bg-cover">
+              {/* <small className="text-4xl font-bold mb-4">Salon Prabhu</small> */}
+              {/* <p className="italic opacity-80">~ HankTheTank</p> */}
+            </div>
+
+            <div className=" hard bg-[url('/textures/book-back.jpg')] bg-center bg-cover" />
+
+            {/* Pokemon Pages */}
+            {[
+              { img: "img-1.png", name: "Charmander" },
+              { img: "img-2.png", name: "Arbok" },
+              { img: "img-3.png", name: "Pikachu" },
+              { img: "img-4.png", name: "Mew" },
+              { img: "img-5.png", name: "Darkrai" },
+              { img: "img-5.png", name: "Darkrai" },
+            ].map((pokemon, index) => (
+              <div key={index} className=" bg-white border border-gray-200">
+                <img
+                  src={`/images/${pokemon.img}`}
+                  alt={pokemon.name}
+                  className="w-full h-auto rounded-lg object-cover"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src =
+                      "https://via.placeholder.com/300x300?text=Pokemon";
+                  }}
+                />
+                <small className="text-gray-600 text-sm mt-4">
+                  {pokemon.name}
+                </small>
               </div>
+            ))}
 
-              <div className="bg-red-700 shadow-lg border-2 border-black" />
-
-              {/* Introduction */}
-              <div className="bg-white p-8 flex flex-col justify-center items-center text-center shadow-md">
-                <p className="text-xl text-gray-700 font-medium mb-4">
-                  Let's Look At Some Amazing Pokemon ❤️
-                </p>
-                <p className="text-lg text-gray-600">Gotta Catch 'Em All</p>
-              </div>
-
-              {/* Pokemon Pages */}
-              {[
-                { img: "img-1.png", name: "Charmander" },
-                { img: "img-2.png", name: "Arbok" },
-                { img: "img-3.png", name: "Pikachu" },
-                { img: "img-4.png", name: "Mew" },
-                { img: "img-5.png", name: "Darkrai" },
-              ].map((pokemon, index) => (
-                <div
-                  key={index}
-                  className="bg-white p-8 flex flex-col justify-center items-center text-center shadow-md"
-                >
-                  <div className="w-4/5 relative mb-4">
-                    <img
-                      src={`/images/${pokemon.img}`}
-                      alt={pokemon.name}
-                      className="w-full h-auto rounded-lg shadow-lg object-cover"
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src =
-                          "https://via.placeholder.com/300x300?text=Pokemon";
-                      }}
-                    />
-                  </div>
-                  <p className="text-gray-600 text-sm mt-4">{pokemon.name}</p>
-                </div>
-              ))}
-
-              {/* Back Cover */}
-              <div className="bg-red-700 shadow-lg border-2 border-black" />
-              <div className="bg-red-700 text-white p-8 flex flex-col justify-center items-center text-center shadow-lg border-2 border-black">
-                <h2 className="text-3xl font-bold mb-4">Thank You</h2>
-                <p className="italic opacity-80">~ HankTheTank</p>
-              </div>
+            {/* Back Cover */}
+            <div className="  hard bg-[url('/textures/book-back.jpg')] bg-center bg-cover" />
+            <div className="  hard bg-[url('/textures/book-back.jpg')] bg-center bg-cover flex flex-col justify-center items-center">
+              <h2 className="text-3xl font-bold mb-4">Thank You</h2>
+              <small className="italic opacity-80">Salon Prabhu</small>
             </div>
           </div>
         </div>
+        {/* </div> */}
       </div>
     </div>
   );
