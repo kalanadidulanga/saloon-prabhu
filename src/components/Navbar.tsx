@@ -11,7 +11,6 @@ import {
   X,
 } from "lucide-react";
 import { NAVIGATIONS } from "@/constants";
-import { Link as ScrollLink } from "react-scroll";
 import useContactDetailsStore from "@/stores/contactdetailsStore";
 
 const Navbar = () => {
