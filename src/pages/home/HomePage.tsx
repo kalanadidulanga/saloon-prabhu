@@ -7,11 +7,13 @@ import HeroSection2 from "./HeroSection2";
 import AboutSection2 from "./AboutSection2";
 import AboutSection3 from "./AboutSection3";
 import CustomersSection from "./CustomersSection";
-import BookSection from "@/components/BookSection";
+// import BookSection from "@/components/BookSection";
 import ReviewSection from "./ReviewSection";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import useAxios from "@/hooks/useAxios";
+import FlipBook from "@/components/FlipBook.jsx";
+// import FlipBook from "@/components/FlipBook";
 // import AntiqueBook from "@/components/AntiqueBook";
 // import Navbar from "@/components/Navbar";
 
@@ -104,8 +106,9 @@ const HomePage = () => {
       {/* <ServicesSection services={SERVICES} /> */}
 
       {/* <PriceRangeSection /> */}
-      <BookSection />
+      {/* <BookSection /> */}
       {/* <AntiqueBook /> */}
+      <FlipBook />
 
       <AppoimentSection />
 

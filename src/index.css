@@ -25,3 +25,71 @@ body {
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
+
+.flipbook-container {
+  display: grid;
+  place-content: center;
+  height: 100vh;
+  overflow: hidden;
+  background: #f1c40f;
+}
+
+.flipbook {
+  width: 800px;
+  height: 500px;
+}
+
+/* Hard Cover */
+.hard {
+  background: #c0392b !important;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.hard h1,
+.hard h2 {
+  font-size: 1.5rem;
+}
+
+.hard small {
+  font-style: italic;
+  font-weight: 300;
+  opacity: 0.8;
+}
+
+/* Pages */
+.page {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.page p {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #444;
+}
+
+.page img {
+  width: 70%;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.page small {
+  font-size: 14px;
+  margin-top: 10px;
+  color: #666;
+}
