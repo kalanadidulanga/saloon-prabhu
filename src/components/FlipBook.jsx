@@ -127,12 +127,12 @@ const Flipbook = () => {
         key="front-cover"
         className="hard bg-[url('/textures/book-cover.jpg')] bg-white bg-center bg-cover flex flex-col justify-center items-center"
       >
-        <div className="text-center p-4">
+        {/* <div className="text-center p-4 h-full">
           <h1 className="text-2xl md:text-4xl font-bold text-gray-800 mb-4">
             Our Services
           </h1>
           <p className="text-lg md:text-xl text-gray-600">Salon Prabhu</p>
-        </div>
+        </div> */}
       </div>
     );
 
