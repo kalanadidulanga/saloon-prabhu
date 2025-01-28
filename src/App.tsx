@@ -17,6 +17,7 @@ import { PublicOnlyRoute } from "./components/PublicOnlyRoute";
 import ScrollToTop from "./components/ScrollToTop";
 import { Toaster } from "react-hot-toast";
 import ReviewsManager from "./adminPages/reviews-manager/ReviewsManager";
+import Appointment from "./pages/appointment/Appointment";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="about" element={<AboutPage />} />
           <Route path="services" element={<ServicesPage />} />
           <Route path="contact" element={<ContactPage />} />
+          <Route path="appointment" element={<Appointment />} />
         </Route>
 
         {/* Protected dashboard routes */}

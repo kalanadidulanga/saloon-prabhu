@@ -121,7 +121,7 @@ const Navbar = () => {
 
               {/* Desktop Appointment Button */}
               <Button variant={"blue2"} size="mySize" asChild className="ml-4">
-                <Link to="#appointment">MAKE APPOINTMENT</Link>
+                <Link to="appointment">MAKE APPOINTMENT</Link>
               </Button>
             </div>
 
@@ -175,14 +175,7 @@ const Navbar = () => {
                     asChild
                     className="w-full"
                   >
-                    <ScrollLink
-                      to="appointment"
-                      smooth={true}
-                      duration={500}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      MAKE APPOINTMENT
-                    </ScrollLink>
+                    <Link to="appointment">MAKE APPOINTMENT</Link>
                   </Button>
                 </div>
               </div>
