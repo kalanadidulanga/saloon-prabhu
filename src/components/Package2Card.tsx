@@ -44,7 +44,7 @@ const Package2Card = ({
           },
         });
 
-        const { data } = await fetch({
+        await fetch({
           url: `/api/package2/${id}`,
           method: "DELETE",
         });
