@@ -125,7 +125,7 @@ const ReviewSection = () => {
             What Our Clients Say
           </h2>
 
-          <div className="bg-reviewbg bg-contain bg-norepeat w-full relative ps-16 pe-14 py-12 md:px-20 lg:ps-28 lg:pe-24 lg:py-20">
+          <div className="bg-reviewbg bg-contain bg-norepet w-full relative ps-16 pe-14 py-12 md:px-20 lg:ps-28 lg:pe-24 lg:py-20">
             {/* Slider container */}
             <div className="w-full h-full relative">
               {loading ? (
