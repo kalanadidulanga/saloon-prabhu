@@ -5,6 +5,7 @@ import ServicesSection from "./ServicesSection";
 import AppoimentSection from "@/components/AppoimentSection";
 import Section4 from "./Section4";
 import FlipBook from "@/components/FlipBook.jsx";
+import { AnimatedSection } from "../home/HomePage";
 
 const ServicesPage = () => {
   return (
@@ -26,14 +27,22 @@ const ServicesPage = () => {
         </div>
       </div>
 
-      <ServicesSection />
+      <AnimatedSection>
+        <ServicesSection />
+      </AnimatedSection>
 
       {/* <BookSection /> */}
-      <FlipBook />
+      <AnimatedSection>
+        <FlipBook />
+      </AnimatedSection>
 
-      <AppoimentSection />
+      <AnimatedSection>
+        <AppoimentSection />
+      </AnimatedSection>
 
-      <Section4 />
+      <AnimatedSection>
+        <Section4 />
+      </AnimatedSection>
     </>
   );
 };

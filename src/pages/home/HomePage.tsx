@@ -32,7 +32,7 @@ const useScrollAnimation = (): [
 };
 
 // Animated section wrapper component
-const AnimatedSection = ({
+export const AnimatedSection = ({
   children,
   className = "",
 }: {

@@ -5,15 +5,11 @@ import AboutSection from "./AboutSection copy";
 import AppoimentSection from "@/components/AppoimentSection";
 import VisionMissionSection from "./VisionMissionSection";
 import Section3 from "./Section3";
+import { AnimatedSection } from "../home/HomePage";
 
 const AboutPage = () => {
   return (
     <>
-      {/* Blue glow effect */}
-      {/* <div className="absolute top-[-60%] right-[-10%] w-[800px] h-[800px] bg-[#3DA1D21F] blur-[100px] rounded-full z-0" /> */}
-      {/* <div className="absolute top-[-60%] left-[-10%] w-[800px] h-[800px] bg-[#3DA1D21F] blur-[100px] rounded-full z-0" /> */}
-
-      {/* <div className="relative z-10"> */}
       <div className="bg-[url('/assets/pageheaderbg.svg')] bg-cover bg-center">
         <div className="container flex flex-col py-24 items-center">
           <h1 className=" text-5xl md:text-6xl text-primary-bg font-judson">
@@ -31,13 +27,25 @@ const AboutPage = () => {
         </div>
       </div>
 
-      <AboutSection />
-      <OurStorySection />
-      <Section3 />
-      <AppoimentSection />
+      <AnimatedSection>
+        <AboutSection />
+      </AnimatedSection>
 
-      <VisionMissionSection />
-      {/* </div> */}
+      <AnimatedSection>
+        <OurStorySection />
+      </AnimatedSection>
+
+      <AnimatedSection>
+        <Section3 />
+      </AnimatedSection>
+
+      <AnimatedSection>
+        <AppoimentSection />
+      </AnimatedSection>
+
+      <AnimatedSection>
+        <VisionMissionSection />
+      </AnimatedSection>
     </>
   );
 };

@@ -9,29 +9,32 @@ const Flipbook = () => {
   const { fetch } = useAxios();
 
   const calculateDimensions = () => {
-    const baseWidth = 800;
-    const baseHeight = 500;
-    const padding = 40;
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
+    const padding = 20; // Reduced padding for mobile
 
-    let width = Math.min(baseWidth, screenWidth - padding);
+    // Base dimensions
+    let baseWidth = screenWidth >= 768 ? 800 : 600; // Smaller base width for mobile
+    let baseHeight = screenWidth >= 768 ? 500 : 375; // Smaller base height for mobile
 
-    // For very small screens, use single page display
-    const isMobile = screenWidth < 768;
+    // Calculate available space
+    let width = Math.min(baseWidth, screenWidth - padding * 2);
 
-    // Maintain aspect ratio
-    let height = isMobile
-      ? width * 1.5 // Taller aspect ratio for single pages on mobile
-      : width * 0.625; // Original aspect ratio for larger screens
+    // Always maintain double page ratio (1.6:1)
+    let height = width * 0.625;
 
     // Ensure height doesn't exceed screen
-    if (height > screenHeight - 200) {
-      height = screenHeight - 200;
-      width = isMobile ? height / 1.5 : height / 0.625;
+    const maxHeight = screenHeight - 150; // Reduced margin for mobile
+    if (height > maxHeight) {
+      height = maxHeight;
+      width = height / 0.625;
     }
 
-    return { width, height, isMobile };
+    return {
+      width,
+      height,
+      isMobile: screenWidth < 768,
+    };
   };
 
   const fetchData = async () => {
@@ -55,7 +58,7 @@ const Flipbook = () => {
     const initializeFlipbook = () => {
       if (window.$ && window.$(".flipbook").turn) {
         const flipbook = window.$(".flipbook");
-        const { width, height, isMobile } = calculateDimensions();
+        const { width, height } = calculateDimensions();
 
         if (flipbook.data()?.turn) {
           flipbook.turn("destroy");
@@ -68,7 +71,7 @@ const Flipbook = () => {
           elevation: 50,
           gradients: true,
           duration: 1000,
-          display: isMobile ? "single" : "double",
+          display: "double", // Always use double display
           acceleration: true,
           when: {
             turned: function (e, page) {
@@ -107,8 +110,7 @@ const Flipbook = () => {
     const handleResize = () => {
       const flipbook = window.$?.(".flipbook");
       if (flipbook?.data()?.turn) {
-        const { width, height, isMobile } = calculateDimensions();
-        flipbook.turn("display", isMobile ? "single" : "double");
+        const { width, height } = calculateDimensions();
         flipbook.turn("size", width, height);
         setDimensions({ width, height });
       }
@@ -128,10 +130,10 @@ const Flipbook = () => {
         className="hard bg-[url('/textures/book-cover3.jpg')] bg-white bg-center bg-cover flex flex-col justify-center items-center"
       >
         {/* <div className="text-center p-4 h-full">
-          <h1 className="text-2xl md:text-4xl font-bold text-gray-800 mb-4">
+          <h1 className="text-xl md:text-4xl font-bold text-gray-800 mb-2 md:mb-4">
             Our Services
           </h1>
-          <p className="text-lg md:text-xl text-gray-600">Salon Prabhu</p>
+          <p className="text-base md:text-xl text-gray-600">Salon Prabhu</p>
         </div> */}
       </div>
     );
@@ -143,7 +145,7 @@ const Flipbook = () => {
           key={`image-${service.id}-${index}`}
           className="bg-white bg-[url('/textures/book-back.jpg')] bg-center bg-cover"
         >
-          <div className="p-3 md:p-5 flex justify-center items-center h-full">
+          <div className="p-2 md:p-5 flex justify-center items-center h-full">
             <img
               src={service.imageUrl}
               alt={service.title}
@@ -163,16 +165,16 @@ const Flipbook = () => {
           key={`details-${service.id}-${index}`}
           className="bg-white bg-[url('/textures/book-back.jpg')] bg-center bg-cover"
         >
-          <div className="h-full flex flex-col justify-between p-3 md:p-5">
+          <div className="h-full flex flex-col justify-between p-2 md:p-5">
             <div>
-              <h4 className="text-xl md:text-2xl font-bold mb-2 md:mb-4">
+              <h4 className="text-lg md:text-2xl font-bold mb-2 md:mb-4">
                 {service.title}
               </h4>
-              <p className="text-sm md:text-base text-gray-600 mb-2 md:mb-4">
+              <p className="text-xs md:text-base text-gray-600 mb-2 md:mb-4">
                 {service.description}
               </p>
             </div>
-            <p className="text-lg md:text-xl font-semibold text-gray-800 mt-2 md:mt-4">
+            <p className="text-base md:text-xl font-semibold text-gray-800 mt-2 md:mt-4">
               <span className="mr-2">LKR</span>
               {service.price}
             </p>
@@ -188,10 +190,10 @@ const Flipbook = () => {
         className="hard bg-[url('/textures/book-back3.jpg')] bg-center bg-cover flex flex-col justify-center items-center"
       >
         {/* <div className="text-center p-4">
-          <h2 className="text-2xl md:text-3xl font-bold mb-2 md:mb-4">
+          <h2 className="text-lg md:text-3xl font-bold mb-2 md:mb-4">
             Thank You
           </h2>
-          <small className="text-sm md:text-base italic opacity-80">
+          <small className="text-xs md:text-base italic opacity-80">
             Salon Prabhu
           </small>
         </div> */}
@@ -202,17 +204,17 @@ const Flipbook = () => {
   };
 
   return (
-    <div className="bg-gray-50/60 py-12 md:py-24">
-      <div className="container mx-auto px-4 overflow-hidden">
+    <div className="bg-gray-50/60 py-6 md:py-24">
+      <div className="container mx-auto px-2 md:px-4 overflow-hidden">
         {isLoading && (
-          <div className="text-center text-base md:text-lg text-gray-700 my-4">
+          <div className="text-center text-sm md:text-lg text-gray-700 my-2 md:my-4">
             Loading Flipbook...
           </div>
         )}
 
         <Title title="PRICE RANGE" align="center" />
 
-        <h2 className="text-2xl md:text-4xl font-judson mt-3 md:mt-5 mb-8 md:mb-16 text-center text-gray-800">
+        <h2 className="text-xl md:text-4xl font-judson mt-2 md:mt-5 mb-4 md:mb-16 text-center text-gray-800">
           Service fees for your beauty and body care
         </h2>
 
@@ -226,8 +228,8 @@ const Flipbook = () => {
           <div className="flipbook mx-auto">{renderPages()}</div>
         </div>
 
-        <div className="mt-4 text-center text-sm text-gray-500 md:hidden">
-          Swipe left or right to turn pages
+        <div className="mt-4 text-center text-xs md:text-sm text-gray-500">
+          Swipe or use arrow keys to turn pages
         </div>
       </div>
     </div>

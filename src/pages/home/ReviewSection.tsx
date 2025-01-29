@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/responsive-modal";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-import { Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { Star } from "lucide-react";
 import useAxios from "@/hooks/useAxios";
 import toast from "react-hot-toast";
 

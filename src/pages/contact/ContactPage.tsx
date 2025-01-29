@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import ContactFormSection from "./ContactFormSection";
 import AppoimentSection from "@/components/AppoimentSection";
 import LocationSection from "./LocationSection";
+import { AnimatedSection } from "../home/HomePage";
 
 const ContactPage = () => {
   return (
@@ -24,9 +25,17 @@ const ContactPage = () => {
         </div>
       </div>
 
-      <ContactFormSection />
-      <AppoimentSection />
-      <LocationSection />
+      <AnimatedSection>
+        <ContactFormSection />
+      </AnimatedSection>
+
+      <AnimatedSection>
+        <AppoimentSection />
+      </AnimatedSection>
+
+      <AnimatedSection>
+        <LocationSection />
+      </AnimatedSection>
     </div>
   );
 };
