@@ -141,7 +141,7 @@ const Flipbook = () => {
       pages.push(
         <div
           key={`image-${service.id}-${index}`}
-          className="bg-white bg-[url('/textures/book-back.jpg')] bg-center bg-cover"
+          className="bg-white bg-[url('/textures/book-cover3.jpg')] bg-center bg-cover"
         >
           <div className="p-3 md:p-5 flex justify-center items-center h-full">
             <img
