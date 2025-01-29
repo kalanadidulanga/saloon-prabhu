@@ -35,6 +35,7 @@ const BookSection = () => {
                 position: [-0.5, 1, window.innerWidth > 800 ? 4 : 9],
                 fov: 45,
               }}
+              className=" test-rotate"
             >
               <Suspense fallback={null}>
                 <Experience />

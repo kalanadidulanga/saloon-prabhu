@@ -125,7 +125,7 @@ const ReviewSection = () => {
             What Our Clients Say
           </h2>
 
-          <div className="bg-reviewbg bg-contain bg-norepet w-full relative ps-16 pe-14 py-12 md:px-20 lg:ps-28 lg:pe-24 lg:py-20">
+          <div className="bg-reviewbg bg-cover bg-no-repeat w-full relative ps-16 pe-14 py-12 md:px-20 lg:ps-28 lg:pe-24 lg:py-20">
             {/* Slider container */}
             <div className="w-full h-full relative">
               {loading ? (
@@ -142,24 +142,8 @@ const ReviewSection = () => {
                     />
                   </div>
 
-                  {/* Navigation buttons */}
-                  {/* <button
-                    onClick={handlePrevious}
-                    className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-8 bg-white/80 p-2 rounded-full hover:bg-white transition-colors"
-                    aria-label="Previous review"
-                  >
-                    <ChevronLeft className="w-6 h-6 text-[#6C381B]" />
-                  </button>
-                  <button
-                    onClick={handleNext}
-                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-8 bg-white/80 p-2 rounded-full hover:bg-white transition-colors"
-                    aria-label="Next review"
-                  >
-                    <ChevronRight className="w-6 h-6 text-[#6C381B]" />
-                  </button> */}
-
                   {/* Dots indicator */}
-                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex gap-2">
+                  <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
                     {reviews.map((_, index) => (
                       <button
                         key={index}

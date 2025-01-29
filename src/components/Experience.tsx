@@ -1,4 +1,4 @@
-import { Environment, OrbitControls } from "@react-three/drei";
+import { Environment } from "@react-three/drei";
 import { Book } from "./Book";
 // import { Book } from "./Book";
 export const Experience = () => {
@@ -12,12 +12,12 @@ export const Experience = () => {
       > */}
       <Book />
       {/* </Float> */}
-      <OrbitControls />
-      <Environment preset="studio"></Environment>
+      {/* <OrbitControls /> */}
+      <Environment preset="forest"></Environment>
       <directionalLight
         position={[2, 5, 2]}
         intensity={2.5}
-        castShadow
+        // castShadow
         shadow-mapSize-width={2048}
         shadow-mapSize-height={2048}
         shadow-bias={-0.0001}
