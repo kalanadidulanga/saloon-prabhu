@@ -119,10 +119,10 @@ export const PackageModal = ({
       try {
         setIsLoading(true);
         const { data } = await fetch({
-          url: "/api/packages",
+          url: "/api/package2",
           method: "POST",
           data: {
-            imgUrl,
+            imageUrl: imgUrl,
             title,
           },
         });
@@ -148,10 +148,10 @@ export const PackageModal = ({
       try {
         setIsLoading(true);
         const { data } = await fetch({
-          url: `/api/packages/${packageData?.id}`,
+          url: `/api/package2/${packageData?.id}`,
           method: "PUT",
           data: {
-            imgUrl,
+            imageUrl: imgUrl,
             title,
           },
         });
