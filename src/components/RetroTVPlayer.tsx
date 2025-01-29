@@ -1,31 +1,50 @@
-import { useState, useRef } from "react";
+import { useState, useEffect } from "react";
 
 const cn = (...classes: (string | undefined)[]) => {
   return classes.filter(Boolean).join(" ");
 };
 
-interface VintageTVPlayerProps extends React.HTMLAttributes<HTMLDivElement> {
-  videoUrl?: string;
-  autoPlay?: boolean;
-  muted?: boolean;
-  loop?: boolean;
+interface VintageTVSliderProps extends React.HTMLAttributes<HTMLDivElement> {
+  images: string[];
+  interval?: number;
   width?: number;
   height?: number;
 }
 
-export function VintageTVPlayer({
-  videoUrl,
-  autoPlay = true,
-  muted = true,
-  loop = true,
+export function VintageTVSlider({
+  images,
+  interval = 3000,
   width = 600,
   height = 450,
   className,
   ...props
-}: VintageTVPlayerProps) {
+}: VintageTVSliderProps) {
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Auto-advance the slider
+  useEffect(() => {
+    if (images.length <= 1) return;
+
+    const timer = setInterval(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === images.length - 1 ? 0 : prevIndex + 1
+      );
+    }, interval);
+
+    return () => clearInterval(timer);
+  }, [images, interval]);
+
+  const handleImageLoad = () => {
+    setIsLoading(false);
+    setError(false);
+  };
+
+  const handleImageError = () => {
+    setError(true);
+    setIsLoading(false);
+  };
 
   return (
     <div className="w-full flex justify-center items-center px-4 sm:px-6">
@@ -36,33 +55,33 @@ export function VintageTVPlayer({
         }}
         {...props}
       >
-        {/* Video Content Area - Positioned to fit inside the TV screen */}
         <div className="relative" style={{ paddingTop: "75%" }}>
-          {" "}
-          {/* 4:3 aspect ratio */}
           <div className="absolute inset-0 flex items-center justify-center">
-            {videoUrl ? (
-              <video
-                ref={videoRef}
-                className="w-[84%] h-[84%] object-cover absolute left-[8%] top-[8%]"
-                autoPlay={autoPlay}
-                muted={muted}
-                loop={loop}
-                playsInline
-                onLoadedData={() => setIsLoading(false)}
-                onError={() => setError(true)}
-              >
-                <source src={videoUrl} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
+            {/* Image Slider */}
+            {images.length > 0 ? (
+              <div className="w-[84%] h-[84%] absolute left-[8%] top-[8%] overflow-hidden">
+                {images.map((image, index) => (
+                  <img
+                    key={image}
+                    src={image}
+                    alt={`Slide ${index + 1}`}
+                    className={cn(
+                      "absolute inset-0 w-full h-full object-cover transition-opacity duration-500",
+                      index === currentIndex ? "opacity-100" : "opacity-0"
+                    )}
+                    onLoad={handleImageLoad}
+                    onError={handleImageError}
+                  />
+                ))}
+              </div>
             ) : (
               <div className="w-[84%] h-[84%] absolute left-[8%] top-[8%] bg-black flex items-center justify-center">
-                <p className="text-gray-500 text-sm">No signal</p>
+                <p className="text-gray-500 text-sm">No images available</p>
               </div>
             )}
 
             {/* Loading State */}
-            {isLoading && videoUrl && (
+            {isLoading && (
               <div className="w-[84%] h-[84%] absolute left-[8%] top-[8%] bg-black bg-opacity-50 flex items-center justify-center">
                 <div className="w-8 h-8 border-4 border-gray-300 border-t-transparent rounded-full animate-spin"></div>
               </div>
@@ -71,13 +90,13 @@ export function VintageTVPlayer({
             {/* Error State */}
             {error && (
               <div className="w-[84%] h-[84%] absolute left-[8%] top-[8%] bg-black flex items-center justify-center">
-                <p className="text-red-500 text-sm">Video failed to load</p>
+                <p className="text-red-500 text-sm">Failed to load image</p>
               </div>
             )}
 
             {/* TV Frame Image Overlay */}
             <img
-              src="/assets/tv.png" // Make sure to add the TV frame image to your assets
+              src="/assets/tv.png"
               alt="Vintage TV frame"
               className="absolute inset-0 w-full h-full object-contain pointer-events-none z-10"
             />

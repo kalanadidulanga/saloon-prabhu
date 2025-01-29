@@ -10,58 +10,84 @@ interface MediaItem {
   timestamp?: string;
 }
 
-interface HashtagSearchResponse {
-  id: string;
-}
+// interface HashtagSearchResponse {
+//   id: string;
+// }
 
-interface MediaResponse {
-  data: MediaItem[];
-  paging?: {
-    cursors: {
-      before: string;
-      after: string;
-    };
-    next: string;
-  };
-}
+// interface MediaResponse {
+//   data: MediaItem[];
+//   paging?: {
+//     cursors: {
+//       before: string;
+//       after: string;
+//     };
+//     next: string;
+//   };
+// }
 
 const SocialFeed = () => {
   const [mediaItems, setMediaItems] = useState<MediaItem[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchHashtagMedia = async () => {
+  // const fetchHashtagMedia = async () => {
+  //   try {
+  //     const accessToken = import.meta.env.VITE_INSTAGRAM_ACCESS_TOKEN;
+  //     const businessAccountId = import.meta.env.VITE_INSTAGRAM_BUSINESS_ID;
+
+  //     if (!accessToken || !businessAccountId) {
+  //       throw new Error("Missing Instagram API credentials");
+  //     }
+
+  //     // Hashtag search
+  //     const hashtagResponse = await fetch(
+  //       `https://graph.facebook.com/v17.0/ig_hashtag_search?user_id=${businessAccountId}&q=simplyTrafalgar&access_token=${accessToken}`
+  //     );
+  //     const hashtagData: HashtagSearchResponse = await hashtagResponse.json();
+
+  //     // Media fetch
+  //     const mediaResponse = await fetch(
+  //       `https://graph.facebook.com/v17.0/${hashtagData.id}/recent_media?user_id=${businessAccountId}&access_token=${accessToken}`
+  //     );
+  //     const mediaData: MediaResponse = await mediaResponse.json();
+
+  //     console.log(mediaData);
+  //     //   setMediaItems(mediaData.data);
+  //   } catch (error) {
+  //     console.error("Error fetching hashtag media:", error);
+  //     setMediaItems([]); // Ensure empty array on error
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+  async function fetchInstagramMedia() {
+    setMediaItems([]);
+    setLoading(true);
+    const accessToken =
+      "IGAAzQ9AjY4HlBZAE1HLU9tSkhtUVZAkb0lHQkJfTHRwZA2NVQ01menVlUjlLeTk1N3VOQlZAxR3ZAyMGROZAzdIYjZAjRDBsbEFJTzU4R2FwNlFvU0hhM0RoUi1TRV9uY3JtdHlFcW95aEdxOHVodjNqUm9zWm1uU2Qtdnk1c0NzeG1GZAwZDZD";
+    const userId = "kalanakoralegedara"; // Replace with your Instagram User ID
+
+    const graphApiUrl = `https://graph.instagram.com/${userId}/media?fields=id,caption,media_type,media_url&access_token=${accessToken}`;
+    // const basicDisplayApiUrl = `https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url&access_token=${accessToken}`;
+
     try {
-      const accessToken = import.meta.env.VITE_INSTAGRAM_ACCESS_TOKEN;
-      const businessAccountId = import.meta.env.VITE_INSTAGRAM_BUSINESS_ID;
+      const responseGraph = await fetch(graphApiUrl);
+      // const responseBasic = await fetch(basicDisplayApiUrl);
 
-      if (!accessToken || !businessAccountId) {
-        throw new Error("Missing Instagram API credentials");
-      }
+      console.log(responseGraph);
+      // const dataGraph = await responseGraph.json();
+      // const dataBasic = await responseBasic.json();
 
-      // Hashtag search
-      const hashtagResponse = await fetch(
-        `https://graph.facebook.com/v17.0/ig_hashtag_search?user_id=${businessAccountId}&q=simplyTrafalgar&access_token=${accessToken}`
-      );
-      const hashtagData: HashtagSearchResponse = await hashtagResponse.json();
-
-      // Media fetch
-      const mediaResponse = await fetch(
-        `https://graph.facebook.com/v17.0/${hashtagData.id}/recent_media?user_id=${businessAccountId}&access_token=${accessToken}`
-      );
-      const mediaData: MediaResponse = await mediaResponse.json();
-
-      console.log(mediaData);
-      //   setMediaItems(mediaData.data);
+      // return [...dataGraph.data, ...dataBasic.data];
     } catch (error) {
-      console.error("Error fetching hashtag media:", error);
-      setMediaItems([]); // Ensure empty array on error
-    } finally {
-      setLoading(false);
+      console.error("Error fetching media:", error);
+      return [];
     }
-  };
+  }
 
   useEffect(() => {
-    fetchHashtagMedia();
+    // fetchHashtagMedia();
+    fetchInstagramMedia();
   }, []);
 
   return (
@@ -84,7 +110,7 @@ const SocialFeed = () => {
             >
               <img
                 src={item.media_url || "/api/placeholder/400/400"}
-                alt={item.caption || "Travel moment"}
+                alt={item.caption || "salonprabhu insta post"}
                 className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-opacity duration-300">

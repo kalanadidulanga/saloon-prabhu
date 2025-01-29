@@ -1,9 +1,15 @@
-import { VintageTVPlayer } from "@/components/RetroTVPlayer";
+import { VintageTVSlider } from "@/components/RetroTVPlayer";
 import Title from "@/components/Title";
 // import { Button } from "@/components/ui/button";
 // import { Link } from "react-router";
 
 const AboutSection3 = () => {
+  const images = [
+    "/assets/herobg.svg",
+    "/assets/herobg2.svg",
+    "/assets/herobg3.svg",
+  ];
+
   return (
     <div className="bg-[#E3E3E3]">
       <div className="container flex flex-col lg:flex-row py-24 ">
@@ -21,14 +27,11 @@ const AboutSection3 = () => {
             </p>
           </div>
           <div className=" w-full relative flex justify-start lg:mb-0">
-            <VintageTVPlayer
-              videoUrl="/path/to/your/video.mp4"
-              // width={600}
-              // height={450}
-              className="mx-auto"
-              autoPlay
-              muted
-              loop
+            <VintageTVSlider
+              images={images}
+              interval={3000} // Optional: change slide interval (default 3s)
+              width={600} // Optional: customize size
+              height={450} // Optional: customize size
             />
           </div>
         </div>

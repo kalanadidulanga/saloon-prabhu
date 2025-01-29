@@ -2,21 +2,57 @@
 // import ServicesSection from "./ServicesSection";
 // import PriceRangeSection from "./PriceRangeSection";
 import AppoimentSection from "@/components/AppoimentSection";
+import { motion } from "framer-motion";
+import { useInView } from "framer-motion";
 // import HashtagGallery from "@/components/HashtagGallery";
 import HeroSection2 from "./HeroSection2";
 import AboutSection2 from "./AboutSection2";
 import AboutSection3 from "./AboutSection3";
 import CustomersSection from "./CustomersSection";
-// import BookSection from "@/components/BookSection";
+import BookSection from "@/components/BookSection";
 import ReviewSection from "./ReviewSection";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import useAxios from "@/hooks/useAxios";
-import FlipBook from "@/components/FlipBook.jsx";
-import SocialFeed from "@/components/SocialFeed";
+// import FlipBook from "@/components/FlipBook.jsx";
+// import SocialFeed from "@/components/SocialFeed";
 // import FlipBook from "@/components/FlipBook";
 // import AntiqueBook from "@/components/AntiqueBook";
 // import Navbar from "@/components/Navbar";
+
+// Custom hook to handle scroll animations
+const useScrollAnimation = (): [
+  React.MutableRefObject<HTMLDivElement | null>,
+  boolean
+] => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "0px 0px -100px 0px" });
+
+  return [ref, isInView];
+};
+
+// Animated section wrapper component
+const AnimatedSection = ({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
+  const [ref, isInView] = useScrollAnimation();
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 50 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className={`w-full ${className}`}
+    >
+      {children}
+    </motion.div>
+  );
+};
 
 const HomePage = () => {
   const [clients, setClients] = useState([]);
@@ -95,27 +131,41 @@ const HomePage = () => {
   return (
     <>
       {/* <HeroSection /> */}
-      <HeroSection2 />
+      <AnimatedSection>
+        <HeroSection2 />
+      </AnimatedSection>
 
       {/* <AboutSection /> */}
-      <AboutSection2 />
+      <AnimatedSection>
+        <AboutSection2 />
+      </AnimatedSection>
 
-      <AboutSection3 />
+      <AnimatedSection>
+        <AboutSection3 />
+      </AnimatedSection>
 
-      <CustomersSection customers={clients} isLoading={loading} />
+      <AnimatedSection>
+        <CustomersSection customers={clients} isLoading={loading} />
+      </AnimatedSection>
 
       {/* <ServicesSection services={SERVICES} /> */}
 
       {/* <PriceRangeSection /> */}
-      {/* <BookSection /> */}
+      <AnimatedSection>
+        <BookSection />
+      </AnimatedSection>
       {/* <AntiqueBook /> */}
-      <FlipBook />
+      {/* <FlipBook /> */}
 
-      <AppoimentSection />
+      <AnimatedSection>
+        <AppoimentSection />
+      </AnimatedSection>
 
-      <ReviewSection />
+      <AnimatedSection>
+        <ReviewSection />
+      </AnimatedSection>
 
-      <SocialFeed />
+      {/* <SocialFeed /> */}
       {/* <HashtagGallery /> */}
     </>
   );
