@@ -187,14 +187,14 @@ const Flipbook = () => {
         key="back-cover"
         className="hard bg-[url('/textures/book-back3.jpg')] bg-center bg-cover flex flex-col justify-center items-center"
       >
-        <div className="text-center p-4">
+        {/* <div className="text-center p-4">
           <h2 className="text-2xl md:text-3xl font-bold mb-2 md:mb-4">
             Thank You
           </h2>
           <small className="text-sm md:text-base italic opacity-80">
             Salon Prabhu
           </small>
-        </div>
+        </div> */}
       </div>
     );
 
