@@ -53,7 +53,7 @@ export default {
       btnbg: "url('/assets/btnbg.png')",
       customerbg: "url('/assets/customerbg.png')",
       customerbg: "url('/assets/pageheaderbg.svg')",
-      reviewbg: "url('/assets/reviewbg.png')",
+      reviewbg: "url('/assets/R.jpeg')",
     },
     container: {
       center: true,
