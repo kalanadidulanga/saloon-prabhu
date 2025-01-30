@@ -18,7 +18,7 @@ const BookSection = () => {
         </h2>
 
         {/* Content Wrapper */}
-        <div className="w-full flex flex-col items-center justify-center gap-8 relative">
+        <div className="w-full flex flex-col items-center justify-center relative">
           {/* UI Controls */}
           {/* <div className="w-full"> */}
           <UI />
