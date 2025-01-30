@@ -98,7 +98,8 @@ const Package2Card = ({
       <div className="bg-white rounded-md p-4 text-center shadow-md">
         <div className="relative inset-x-0 w-full aspect-square mx-auto mb-5">
           <img
-            src={imageUrl}
+            // src={imageUrl}
+            src={`./src/server${imageUrl}`}
             alt={imageAlt}
             className="w-full h-full object-cover"
           />

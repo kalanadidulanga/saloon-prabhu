@@ -4,7 +4,7 @@ import ServicesSection from "./ServicesSection";
 // import BookSection from "@/components/BookSection";
 import AppoimentSection from "@/components/AppoimentSection";
 import Section4 from "./Section4";
-import FlipBook from "@/components/FlipBook.jsx";
+// import FlipBook from "@/components/FlipBook.jsx";
 import { AnimatedSection } from "../home/HomePage";
 import BookSection from "@/components/BookSection";
 

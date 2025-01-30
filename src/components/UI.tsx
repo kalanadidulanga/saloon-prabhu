@@ -14,14 +14,17 @@ import { useEffect } from "react";
 //   console.error("Error fetching data:", error);
 // }
 
+const file = "/uploads/1738235206355-8baw5vq74bw.jpg"
+
 const pictures = [
   // "/textures/DSC00680.jpg",
   // "/textures/DSC00933.jpg",
   // "/textures/DSC00966.jpg",
   // "/textures/DSC00983.jpg",
-  "https://universemagazine.com/wp-content/uploads/2022/08/zm4nfgq29yi91-1536x1536-1.jpg",
-  "/textures/1.jpg",
-  "/textures/2.jpg",
+  // "https://universemagazine.com/wp-content/uploads/2022/08/zm4nfgq29yi91-1536x1536-1.jpg",
+  `./src/server${file}`,
+  // "/textures/1.jpg",
+  // "/textures/2.jpg",
   "/textures/3.jpg",
 ];
 

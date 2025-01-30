@@ -11,7 +11,7 @@ import { Label } from "@/components/ui/label";
 import { Cloud } from "lucide-react";
 import { useState, ReactNode } from "react";
 import toast from "react-hot-toast";
-import { uploadImage } from "@/utils/imageUpload";
+import { uploadImage2 } from "@/utils/imageUpload2";
 import useAxios from "@/hooks/useAxios";
 
 type Side = "top" | "bottom" | "left" | "right";
@@ -62,7 +62,7 @@ export const PackageModal = ({
     if (file && validateFile(file)) {
       setLoading(true);
       try {
-        const url = await uploadImage(file);
+        const url = await uploadImage2(file);
         setImageUrl(url);
         setError("");
       } catch {
@@ -89,7 +89,7 @@ export const PackageModal = ({
     if (file && validateFile(file)) {
       setLoading(true);
       try {
-        const url = await uploadImage(file);
+        const url = await uploadImage2(file);
         setImageUrl(url);
         setError("");
       } catch {
@@ -194,7 +194,7 @@ export const PackageModal = ({
               {imgUrl ? (
                 <div className="relative">
                   <img
-                    src={imgUrl}
+                    src={`./src/server${imgUrl}`}
                     alt="Uploaded Preview"
                     className="max-h-40 mx-auto rounded-lg"
                   />
