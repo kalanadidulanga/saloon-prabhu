@@ -6,6 +6,7 @@ import AppoimentSection from "@/components/AppoimentSection";
 import Section4 from "./Section4";
 import FlipBook from "@/components/FlipBook.jsx";
 import { AnimatedSection } from "../home/HomePage";
+import BookSection from "@/components/BookSection";
 
 const ServicesPage = () => {
   return (
@@ -31,10 +32,10 @@ const ServicesPage = () => {
         <ServicesSection />
       </AnimatedSection>
 
-      {/* <BookSection /> */}
-      <AnimatedSection>
+      <BookSection />
+      {/* <AnimatedSection>
         <FlipBook />
-      </AnimatedSection>
+      </AnimatedSection> */}
 
       <AnimatedSection>
         <AppoimentSection />

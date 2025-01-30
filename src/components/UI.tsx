@@ -15,26 +15,16 @@ import { useEffect } from "react";
 // }
 
 const pictures = [
-  "/textures/DSC00680.jpg",
-  "/textures/DSC00933.jpg",
-  "/textures/DSC00966.jpg",
-  "/textures/DSC00983.jpg",
-  "/textures/DSC01011.jpg",
-  "/textures/qqqqq.jpg",
-  // "DSC01040",
-  // "DSC01064",
-  // "DSC01071",
-  // "DSC01103",
-  // "DSC01145",
-  // "DSC01420",
-  // "DSC01461",
-  // "DSC01489",
-  // "DSC02031",
-  // "DSC02064",
-  // "DSC02069",
+  // "/textures/DSC00680.jpg",
+  // "/textures/DSC00933.jpg",
+  // "/textures/DSC00966.jpg",
+  // "/textures/DSC00983.jpg",
+  "https://universemagazine.com/wp-content/uploads/2022/08/zm4nfgq29yi91-1536x1536-1.jpg",
+  "/textures/1.jpg",
+  "/textures/2.jpg",
+  "/textures/3.jpg",
 ];
 
-export const pageAtom = atom(0);
 export const pages = [
   {
     front: "/textures/book-cover3.jpg",
@@ -52,6 +42,8 @@ pages.push({
   front: pictures[pictures.length - 1],
   back: "/textures/book-back3.jpg",
 });
+
+export const pageAtom = atom(1);
 
 export const UI = () => {
   const [page, setPage] = useAtom(pageAtom);

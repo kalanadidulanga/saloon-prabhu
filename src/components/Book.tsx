@@ -1,5 +1,5 @@
 import { useCursor, useTexture } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { useAtom } from "jotai";
 import { easing } from "maath";
 import { useEffect, useMemo, useRef, useState, FC } from "react";
@@ -271,6 +271,23 @@ export const Book: FC = (props) => {
   const [page] = useAtom(pageAtom);
   const [delayedPage, setDelayedPage] = useState(page);
 
+  const { viewport } = useThree(); // Get the screen size
+  const [bookScale, setBookScale] = useState(1);
+
+  useEffect(() => {
+    let scaleFactor;
+
+    if (viewport.width < 4) {
+      scaleFactor = 0.8; // Small screens (mobile)
+    } else if (viewport.width < 8) {
+      scaleFactor = 1; // Medium screens (tablets)
+    } else {
+      scaleFactor = 2; // Large screens (desktops)
+    }
+
+    setBookScale(scaleFactor);
+  }, [viewport.width]);
+
   useEffect(() => {
     let timeout: NodeJS.Timeout;
     const goToPage = () => {
@@ -290,7 +307,7 @@ export const Book: FC = (props) => {
   }, [page]);
 
   return (
-    <group {...props} rotation-y={-Math.PI / 2}>
+    <group {...props} rotation-y={-Math.PI / 2} scale={[bookScale, bookScale, bookScale]}>
       {[...pages].map((pageData, index) => (
         <Page
           key={index}

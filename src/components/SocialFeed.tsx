@@ -1,13 +1,24 @@
 import { useState, useEffect } from "react";
-import { Instagram } from "lucide-react";
+// import { Instagram } from "lucide-react";
 import Title from "./Title";
+// @ts-ignore
+import { fetchInstagramPosts } from '../utils/instagramScraper';
 
-interface MediaItem {
-  id: string;
-  media_url?: string;
-  caption?: string;
-  username?: string;
-  timestamp?: string;
+
+// interface MediaItem {
+//   id: string;
+//   media_url?: string;
+//   caption?: string;
+//   username?: string;
+//   timestamp?: string;
+// }
+
+interface InstagramPost {
+  shortcode: string;
+  caption: string;
+  thumbnail: string;
+  likes: number;
+  comments: number;
 }
 
 // interface HashtagSearchResponse {
@@ -26,8 +37,20 @@ interface MediaItem {
 // }
 
 const SocialFeed = () => {
-  const [mediaItems, setMediaItems] = useState<MediaItem[]>([]);
+  // const [mediaItems, setMediaItems] = useState<MediaItem[]>([]);
   const [loading, setLoading] = useState(true);
+
+  const [posts, setPosts] = useState<InstagramPost[]>([]);
+
+  useEffect(() => {
+    const getPosts = async () => {
+      setLoading(true)
+      const data:any = await fetchInstagramPosts();
+      setPosts(data);
+      setLoading(false)
+    };
+    getPosts();
+  }, []);
 
   // const fetchHashtagMedia = async () => {
   //   try {
@@ -60,35 +83,35 @@ const SocialFeed = () => {
   //   }
   // };
 
-  async function fetchInstagramMedia() {
-    setMediaItems([]);
-    setLoading(true);
-    const accessToken =
-      "IGAAzQ9AjY4HlBZAE1HLU9tSkhtUVZAkb0lHQkJfTHRwZA2NVQ01menVlUjlLeTk1N3VOQlZAxR3ZAyMGROZAzdIYjZAjRDBsbEFJTzU4R2FwNlFvU0hhM0RoUi1TRV9uY3JtdHlFcW95aEdxOHVodjNqUm9zWm1uU2Qtdnk1c0NzeG1GZAwZDZD";
-    const userId = "kalanakoralegedara"; // Replace with your Instagram User ID
+  // async function fetchInstagramMedia() {
+  //   setMediaItems([]);
+  //   setLoading(true);
+  //   const accessToken =
+  //     "IGAAzQ9AjY4HlBZAE1HLU9tSkhtUVZAkb0lHQkJfTHRwZA2NVQ01menVlUjlLeTk1N3VOQlZAxR3ZAyMGROZAzdIYjZAjRDBsbEFJTzU4R2FwNlFvU0hhM0RoUi1TRV9uY3JtdHlFcW95aEdxOHVodjNqUm9zWm1uU2Qtdnk1c0NzeG1GZAwZDZD";
+  //   const userId = "kalanakoralegedara"; // Replace with your Instagram User ID
 
-    const graphApiUrl = `https://graph.instagram.com/${userId}/media?fields=id,caption,media_type,media_url&access_token=${accessToken}`;
-    // const basicDisplayApiUrl = `https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url&access_token=${accessToken}`;
+  //   const graphApiUrl = `https://graph.instagram.com/${userId}/media?fields=id,caption,media_type,media_url&access_token=${accessToken}`;
+  //   // const basicDisplayApiUrl = `https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url&access_token=${accessToken}`;
 
-    try {
-      const responseGraph = await fetch(graphApiUrl);
-      // const responseBasic = await fetch(basicDisplayApiUrl);
+  //   try {
+  //     const responseGraph = await fetch(graphApiUrl);
+  //     // const responseBasic = await fetch(basicDisplayApiUrl);
 
-      console.log(responseGraph);
-      // const dataGraph = await responseGraph.json();
-      // const dataBasic = await responseBasic.json();
+  //     console.log(responseGraph);
+  //     // const dataGraph = await responseGraph.json();
+  //     // const dataBasic = await responseBasic.json();
 
-      // return [...dataGraph.data, ...dataBasic.data];
-    } catch (error) {
-      console.error("Error fetching media:", error);
-      return [];
-    }
-  }
+  //     // return [...dataGraph.data, ...dataBasic.data];
+  //   } catch (error) {
+  //     console.error("Error fetching media:", error);
+  //     return [];
+  //   }
+  // }
 
-  useEffect(() => {
-    // fetchHashtagMedia();
-    fetchInstagramMedia();
-  }, []);
+  // useEffect(() => {
+  //   // fetchHashtagMedia();
+  //   fetchInstagramMedia();
+  // }, []);
 
   return (
     <div className="container mx-auto pb-24">
@@ -103,34 +126,31 @@ const SocialFeed = () => {
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {mediaItems.map((item) => (
-            <div
-              key={item.id}
-              className="relative group overflow-hidden rounded-lg"
+          {posts.map((post, index) => (
+            <a
+              key={index}
+              href={`https://www.instagram.com/p/${post.shortcode}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
             >
               <img
-                src={item.media_url || "/api/placeholder/400/400"}
-                alt={item.caption || "salonprabhu insta post"}
-                className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
+                src={post.thumbnail}
+                alt={post.caption || 'Instagram Post'}
+                className="w-full h-64 object-cover"
               />
-              <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-opacity duration-300">
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <Instagram className="w-8 h-8 text-white" />
-                </div>
+              {post.caption && (
+                <p className="p-4 text-sm text-gray-700">{post.caption}</p>
+              )}
+              <div className="p-4 text-sm text-gray-600">
+                <span>❤️ {post.likes}</span>
+                <span className="ml-4">💬 {post.comments}</span>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       )}
 
-      {/* <div className="text-center mt-8">
-        <button
-          className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200"
-          onClick={() => fetchHashtagMedia()}
-        >
-          Load More
-        </button>
-      </div> */}
     </div>
   );
 };

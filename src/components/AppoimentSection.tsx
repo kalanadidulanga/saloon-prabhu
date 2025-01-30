@@ -211,7 +211,7 @@ const AppoimentSection = () => {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="text-sm font-medium text-primary-bg">
-                            Location Link
+                            Address or Location url
                           </FormLabel>
                           <FormControl>
                             <Input
