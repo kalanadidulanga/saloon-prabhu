@@ -1,5 +1,18 @@
+// import useAxios from "@/hooks/useAxios";
 import { atom, useAtom } from "jotai";
 import { useEffect } from "react";
+
+// const { fetch } = useAxios();
+
+// try {
+//   const { data } = await fetch({
+//     url: "/api/package2",
+//     method: "GET",
+//   });
+//   console.log(data.data);
+// } catch (error) {
+//   console.error("Error fetching data:", error);
+// }
 
 const pictures = [
   "/textures/DSC00680.jpg",
