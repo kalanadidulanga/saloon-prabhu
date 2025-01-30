@@ -9,6 +9,7 @@ type ContactDetails = {
   facebook: string;
   whatsapp: string;
   tiktok: string;
+  youtube: string;
 };
 
 type ContactDetailsStore = ContactDetails & {
@@ -24,6 +25,7 @@ const useContactDetailsStore = create<ContactDetailsStore>((set) => ({
   facebook: "https://web.facebook.com/salon.prabhu",
   whatsapp: "https://wa.link/uepbvy",
   tiktok: "https://www.tiktok.com/@salon_prabhu",
+  youtube: "https://www.youtube.com/@SalonPRABHU",
 
   updateContactDetails: (newDetails) =>
     set((state) => ({
