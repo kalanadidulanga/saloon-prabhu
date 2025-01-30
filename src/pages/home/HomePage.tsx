@@ -15,7 +15,7 @@ import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import useAxios from "@/hooks/useAxios";
 // import FlipBook from "@/components/FlipBook.jsx";
-// import SocialFeed from "@/components/SocialFeed";
+import SocialFeed from "@/components/SocialFeed";
 // import FlipBook from "@/components/FlipBook";
 // import AntiqueBook from "@/components/AntiqueBook";
 // import Navbar from "@/components/Navbar";
@@ -165,7 +165,7 @@ const HomePage = () => {
         <ReviewSection />
       </AnimatedSection>
 
-      {/* <SocialFeed /> */}
+      <SocialFeed />
       {/* <HashtagGallery /> */}
     </>
   );

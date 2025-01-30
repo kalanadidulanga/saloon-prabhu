@@ -6,7 +6,7 @@ const file = "/uploads/1738235206355-8baw5vq74bw.jpg"
 
 const response:any = await fetch(import.meta.env.VITE_BASE_URL + '/api/package2');
 
-// console.log(response.data.data[0].imageUrl);
+console.log(response.data.data);
 
 const pictures = [
 "/textures/DSC00680.jpg",
