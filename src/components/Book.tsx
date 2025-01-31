@@ -17,7 +17,7 @@ import {
   Vector3,
 } from "three";
 import { degToRad } from "three/src/math/MathUtils.js";
-import { pageAtom, pages } from "./UI";
+import { pageAtom, usePagesStore } from "./UI";
 
 const easingFactor = 0.5; // Controls the speed of the easing
 const easingFactorFold = 0.3; // Controls the speed of the easing
@@ -84,11 +84,11 @@ const pageMaterials = [
   }),
 ];
 
-pages.forEach((page) => {
-  useTexture.preload(`${page.front}`);
-  useTexture.preload(`${page.back}`);
-  useTexture.preload(`/textures/book-cover-roughness.jpg`);
-});
+// pages.forEach((page) => {
+//   useTexture.preload(`${page.front}`);
+//   useTexture.preload(`${page.back}`);
+//   useTexture.preload(`/textures/book-cover-roughness.jpg`);
+// });
 
 interface PageProps {
   number: number;
@@ -108,6 +108,8 @@ const Page: FC<PageProps> = ({
   bookClosed,
   ...props
 }) => {
+  const {pages}=usePagesStore();
+
   const [picture, picture2, pictureRoughness] = useTexture([
     `${front}`,
     `${back}`,
@@ -270,7 +272,7 @@ const Page: FC<PageProps> = ({
 export const Book: FC = (props) => {
   const [page] = useAtom(pageAtom);
   const [delayedPage, setDelayedPage] = useState(page);
-
+  const {pages,loading}=usePagesStore();
   const { viewport } = useThree(); // Get the screen size
   const [bookScale, setBookScale] = useState(1);
 
@@ -308,7 +310,7 @@ export const Book: FC = (props) => {
 
   return (
     <group {...props} rotation-y={-Math.PI / 2} scale={[bookScale, bookScale, bookScale]}>
-      {[...pages].map((pageData, index) => (
+      {loading? null : [...pages].map((pageData, index) => (
         <Page
           key={index}
           page={delayedPage}

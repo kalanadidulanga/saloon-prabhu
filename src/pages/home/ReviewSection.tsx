@@ -22,7 +22,7 @@ const ReviewCard: React.FC<ReviewCardProps> = ({ name, rating, review }) => {
   const stars = Array.from({ length: 5 }, (_, i) => i + 1);
 
   return (
-    <div className="bg-transparent border-2 border-black-900 p-4 lg:p-5 w-full mx-auto">
+    <div className="bg-transparent border-2 border-black-900 p-4 lg:p-5 w-full mx-auto transition-all duration-300 ease-in-out">
       <h3 className="text-lg font-semibold">{name}</h3>
       <p className="text-gray-700 leading-relaxed mt-3 mb-2">{review}</p>
       <div className="flex items-center">
@@ -125,7 +125,7 @@ const ReviewSection = () => {
             What Our Clients Say
           </h2>
 
-          <div className="bg-reviewbg bg-cover bg-no-repeat w-full relative ps-16 pe-14 py-12 md:px-20 lg:ps-28 lg:pe-24 lg:py-20">
+          <div className="bg-reviewbg bg-cover bg-no-repeat w-full relative ps-16 pe-14 py-12 md:px-20 lg:ps-28 lg:pe-24 lg:py-20 transition-all duration-300">
             {/* Slider container */}
             <div className="w-full h-full relative">
               {loading ? (
@@ -134,7 +134,7 @@ const ReviewSection = () => {
                 </div>
               ) : reviews.length > 0 ? (
                 <>
-                  <div className="transition-opacity duration-500">
+                  <div className="transition-all duration-500">
                     <ReviewCard
                       name={reviews[currentIndex]?.clientName || ""}
                       rating={reviews[currentIndex]?.rating || 0}
