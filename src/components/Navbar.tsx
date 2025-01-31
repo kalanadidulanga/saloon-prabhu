@@ -119,7 +119,9 @@ const Navbar = () => {
               ))}
 
               {/* Desktop Appointment Button */}
-              <Button variant={"blue2"} size="mySize" asChild className="ml-4">
+              <Button variant={"blue2"} size="mySize" asChild className="ml-4" onClick={()=>{
+                setIsMobileMenuOpen(false)
+              }}>
                 <Link to="appointment">MAKE APPOINTMENT</Link>
               </Button>
             </div>
@@ -173,6 +175,9 @@ const Navbar = () => {
                     size="mySize"
                     asChild
                     className="w-full"
+                    onClick={()=>{
+                      setIsMobileMenuOpen(false)
+                    }}
                   >
                     <Link to="appointment">MAKE APPOINTMENT</Link>
                   </Button>
