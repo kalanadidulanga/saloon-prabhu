@@ -22,7 +22,7 @@ const OurStorySection = () => {
         </div>
         <div className=" w-full relative flex justify-end mb-8 lg:mb-0">
           <OrnateFrame
-            image="/assets/salon.svg"
+            image="/assets/salon.jpg"
             alt="Beautiful landscape"
             aspectRatio="portrait"
             // width={600}

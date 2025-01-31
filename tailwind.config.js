@@ -52,8 +52,8 @@ export default {
     backgroundImage: {
       btnbg: "url('/assets/btnbg.png')",
       customerbg: "url('/assets/customerbg.png')",
-      customerbg: "url('/assets/pageheaderbg.svg')",
-      reviewbg: "url('/assets/R.jpeg')",
+      customerbg: "url('/assets/pageheaderbg.jpg')",
+      reviewbg: "url('/assets/R.jpg')",
     },
     container: {
       center: true,

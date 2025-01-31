@@ -10,7 +10,7 @@ import { AnimatedSection } from "../home/HomePage";
 const AboutPage = () => {
   return (
     <>
-      <div className="bg-[url('/assets/pageheaderbg.svg')] bg-cover bg-center">
+      <div className="bg-[url('/assets/pageheaderbg.jpg')] bg-cover bg-center">
         <div className="container flex flex-col py-24 items-center">
           <h1 className=" text-5xl md:text-6xl text-primary-bg font-judson">
             About Us

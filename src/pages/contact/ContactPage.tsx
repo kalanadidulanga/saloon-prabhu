@@ -8,7 +8,7 @@ import { AnimatedSection } from "../home/HomePage";
 const ContactPage = () => {
   return (
     <div>
-      <div className="bg-[url('/assets/contactpageheaderbg.svg')] bg-cover bg-left md:bg-center">
+      <div className="bg-[url('/assets/contactpageheaderbg.jpg')] bg-cover bg-left md:bg-center">
         <div className="container flex flex-col py-24 items-start">
           <h1 className=" text-5xl md:text-6xl text-primary-bg font-judson">
             Contact Us

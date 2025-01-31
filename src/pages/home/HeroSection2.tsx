@@ -5,9 +5,9 @@ import { Link } from "react-router";
 const HeroSection2 = () => {
   // Array of background images for the slider
   const backgroundImages = [
-    "/assets/herobg.svg",
-    "/assets/herobg2.svg",
-    "/assets/herobg3.svg", // Add more background images here
+    "/assets/herobg.jpg",
+    "/assets/herobg2.jpg",
+    "/assets/herobg3.jpg", // Add more background images here
   ];
 
   const [currentBgIndex, setCurrentBgIndex] = useState(0);

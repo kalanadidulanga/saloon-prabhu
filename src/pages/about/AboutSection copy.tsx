@@ -7,7 +7,7 @@ const AboutSection = () => {
       <div className="w-full flex flex-col lg:flex-row gap-16 ">
         <div className=" w-full relative flex justify-start lg:mb-0">
           <OrnateFrame
-            image="/assets/prabhu2.svg"
+            image="/assets/prabhu2.jpg"
             alt="Beautiful landscape"
             aspectRatio="portrait"
             // width={600}

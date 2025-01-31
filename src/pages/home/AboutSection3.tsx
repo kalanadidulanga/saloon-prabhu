@@ -5,9 +5,9 @@ import Title from "@/components/Title";
 
 const AboutSection3 = () => {
   const images = [
-    "/assets/herobg.svg",
-    "/assets/herobg2.svg",
-    "/assets/herobg3.svg",
+    "/assets/herobg.jpg",
+    "/assets/herobg2.jpg",
+    "/assets/herobg3.jpg",
   ];
 
   return (
