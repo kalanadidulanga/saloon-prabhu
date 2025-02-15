@@ -151,9 +151,9 @@ const HomePage = () => {
       {/* <ServicesSection services={SERVICES} /> */}
 
       {/* <PriceRangeSection /> */}
-      <AnimatedSection>
+      {/* <AnimatedSection>
         <BookSection />
-      </AnimatedSection>
+      </AnimatedSection> */}
       {/* <AntiqueBook /> */}
       {/* <FlipBook /> */}
 

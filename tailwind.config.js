@@ -44,9 +44,36 @@ export default {
         "text-color": "#525252",
         "my-blue": "#4880FF",
         "bg-color": "#222227",
-        "Color": "#F6ECD7",
+        Color: "#F6ECD7",
         "primary-bg": "#EBEBEB",
-        "primary": "#9E8A78"
+        primary: "#9E8A78",
+      },
+      animation: {
+        blob: "blob 15s infinite 3s",
+      },
+      keyframes: {
+        blob: {
+          "0%": {
+            // transform: "translate(0px, 0px) scale(1)",
+            borderRadius: "30% 70% 70% 30% / 30% 30% 70% 70% "
+          },
+          "25%": {
+            borderRadius: "72% 28% 61% 39% / 78% 62% 38% 22% "
+            // transform: "translate(30px, -50px) scale(1.1)",
+          },
+          "50%": {
+            borderRadius: "72% 28% 61% 39% / 30% 30% 70% 70% "
+            // transform: "translate(-20px, 20px) scale(0.9)",
+          },
+          "75%": {
+            borderRadius: "30% 70% 18% 82% / 30% 30% 70% 70% "
+            // transform: "translate(-20px, 20px) scale(0.9)",
+          },
+          "100%": {
+            borderRadius: "30% 70% 70% 30% / 30% 30% 70% 70% "
+            // transform: "tranlate(0px, 0px) scale(1)",
+          },
+        },
       },
     },
     backgroundImage: {
@@ -58,13 +85,17 @@ export default {
     container: {
       center: true,
       padding: {
-        DEFAULT: '1rem',
-        sm: '2rem',
-        lg: '4rem',
-        xl: '5rem',
-        '2xl': '6rem',
+        DEFAULT: "1rem",
+        sm: "2rem",
+        lg: "4rem",
+        xl: "5rem",
+        "2xl": "6rem",
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography"), require('tailwindcss-motion')],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("@tailwindcss/typography"),
+    require("tailwindcss-motion"),
+  ],
 };
