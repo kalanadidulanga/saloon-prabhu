@@ -151,7 +151,7 @@ const PackagesManager: React.FC = () => {
   };
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
+    <div className="p-5">
       <Card>
         <CardHeader>
           <div className="flex items-center justify-between">
@@ -183,12 +183,12 @@ const PackagesManager: React.FC = () => {
         </CardHeader>
         <CardContent>
           <Tabs value={selectedCategory} onValueChange={setSelectedCategory}>
-            <TabsList className="flex flex-wrap gap-2">
+            <TabsList className=" mr-auto">
               {categories.map((category) => (
                 <TabsTrigger
                   key={category.id}
                   value={category.id}
-                  className="px-4 py-2 rounded-full"
+                  className=""
                 >
                   {category.name}
                 </TabsTrigger>
