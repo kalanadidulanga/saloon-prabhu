@@ -9,7 +9,7 @@ import HeroSection2 from "./HeroSection2";
 import AboutSection2 from "./AboutSection2";
 import AboutSection3 from "./AboutSection3";
 import CustomersSection from "./CustomersSection";
-import BookSection from "@/components/BookSection";
+// import BookSection from "@/components/BookSection";
 import ReviewSection from "./ReviewSection";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
