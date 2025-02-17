@@ -22,7 +22,7 @@ const ReviewCard: React.FC<ReviewCardProps> = ({ name, rating, review }) => {
   const stars = Array.from({ length: 5 }, (_, i) => i + 1);
 
   return (
-    <div className="bg-transparent border-2 border-black-900 p-4 lg:p-5 w-full mx-auto transition-all duration-300 ease-in-out">
+    <div className="bg-[#EBE2E2] border border-[#C09B9B] p-4 lg:p-5 w-full">
       <h3 className="text-lg font-semibold">{name}</h3>
       <p className="text-gray-700 leading-relaxed mt-3 mb-2">{review}</p>
       <div className="flex items-center">
@@ -55,16 +55,26 @@ const ReviewSection = () => {
   const [autoPlay, setAutoPlay] = useState(true);
   const { fetch, loading } = useAxios();
 
+  // Calculate the number of slides needed
+  const reviewsPerSlide = 4;
+  const totalSlides = Math.ceil(reviews.length / reviewsPerSlide);
+
+  // Get current slide's reviews
+  const getCurrentSlideReviews = () => {
+    const startIndex = currentIndex * reviewsPerSlide;
+    return reviews.slice(startIndex, startIndex + reviewsPerSlide);
+  };
+
   // Slider logic
   useEffect(() => {
     let timer: NodeJS.Timeout;
-    if (autoPlay && reviews.length > 0) {
+    if (autoPlay && reviews.length > reviewsPerSlide) {
       timer = setInterval(() => {
-        setCurrentIndex((prev) => (prev === reviews.length - 1 ? 0 : prev + 1));
+        setCurrentIndex((prev) => (prev === totalSlides - 1 ? 0 : prev + 1));
       }, 5000); // Change slide every 5 seconds
     }
     return () => clearInterval(timer);
-  }, [autoPlay, reviews.length]);
+  }, [autoPlay, reviews.length, totalSlides]);
 
   const loadReviews = async () => {
     try {
@@ -87,16 +97,6 @@ const ReviewSection = () => {
     loadReviews();
   }, []);
 
-  // const handlePrevious = () => {
-  //   setAutoPlay(false);
-  //   setCurrentIndex((prev) => (prev === 0 ? reviews.length - 1 : prev - 1));
-  // };
-
-  // const handleNext = () => {
-  //   setAutoPlay(false);
-  //   setCurrentIndex((prev) => (prev === reviews.length - 1 ? 0 : prev + 1));
-  // };
-
   const handleSubmit = async () => {
     try {
       await fetch({
@@ -118,57 +118,49 @@ const ReviewSection = () => {
   };
 
   return (
-    <div>
+    <div className="bg-[#FAF4E7]">
       <div className="container pt-24 pb-24">
         <div className="flex flex-col items-center justify-center flex-1 gap-8">
           <h2 className="text-4xl font-bold font-judson text-center text-[#6C381B]">
             What Our Clients Say
           </h2>
 
-          <div className="bg-reviewbg bg-cover bg-no-repeat w-full relative ps-16 pe-14 py-12 md:px-20 lg:ps-28 lg:pe-24 lg:py-20 transition-all duration-300">
-            <img
-              src="/assets/R.jpg"
-              alt="Review Background"
-              className="absolute top-0 left-0 w-full h-full transition-all duration-100"
-            />
-            {/* Slider container */}
-            <div className="w-full h-full relative">
+          <div className="flex flex-col w-full gap-5">
+            <div className="w-full h-full relative grid grid-cols-1 lg:grid-cols-2 gap-8">
               {loading ? (
-                <div className="flex items-center justify-center h-full">
+                <div className="flex items-center justify-center h-full col-span-4">
                   <p className="text-center">Loading...</p>
                 </div>
               ) : reviews.length > 0 ? (
-                <>
-                  <div className="transition-all duration-500">
+                getCurrentSlideReviews().map((review, index) => (
+                  <div key={index} className="transition-all duration-500">
                     <ReviewCard
-                      name={reviews[currentIndex]?.clientName || ""}
-                      rating={reviews[currentIndex]?.rating || 0}
-                      review={reviews[currentIndex]?.comment || ""}
+                      name={review.clientName}
+                      rating={review.rating}
+                      review={review.comment}
                     />
                   </div>
-
-                  {/* Dots indicator */}
-                  <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
-                    {reviews.map((_, index) => (
-                      <button
-                        key={index}
-                        className={`w-2 h-2 rounded-full transition-colors ${
-                          index === currentIndex
-                            ? "bg-[#6C381B]"
-                            : "bg-gray-300"
-                        }`}
-                        onClick={() => {
-                          setCurrentIndex(index);
-                          setAutoPlay(false);
-                        }}
-                        aria-label={`Go to review ${index + 1}`}
-                      />
-                    ))}
-                  </div>
-                </>
+                ))
               ) : (
-                <p className="text-center">No reviews available</p>
+                <p className="text-center col-span-4">No reviews available</p>
               )}
+            </div>
+            
+            {/* Dots indicator */}
+            <div className="flex gap-2 items-center mt-4 mx-auto">
+              {Array.from({ length: totalSlides }).map((_, index) => (
+                <button
+                  key={index}
+                  className={`w-6 h-6 rounded-full transition-colors ${
+                    index === currentIndex ? "bg-[#6C381B]" : "bg-gray-300"
+                  }`}
+                  onClick={() => {
+                    setCurrentIndex(index);
+                    setAutoPlay(false);
+                  }}
+                  aria-label={`Go to review set ${index + 1}`}
+                />
+              ))}
             </div>
           </div>
 
