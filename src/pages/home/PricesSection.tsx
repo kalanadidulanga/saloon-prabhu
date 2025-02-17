@@ -19,9 +19,11 @@ interface Category {
 }
 
 const PricesSection = () => {
-  const { fetch, loading } = useAxios();
+  const { fetch } = useAxios();
   const [priceList, setPriceList] = useState<Category[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<Category | null>(
+    null
+  );
 
   const loadPriceList = async () => {
     try {
@@ -74,7 +76,10 @@ const PricesSection = () => {
 
         <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12">
           {selectedCategory?.packages.map((pkg, index) => (
-            <div key={index} className="flex flex-col flex-1 w-full max-w-xl mx-auto">
+            <div
+              key={index}
+              className="flex flex-col flex-1 w-full max-w-xl mx-auto"
+            >
               <h4 className="text-xl md:text-2xl font-judson mb-5 max-w-lg text-[#28262C]">
                 {pkg.name}
               </h4>
