@@ -6,7 +6,7 @@ const VisionMissionSection = () => {
       <div className="container flex flex-col lg:flex-row pt-24">
         <div className="w-full flex flex-col lg:flex-row gap-16">
           <div className=" flex flex-col justify-center w-full">
-            <Title title={"ABOUT"} align="left" />
+            <Title title={"ABOUT VISION"} align="left" />
             <h1 className="text-3xl md:text-4xl font-judson my-8">Vision</h1>
             <p className=" text-text-color">
               At Salon Prabhu, our vision is to be the leading beauty and
@@ -35,7 +35,7 @@ const VisionMissionSection = () => {
             />
           </div>
           <div className=" flex flex-col justify-center w-full">
-            <Title title={"ABOUT"} align="left" />
+            <Title title={"ABOUT MISSION"} align="left" />
             <h1 className="text-3xl md:text-4xl font-judson my-8">Mission</h1>
             <p className=" text-text-color">
               Our mission is to deliver personalized, high-quality beauty

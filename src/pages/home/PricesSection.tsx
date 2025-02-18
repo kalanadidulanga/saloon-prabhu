@@ -81,7 +81,7 @@ const PricesSection = () => {
           ))}
         </div>
 
-        <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12 max-h-screen overflow-y-auto">
           {selectedCategory?.packages.map((pkg, index) => (
             <div
               key={index}
@@ -93,10 +93,10 @@ const PricesSection = () => {
               <table className="border-collapse font-judson border border-gray-400">
                 <thead>
                   <tr>
-                    <th className="border border-[#2F201A] text-lg text-start py-2 px-5">
+                    <th className="border border-gray-300 text-lg text-start py-2 px-5">
                       Name
                     </th>
-                    <th className="border border-[#2F201A] text-lg text-end py-2 px-5">
+                    <th className="border border-gray-300 text-lg text-end py-2 px-5">
                       Price
                     </th>
                   </tr>
@@ -104,10 +104,10 @@ const PricesSection = () => {
                 <tbody>
                   {pkg.serviceItems?.map((serviceItem, serviceIndex) => (
                     <tr key={serviceIndex}>
-                      <td className="border border-[#2F201A] text-start py-2 px-5">
+                      <td className="border border-gray-300 text-start py-2 px-5">
                         {serviceItem.name}
                       </td>
-                      <td className="border border-[#2F201A] text-end py-2 px-5">
+                      <td className="border border-gray-300 text-end py-2 px-5">
                         LKR {serviceItem.price}
                       </td>
                     </tr>
