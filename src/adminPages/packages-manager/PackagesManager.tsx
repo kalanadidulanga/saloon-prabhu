@@ -149,56 +149,85 @@ const PackagesManager: React.FC = () => {
   const deleteCategory = async (categoryId: string) => {
     // const updatedCategories = categories.filter((c) => c.id !== categoryId);
     // setCategories(updatedCategories);
+    //add confirm box
+    if (!window.confirm("Are you sure you want to delete this category?")) {
+      return null;
+    } else {
+      try {
+        await fetch({
+          url: `/api/categories/${categoryId}`,
+          method: "DELETE",
+        });
+        toast.success("Category deleted successfully");
+        loadPriceList();
+      } catch (error) {
+        console.error("Error :", error);
+        toast.error("Something went wrong. Please try again.");
+      }
+    }
+  };
+
+  const updateCategory = async (categoryId: string, newName: string) => {
+    // setCategories(
+    //   categories.map((cat) =>
+    //     cat.id === categoryId ? { ...cat, name: newName.toUpperCase() } : cat
+    //   )
+    // );
     try {
       const { data } = await fetch({
-        url: "/api/categories",
-        method: "POST",
-        data: { name: newCategoryName },
+        url: `/api/categories/${categoryId}`,
+        method: "PUT",
+        data: { name: newName },
       });
       if (data.success) {
-        setNewCategoryName("");
-        toast.success("Category added successfully");
+        toast.success("Category name updated successfully");
         loadPriceList();
       }
     } catch (error) {
       console.error("Error :", error);
       toast.error("Something went wrong. Please try again.");
     }
-    // if (selectedCategory === categoryId && updatedCategories.length > 0) {
-    //   setSelectedCategory(updatedCategories[0].id);
-    // }
-  };
-
-  const updateCategory = (categoryId: string, newName: string) => {
-    setCategories(
-      categories.map((cat) =>
-        cat.id === categoryId ? { ...cat, name: newName.toUpperCase() } : cat
-      )
-    );
   };
 
   // Package operations
-  const addPackage = () => {
+  const addPackage = async (packageId: string) => {
     if (newPackageName.trim()) {
-      setCategories(
-        categories.map((category) => {
-          if (category.id === selectedCategory) {
-            return {
-              ...category,
-              packages: [
-                ...category.packages,
-                {
-                  id: String(Date.now()),
-                  name: newPackageName,
-                  serviceItems: [],
-                },
-              ],
-            };
-          }
-          return category;
-        })
-      );
-      setNewPackageName("");
+      // setCategories(
+      //   categories.map((category) => {
+      //     if (category.id === selectedCategory) {
+      //       return {
+      //         ...category,
+      //         packages: [
+      //           ...category.packages,
+      //           {
+      //             id: String(Date.now()),
+      //             name: newPackageName,
+      //             serviceItems: [],
+      //           },
+      //         ],
+      //       };
+      //     }
+      //     return category;
+      //   })
+      try {
+        const { data } = await fetch({
+          url: "/api/packages",
+          method: "POST",
+          data: {
+            categoryId: packageId,
+            name: newPackageName,
+          },
+        });
+        if (data.success) {
+          setNewPackageName("");
+
+          toast.success("Package added successfully");
+          loadPriceList();
+        }
+      } catch (error) {
+        console.error("Error :", error);
+        toast.error("Something went wrong. Please try again.");
+      }
     }
   };
 
@@ -418,6 +447,7 @@ const PackagesManager: React.FC = () => {
                   }
                 />
                 <Button
+                  disabled={loading}
                   onClick={() => {
                     if (editingCategory) {
                       updateCategory(editingCategory.id, editingCategory.name);
@@ -454,7 +484,14 @@ const PackagesManager: React.FC = () => {
                             value={newPackageName}
                             onChange={(e) => setNewPackageName(e.target.value)}
                           />
-                          <Button onClick={addPackage}>Add</Button>
+                          <Button
+                            disabled={loading}
+                            onClick={() => {
+                              addPackage(category.id);
+                            }}
+                          >
+                            Add
+                          </Button>
                         </div>
                       </DialogContent>
                     </Dialog>
