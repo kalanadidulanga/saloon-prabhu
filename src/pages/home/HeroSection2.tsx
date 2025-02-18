@@ -44,16 +44,19 @@ const HeroSection2 = () => {
               Hair and beauty studio,{" "}
               <span className="font-bold">Unisex saloon</span>
             </p>
-            <Button
-              variant={"blue2"}
-              size={"mySize"}
-              className="mt-16 mx-auto md:mr-auto tracking-wider"
-              asChild
-            >
-              <Link to={"../about"} className="capitalize font-normal">
-                LEARN MORE
-              </Link>
-            </Button>
+
+            <div className=" flex items-center justify-center md:justify-start">
+              <Button
+                variant={"blue2"}
+                size={"mySize"}
+                className="mt-16 tracking-wider"
+                asChild
+              >
+                <Link to={"../about"} className="capitalize font-normal">
+                  LEARN MORE
+                </Link>
+              </Button>
+            </div>
           </div>
         </div>
       </div>
