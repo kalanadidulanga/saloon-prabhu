@@ -103,11 +103,15 @@ const PackagesManager: React.FC = () => {
         method: "GET",
       });
       if (data.success && data.data.length > 0) {
-        // setPriceList(data.data);
+        console.log(selectedPackage);
         setCategories(data.data);
-        if (!data.data.some((category: Category) => category.id === selectedCategory)) {
+        if (
+          !data.data.some(
+            (category: Category) => category.id === selectedCategory
+          )
+        ) {
           setSelectedCategory(data.data[0].id);
-        }        
+        }
       }
     } catch (error) {
       console.error("Error fetching prices:", error);
