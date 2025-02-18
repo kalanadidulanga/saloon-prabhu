@@ -2,6 +2,7 @@ import Title from "@/components/Title";
 import { useEffect, useState } from "react";
 import useAxios from "@/hooks/useAxios";
 import toast from "react-hot-toast";
+import { Loader } from "lucide-react";
 
 interface ServiceItem {
   name: string;
@@ -19,7 +20,7 @@ interface Category {
 }
 
 const PricesSection = () => {
-  const { fetch } = useAxios();
+  const { fetch, loading } = useAxios();
   const [priceList, setPriceList] = useState<Category[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(
     null
@@ -58,8 +59,14 @@ const PricesSection = () => {
           Service fees for your beauty and body care
         </div>
 
-        <div className="flex items-center gap-5">
-          {priceList.map((category, index) => (
+        {loading && (
+          <div className=" flex items-center justify-center mx-auto my-8 py-3 gap-3">
+            <Loader className="animate-spin" /> Loading...
+          </div>
+        )}
+
+        <div className="flex flex-wrap justify-center items-center gap-5">
+          {priceList?.map((category, index) => (
             <button
               key={index}
               onClick={() => setSelectedCategory(category)}
@@ -87,7 +94,7 @@ const PricesSection = () => {
                 <thead>
                   <tr>
                     <th className="border border-[#2F201A] text-lg text-start py-2 px-5">
-                      Title
+                      Name
                     </th>
                     <th className="border border-[#2F201A] text-lg text-end py-2 px-5">
                       Price

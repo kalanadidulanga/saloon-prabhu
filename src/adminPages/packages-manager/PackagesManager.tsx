@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { PlusCircle, Edit, Trash2 } from "lucide-react";
+import { PlusCircle, Edit, Trash2, Loader } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -375,6 +375,11 @@ const PackagesManager: React.FC = () => {
 
   return (
     <div className="p-5">
+      {loading && (
+        <div className=" flex items-center justify-center mx-auto bg-white rounded-lg border mb-5 py-3 gap-3">
+          <Loader className="animate-spin"/> Loading...
+        </div>
+      )}
       <Card>
         <CardHeader>
           <div className="flex items-center justify-between">
