@@ -36,7 +36,7 @@ const HeroSection2 = () => {
       <div className="container flex flex-col min-h-[calc(100vh-96px)] justify-center pt-32 pb-24">
         <div className="w-full flex flex-col lg:flex-row">
           <div className="flex flex-col w-full motion-preset-slide-right">
-            <h1 className="text-5xl md:text-6xl font-judson text-white">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-judson text-white">
               Get the hair you've been <br />
               dreaming about
             </h1>
