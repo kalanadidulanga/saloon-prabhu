@@ -33,21 +33,21 @@ const HeroSection2 = () => {
         backgroundSize: "cover",
       }}
     >
-      <div className="container flex flex-col min-h-[calc(100vh-96px)] justify-center pt-32 pb-24">
+      <div className="container flex flex-col lg:min-h-[calc(100vh-96px)] justify-center py-32">
         <div className="w-full flex flex-col lg:flex-row">
           <div className="flex flex-col w-full motion-preset-slide-right">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-judson text-white">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl text-center md:text-start font-judson text-white">
               Get the hair you've been <br />
               dreaming about
             </h1>
-            <p className="text-white mt-6">
+            <p className="text-white mt-6 text-center md:text-start">
               Hair and beauty studio,{" "}
               <span className="font-bold">Unisex saloon</span>
             </p>
             <Button
               variant={"blue2"}
               size={"mySize"}
-              className="mt-16 mr-auto tracking-wider"
+              className="mt-16 mx-auto md:mr-auto tracking-wider"
               asChild
             >
               <Link to={"../about"} className="capitalize font-normal">
