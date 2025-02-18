@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PlusCircle, Edit, Trash2 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -11,8 +11,10 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import useAxios from "@/hooks/useAxios";
+import toast from "react-hot-toast";
 
-interface Service {
+interface ServiceItem {
   id: string;
   name: string;
   price: number;
@@ -21,7 +23,7 @@ interface Service {
 interface Package {
   id: string;
   name: string;
-  services: Service[];
+  serviceItems: ServiceItem[];
 }
 
 interface Category {
@@ -31,19 +33,34 @@ interface Category {
 }
 
 const PackagesManager: React.FC = () => {
+  const { fetch, loading } = useAxios();
+  // const [priceList, setPriceList] = useState<Category[]>([]);
+  // const [categories, setCategories] = useState<Category[]>([
+  //   {
+  //     id: "1",
+  //     name: "HAIR",
+  //     packages: [
+  //       {
+  //         id: "1",
+  //         name: "HAIR CUT",
+  //         services: [
+  //           { id: "1", name: "Cut & Re-Style (Advance)", price: 4000 },
+  //           { id: "2", name: "Fringe Cut", price: 1000 },
+  //           { id: "3", name: "Trim", price: 1400 },
+  //         ],
+  //       },
+  //     ],
+  //   },
+  // ]);
   const [categories, setCategories] = useState<Category[]>([
     {
       id: "1",
-      name: "HAIR",
+      name: "",
       packages: [
         {
           id: "1",
-          name: "HAIR CUT",
-          services: [
-            { id: "1", name: "Cut & Re-Style (Advance)", price: 4000 },
-            { id: "2", name: "Fringe Cut", price: 1000 },
-            { id: "3", name: "Trim", price: 1400 },
-          ],
+          name: "",
+          serviceItems: [{ id: "1", name: "", price: 0 }],
         },
       ],
     },
@@ -79,27 +96,77 @@ const PackagesManager: React.FC = () => {
     price: number;
   } | null>(null);
 
-  // Category operations
-  const addCategory = () => {
-    if (newCategoryName.trim()) {
-      setCategories([
-        ...categories,
-        {
-          id: String(Date.now()),
-          name: newCategoryName.toUpperCase(),
-          packages: [],
-        },
-      ]);
-      setNewCategoryName("");
+  const loadPriceList = async () => {
+    try {
+      const { data } = await fetch({
+        url: "/api/categories",
+        method: "GET",
+      });
+      if (data.success && data.data.length > 0) {
+        // setPriceList(data.data);
+        setCategories(data.data);
+        setSelectedCategory(data.data[0].id);
+      }
+    } catch (error) {
+      console.error("Error fetching prices:", error);
+      toast.error("Failed to fetch prices. Please try again.");
     }
   };
 
-  const deleteCategory = (categoryId: string) => {
-    const updatedCategories = categories.filter((c) => c.id !== categoryId);
-    setCategories(updatedCategories);
-    if (selectedCategory === categoryId && updatedCategories.length > 0) {
-      setSelectedCategory(updatedCategories[0].id);
+  useEffect(() => {
+    loadPriceList();
+  }, []);
+
+  // Category operations
+  const addCategory = async () => {
+    if (newCategoryName.trim()) {
+      // setCategories([
+      //   ...categories,
+      //   {
+      //     id: String(Date.now()),
+      //     name: newCategoryName.toUpperCase(),
+      //     packages: [],
+      //   },
+      // ]);
+      try {
+        const { data } = await fetch({
+          url: "/api/categories",
+          method: "POST",
+          data: { name: newCategoryName },
+        });
+        if (data.success) {
+          setNewCategoryName("");
+          toast.success("Category added successfully");
+          loadPriceList();
+        }
+      } catch (error) {
+        console.error("Error :", error);
+        toast.error("Something went wrong. Please try again.");
+      }
     }
+  };
+
+  const deleteCategory = async (categoryId: string) => {
+    // const updatedCategories = categories.filter((c) => c.id !== categoryId);
+    // setCategories(updatedCategories);
+    try {
+      const { data } = await fetch({
+        url: "/api/categories",
+        method: "POST",
+        data: { name: newCategoryName },
+      });
+      if (data.success) {
+        setNewCategoryName("");
+        toast.success("Category added successfully");
+        loadPriceList();
+      }
+    } catch (error) {
+      console.error("Error :", error);
+      toast.error("Something went wrong. Please try again.");
+    }
+    // if (selectedCategory === categoryId && updatedCategories.length > 0) {
+    //   setSelectedCategory(updatedCategories[0].id);
+    // }
   };
 
   const updateCategory = (categoryId: string, newName: string) => {
@@ -123,7 +190,7 @@ const PackagesManager: React.FC = () => {
                 {
                   id: String(Date.now()),
                   name: newPackageName,
-                  services: [],
+                  serviceItems: [],
                 },
               ],
             };
@@ -179,8 +246,8 @@ const PackagesManager: React.FC = () => {
                 if (pkg.id === selectedPackage) {
                   return {
                     ...pkg,
-                    services: [
-                      ...pkg.services,
+                    serviceItems: [
+                      ...pkg.serviceItems,
                       {
                         id: String(Date.now()),
                         name: newService.name,
@@ -214,7 +281,9 @@ const PackagesManager: React.FC = () => {
                 pkg.id === packageId
                   ? {
                       ...pkg,
-                      services: pkg.services.filter((s) => s.id !== serviceId),
+                      serviceItems: pkg.serviceItems.filter(
+                        (s) => s.id !== serviceId
+                      ),
                     }
                   : pkg
               ),
@@ -240,7 +309,7 @@ const PackagesManager: React.FC = () => {
                 pkg.id === packageId
                   ? {
                       ...pkg,
-                      services: pkg.services.map((service) =>
+                      serviceItems: pkg.serviceItems.map((service) =>
                         service.id === serviceId
                           ? {
                               ...service,
@@ -283,7 +352,9 @@ const PackagesManager: React.FC = () => {
                     value={newCategoryName}
                     onChange={(e) => setNewCategoryName(e.target.value)}
                   />
-                  <Button onClick={addCategory}>Add</Button>
+                  <Button disabled={loading} onClick={addCategory}>
+                    Add
+                  </Button>
                 </div>
               </DialogContent>
             </Dialog>
@@ -464,7 +535,7 @@ const PackagesManager: React.FC = () => {
                         </CardHeader>
                         <CardContent>
                           <div className="space-y-4">
-                            {pkg.services.map((service) => (
+                            {pkg?.serviceItems?.map((service) => (
                               <div
                                 key={service.id}
                                 className="flex items-center justify-between p-2 bg-gray-50 rounded"

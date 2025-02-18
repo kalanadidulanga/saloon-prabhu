@@ -5,7 +5,7 @@ import Title from "@/components/Title";
 
 const AboutSection2 = () => {
   return (
-    <div className="w-full h-full relative overflow-hidden">
+    <div className="w-full h-full relative overflow-hidden bg-[#FAF4E7]">
       {/* Animated background blobs */}
       {/* <div className="absolute top-0 -left-4 w-72 h-72 bg-color-3 rounded-full mix-blend-multiply filter blur-xl opacity-50 animate-blob"></div> */}
       {/* <div className="absolute top-24 right-12 w-72 h-72 bg-color-6 rounded-full mix-blend-multiply filter blur-xl opacity-50 animate-blob animation-delay-2000"></div> */}
@@ -27,7 +27,7 @@ const AboutSection2 = () => {
         ))}
       </div> */}
 
-      <div className="container flex flex-col lg:flex-row py-24 relative z-10">
+      <div className="container bg-[url('/assets/bg-line.png')] bg-cover bg-center flex flex-col lg:flex-row py-24 relative z-10">
         <div className="w-full flex flex-col lg:flex-row gap-16 ">
           <div className="w-full relative flex justify-start lg:mb-0">
             <div className="absolute top-1/2 right-1/4 w-64 h-64 bg-primary rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-3000"></div>
