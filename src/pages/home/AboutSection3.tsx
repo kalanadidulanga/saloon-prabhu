@@ -1,14 +1,15 @@
-import { VintageTVSlider } from "@/components/RetroTVPlayer";
+// import { VintageTVSlider } from "@/components/RetroTVPlayer";
 import Title from "@/components/Title";
+import { VintageTV } from "@/components/VintageTV";
 // import { Button } from "@/components/ui/button";
 // import { Link } from "react-router";
 
 const AboutSection3 = () => {
-  const images = [
-    "/assets/herobg.jpg",
-    "/assets/herobg2.jpg",
-    "/assets/herobg3.jpg",
-  ];
+  // const images = [
+  //   "/assets/herobg.jpg",
+  //   "/assets/herobg2.jpg",
+  //   "/assets/herobg3.jpg",
+  // ];
 
   return (
     <div className="bg-[#E3E3E3]">
@@ -27,11 +28,14 @@ const AboutSection3 = () => {
             </p>
           </div>
           <div className=" w-full relative flex justify-start lg:mb-0">
-            <VintageTVSlider
+            {/* <VintageTVSlider
               images={images}
               interval={3000} // Optional: change slide interval (default 3s)
               width={600} // Optional: customize size
               height={450} // Optional: customize size
+            /> */}
+            <VintageTV
+              videoSrc="/videos/1.mp4"
             />
           </div>
         </div>

@@ -30,7 +30,7 @@ const AboutSection2 = () => {
       <div className="container bg-[url('/assets/bg-line.png')] bg-cover bg-center flex flex-col lg:flex-row py-24 relative z-10">
         <div className="w-full flex flex-col lg:flex-row gap-16 ">
           <div className="w-full relative flex justify-start lg:mb-0">
-            <div className="absolute top-1/2 right-1/4 w-64 h-64 bg-primary rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-3000"></div>
+            <div className="absolute top-1/2 right-1/4 w-64 h-64 bg-primary/80 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-3000"></div>
             {/* <div className="absolute w-full h-full bg-primary rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-3000"></div> */}
             <OrnateFrame
               image="/assets/prabhu1.svg"
@@ -41,7 +41,7 @@ const AboutSection2 = () => {
           </div>
           <div className="flex flex-col w-full justify-center motion-preset-slide-left relative">
             {/* <div className="absolute top-52 left-48 w-72 h-96 bg-primary rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div> */}
-            <div className="absolute w-[500px] left-24 h-[500px] bg-primary rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+            <div className="absolute w-[500px] left-24 h-[500px] bg-primary/50 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
 
             <h1 className="text-3xl md:text-4xl font-judson relative z-10">
               Get the Hair You've Been Dreaming About, With Care
