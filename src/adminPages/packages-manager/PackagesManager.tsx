@@ -105,7 +105,9 @@ const PackagesManager: React.FC = () => {
       if (data.success && data.data.length > 0) {
         // setPriceList(data.data);
         setCategories(data.data);
-        setSelectedCategory(data.data[0].id);
+        if (!data.data.some((category: Category) => category.id === selectedCategory)) {
+          setSelectedCategory(data.data[0].id);
+        }        
       }
     } catch (error) {
       console.error("Error fetching prices:", error);
@@ -190,14 +192,14 @@ const PackagesManager: React.FC = () => {
   };
 
   // Package operations
-  const addPackage = async (packageId: string) => {
+  const addPackage = async (categoryId: string) => {
     if (newPackageName.trim()) {
       try {
         const { data } = await fetch({
           url: "/api/packages",
           method: "POST",
           data: {
-            categoryId: packageId,
+            categoryId: categoryId,
             name: newPackageName,
           },
         });
@@ -214,129 +216,157 @@ const PackagesManager: React.FC = () => {
     }
   };
 
-  const deletePackage = (categoryId: string, packageId: string) => {
-    setCategories(
-      categories.map((category) =>
-        category.id === categoryId
-          ? {
-              ...category,
-              packages: category.packages.filter((pkg) => pkg.id !== packageId),
-            }
-          : category
-      )
-    );
+  const deletePackage = async (categoryId: string, packageId: string) => {
+    if (!window.confirm("Are you sure you want to delete this Package?")) {
+      console.log(categoryId);
+      return null;
+    } else {
+      try {
+        await fetch({
+          url: `/api/packages/${packageId}`,
+          method: "DELETE",
+        });
+        toast.success("Package deleted successfully");
+        loadPriceList();
+      } catch (error) {
+        console.error("Error :", error);
+        toast.error("Something went wrong. Please try again.");
+      }
+    }
   };
 
-  const updatePackage = (
+  const updatePackage = async (
     categoryId: string,
     packageId: string,
     newName: string
   ) => {
-    setCategories(
-      categories.map((category) =>
-        category.id === categoryId
-          ? {
-              ...category,
-              packages: category.packages.map((pkg) =>
-                pkg.id === packageId ? { ...pkg, name: newName } : pkg
-              ),
-            }
-          : category
-      )
-    );
-  };
-
-  // Service operations
-  const addService = () => {
-    if (newService.name.trim() && newService.price) {
-      setCategories(
-        categories.map((category) => {
-          if (category.id === selectedCategory) {
-            return {
-              ...category,
-              packages: category.packages.map((pkg) => {
-                if (pkg.id === selectedPackage) {
-                  return {
-                    ...pkg,
-                    serviceItems: [
-                      ...pkg.serviceItems,
-                      {
-                        id: String(Date.now()),
-                        name: newService.name,
-                        price: Number(newService.price),
-                      },
-                    ],
-                  };
-                }
-                return pkg;
-              }),
-            };
-          }
-          return category;
-        })
-      );
-      setNewService({ name: "", price: "" });
+    // setCategories(
+    //   categories.map((category) =>
+    //     category.id === categoryId
+    //       ? {
+    //           ...category,
+    //           packages: category.packages.map((pkg) =>
+    //             pkg.id === packageId ? { ...pkg, name: newName } : pkg
+    //           ),
+    //         }
+    //       : category
+    //   )
+    // );
+    try {
+      const { data } = await fetch({
+        url: `/api/packages/${packageId}`,
+        method: "PUT",
+        data: { name: newName },
+      });
+      if (data.success) {
+        toast.success("Package name updated successfully");
+        loadPriceList();
+      }
+    } catch (error) {
+      console.error("Error :", error);
+      console.error(categoryId);
+      toast.error("Something went wrong. Please try again.");
     }
   };
 
-  const deleteService = (
+  // Service operations
+  const addService = async (packageId: string) => {
+    if (newService.name.trim() && newService.price) {
+      try {
+        const { data } = await fetch({
+          url: "/api/service-items",
+          method: "POST",
+          data: {
+            packageId: packageId,
+            name: newService.name,
+            price: Number(newService.price),
+          },
+        });
+        if (data.success) {
+          setNewService({ name: "", price: "" });
+
+          toast.success("Service Item added successfully");
+          loadPriceList();
+        }
+      } catch (error) {
+        console.error("Error :", error);
+        toast.error("Something went wrong. Please try again.");
+      }
+    }
+  };
+
+  const deleteService = async (
     categoryId: string,
     packageId: string,
     serviceId: string
   ) => {
-    setCategories(
-      categories.map((category) =>
-        category.id === categoryId
-          ? {
-              ...category,
-              packages: category.packages.map((pkg) =>
-                pkg.id === packageId
-                  ? {
-                      ...pkg,
-                      serviceItems: pkg.serviceItems.filter(
-                        (s) => s.id !== serviceId
-                      ),
-                    }
-                  : pkg
-              ),
-            }
-          : category
-      )
-    );
+    if (!window.confirm("Are you sure you want to delete this Service Item?")) {
+      console.log(categoryId);
+      console.log(packageId);
+      return null;
+    } else {
+      try {
+        await fetch({
+          url: `/api/service-items/${serviceId}`,
+          method: "DELETE",
+        });
+        toast.success("Service Item deleted successfully");
+        loadPriceList();
+      } catch (error) {
+        console.error("Error :", error);
+        toast.error("Something went wrong. Please try again.");
+      }
+    }
   };
 
-  const updateService = (
+  const updateService = async (
     categoryId: string,
     packageId: string,
     serviceId: string,
     newName: string,
     newPrice: number
   ) => {
-    setCategories(
-      categories.map((category) =>
-        category.id === categoryId
-          ? {
-              ...category,
-              packages: category.packages.map((pkg) =>
-                pkg.id === packageId
-                  ? {
-                      ...pkg,
-                      serviceItems: pkg.serviceItems.map((service) =>
-                        service.id === serviceId
-                          ? {
-                              ...service,
-                              name: newName,
-                              price: newPrice,
-                            }
-                          : service
-                      ),
-                    }
-                  : pkg
-              ),
-            }
-          : category
-      )
-    );
+    // setCategories(
+    //   categories.map((category) =>
+    //     category.id === categoryId
+    //       ? {
+    //           ...category,
+    //           packages: category.packages.map((pkg) =>
+    //             pkg.id === packageId
+    //               ? {
+    //                   ...pkg,
+    //                   serviceItems: pkg.serviceItems.map((service) =>
+    //                     service.id === serviceId
+    //                       ? {
+    //                           ...service,
+    //                           name: newName,
+    //                           price: newPrice,
+    //                         }
+    //                       : service
+    //                   ),
+    //                 }
+    //               : pkg
+    //           ),
+    //         }
+    //       : category
+    //   )
+    // );
+    try {
+      const { data } = await fetch({
+        url: `/api/service-items/${serviceId}`,
+        method: "PUT",
+        data: { name: newName, price: newPrice },
+      });
+      if (data.success) {
+        toast.success("Service Item updated successfully");
+        loadPriceList();
+      }
+    } catch (error) {
+      console.error("Error :", error);
+      console.error(categoryId);
+      console.error(packageId);
+      toast.error("Something went wrong. Please try again.");
+    }
   };
 
   return (
@@ -546,7 +576,14 @@ const PackagesManager: React.FC = () => {
                                         })
                                       }
                                     />
-                                    <Button onClick={addService}>Add</Button>
+                                    <Button
+                                      disabled={loading}
+                                      onClick={() => {
+                                        addService(pkg.id);
+                                      }}
+                                    >
+                                      Add
+                                    </Button>
                                   </div>
                                 </DialogContent>
                               </Dialog>
