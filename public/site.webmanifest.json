@@ -1,0 +1,27 @@
+{
+  "name": "Prabhu Salon",
+  "short_name": "Prabhu Salon",
+  "description": "The best hair & beauty salon in Sri Lanka offering expert haircuts, styling, facials, and bridal makeup services.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ff6f61",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "manifest_version": "1"
+}
