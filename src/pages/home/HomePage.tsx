@@ -151,7 +151,7 @@ const HomePage = () => {
 
       {/* <ServicesSection services={SERVICES} /> */}
 
-      <PricesSection/>
+      <PricesSection />
 
       {/* <PriceRangeSection /> */}
       {/* <AnimatedSection>
