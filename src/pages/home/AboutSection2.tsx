@@ -52,7 +52,7 @@ const AboutSection2 = () => {
               className="my-8 relative z-10"
             />
             <p className="text-text-color relative z-10">
-              At Saloon Prabhu, we bring elegance to life with care, Our expert
+              At Salon Prabhu, we bring elegance to life with care, Our expert
               stylists ensure you leave looking and feeling your best. From
               classic cuts to modern styles, we craft each look to match your
               unique beauty. Let us make every visit a delightful experience.

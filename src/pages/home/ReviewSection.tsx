@@ -151,7 +151,7 @@ const ReviewSection = () => {
               {Array.from({ length: totalSlides }).map((_, index) => (
                 <button
                   key={index}
-                  className={`w-6 h-6 rounded-full transition-colors ${
+                  className={`w-3 h-3 rounded-full transition-colors ${
                     index === currentIndex ? "bg-[#6C381B]" : "bg-gray-300"
                   }`}
                   onClick={() => {

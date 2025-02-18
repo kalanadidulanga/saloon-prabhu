@@ -25,7 +25,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand Section */}
           <div className="space-y-6 md:col-span-2">
-            <h2 className="text-2xl font-judson text-white">Saloon Prabhu</h2>
+            <h2 className="text-2xl font-judson text-white">Salon Prabhu</h2>
             <p className="text-primary-bg text-sm leading-relaxed">
               Style and confidence go hand in hand, creating beauty that
               inspires and empowers everyone.
@@ -149,7 +149,7 @@ const Footer = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <strong>Fuchsius</strong>
+            <strong className=" text-fuchsia-500">Fuchsius</strong>
           </a>
         </div>
       </div>

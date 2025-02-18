@@ -4,12 +4,12 @@ const LocationSection = () => {
       <div className=" flex flex-col flex-1">
         <div className=" flex items-center">
           <h1 className="text-3xl md:text-4xl font-judson text-nowrap">
-            Location Saloon Prabhu
+            Location Salon Prabhu
           </h1>{" "}
           <div className=" border-2 border-primary w-full ml-8"></div>
         </div>
         <p className=" mt-5 text-[#525252] text-sm lg:text-base">
-          Want to visit Saloon Prabhu but worried about travel or timing? Don’t
+          Want to visit Salon Prabhu but worried about travel or timing? Don’t
           worry! Reach out to us, and we’ll help you find the best time to visit
           based on your location and schedule. Our team is always ready to
           assist and ensure your grooming experience is as convenient as

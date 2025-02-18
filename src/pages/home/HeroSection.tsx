@@ -12,7 +12,7 @@ const HeroSection = () => {
           </h1>
           <p className=" text-text-color mt-6">
             Hair and beauty studio,{" "}
-            <span className="font-bold">Unisex saloon</span>
+            <span className="font-bold">Unisex salon</span>
           </p>
           <Button
             variant={"black"}

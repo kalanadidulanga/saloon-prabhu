@@ -42,7 +42,7 @@ const HeroSection2 = () => {
             </h1>
             <p className="text-white mt-6 text-center md:text-start">
               Hair and beauty studio,{" "}
-              <span className="font-bold">Unisex saloon</span>
+              <span className="font-bold">Unisex salon</span>
             </p>
 
             <div className=" flex items-center justify-center md:justify-start">

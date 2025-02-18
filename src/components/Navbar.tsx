@@ -92,7 +92,7 @@ const Navbar = () => {
             {/* Logo */}
             <Link to="/" className="flex items-center">
               {/* <span className="text-xl md:text-2xl lg:text-4xl font-normal font-judson text-color-5">
-              Saloon Prabhu
+              Salon Prabhu
             </span> */}
               <div>
                 <img

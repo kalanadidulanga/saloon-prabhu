@@ -70,7 +70,7 @@ const ContactFormSection = () => {
       <div className=" flex flex-col flex-1">
         <div className=" flex items-center">
           <h1 className="text-3xl md:text-4xl font-judson text-nowrap">
-            Contact Saloon Prabhu
+            Contact Salon Prabhu
           </h1>{" "}
           <div className=" border-2 border-primary w-full ml-8"></div>
         </div>

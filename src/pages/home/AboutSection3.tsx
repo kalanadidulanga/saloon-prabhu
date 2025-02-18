@@ -21,7 +21,7 @@ const AboutSection3 = () => {
             </h1>
             <Title title={"ABOUT"} align="left" className=" my-8" />
             <p className=" text-text-color">
-              At Saloon Prabhu, we bring elegance to life with care, Our expert
+              At Salon Prabhu, we bring elegance to life with care, Our expert
               stylists ensure you leave looking and feeling your best. From
               classic cuts to modern styles, we craft each look to match your
               unique beauty. Let us make every visit a delightful experience.

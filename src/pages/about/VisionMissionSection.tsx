@@ -9,7 +9,7 @@ const VisionMissionSection = () => {
             <Title title={"ABOUT"} align="left" />
             <h1 className="text-3xl md:text-4xl font-judson my-8">Vision</h1>
             <p className=" text-text-color">
-              At Saloon Prabhu, our vision is to be the leading beauty and
+              At Salon Prabhu, our vision is to be the leading beauty and
               wellness destination, recognized for our innovative approach to
               hairstyling, skincare, and spa treatments. We aspire to empower
               individuals by enhancing their natural beauty and boosting their
