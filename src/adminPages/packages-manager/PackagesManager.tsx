@@ -192,23 +192,6 @@ const PackagesManager: React.FC = () => {
   // Package operations
   const addPackage = async (packageId: string) => {
     if (newPackageName.trim()) {
-      // setCategories(
-      //   categories.map((category) => {
-      //     if (category.id === selectedCategory) {
-      //       return {
-      //         ...category,
-      //         packages: [
-      //           ...category.packages,
-      //           {
-      //             id: String(Date.now()),
-      //             name: newPackageName,
-      //             serviceItems: [],
-      //           },
-      //         ],
-      //       };
-      //     }
-      //     return category;
-      //   })
       try {
         const { data } = await fetch({
           url: "/api/packages",
