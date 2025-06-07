@@ -191,10 +191,11 @@ export const PackageModal = ({
               onDragLeave={handleDragLeave}
               onDrop={handleDrop}
             >
+              {" "}
               {imgUrl ? (
                 <div className="relative">
                   <img
-                    src={`./src/server${imgUrl}`}
+                    src={imgUrl}
                     alt="Uploaded Preview"
                     className="max-h-40 mx-auto rounded-lg"
                   />

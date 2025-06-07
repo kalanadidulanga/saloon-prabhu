@@ -96,15 +96,19 @@ const Package2Card = ({
       </Button>
 
       <div className="bg-white rounded-md p-4 text-center shadow-md">
+        {" "}
         <div className="relative inset-x-0 w-full aspect-square mx-auto mb-5">
           <img
-            // src={imageUrl}
-            src={`./src/server${imageUrl}`}
+            src={imageUrl}
             alt={imageAlt}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover rounded-md"
+            onError={(e) => {
+              console.error("Failed to load image:", imageUrl);
+              const target = e.target as HTMLImageElement;
+              target.src = "/assets/placeholder-image.png"; // fallback image
+            }}
           />
         </div>
-
         <h3 className="text-md font-medium text-gray-900 mb-4 tracking-wide">
           {title || "Title"}
         </h3>
